@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Wine Gift Box Demo</title>
+<style>
+  :root{
+    --bg:#0b0b10;
+    --card:#151521;
+    --gold:#d8b35a;
+    --paper:#f5f1e6;
+    --shadow: 0 25px 80px rgba(0,0,0,.55);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    height:100vh;
+    display:grid;
+    place-items:center;
+    background: radial-gradient(1200px 700px at 60% 30%, #1d1a2d 0%, var(--bg) 55%, #050509 100%);
+    color:#fff;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+    overflow:hidden;
+  }
+
+  .stage{
+    width:min(92vw, 980px);
+    height:min(86vh, 640px);
+    display:grid;
+    grid-template-columns: 1fr 320px;
+    gap:18px;
+    align-items:stretch;
+  }
+
+  .panel{
+    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:20px;
+    box-shadow: var(--shadow);
+    position:relative;
+    overflow:hidden;
+  }
+
+  /* ===== Scene (box + bottle) ===== */
+  .scene{
+    perspective: 1200px;
+    display:grid;
+    place-items:center;
+  }
+
+  .hint{
+    position:absolute;
+    left:16px; top:14px;
+    font-size:12px;
+    opacity:.85;
+    letter-spacing:.04em;
+    padding:8px 10px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.12);
+    background: rgba(0,0,0,.25);
+    backdrop-filter: blur(8px);
+  }
+
+  .gift{
+    width:min(640px, 86%);
+    height:min(460px, 86%);
+    position:relative;
+    transform-style:preserve-3d;
+  }
+
+  /* Box base */
+  .box{
+    position:absolute;
+    inset:0;
+    border-radius:28px;
+    background: linear-gradient(145deg, #1d1d2b, #0e0e16);
+    border:1px solid rgba(255,255,255,.10);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), 0 40px 120px rgba(0,0,0,.6);
+    transform: translateZ(-10px);
+  }
+
+  .box::before{
+    content:"";
+    position:absolute; inset:18px;
+    border-radius:22px;
+    background: radial-gradient(600px 220px at 50% 30%, rgba(216,179,90,.18), rgba(0,0,0,0));
+    border:1px solid rgba(216,179,90,.25);
+  }
+
+  /* Lid */
+  .lid-wrap{
+    position:absolute;
+    left:0; right:0;
+    top:0;
+    height:52%;
+    transform-style:preserve-3d;
+    transform-origin: 50% 100%;
+    transition: transform 900ms cubic-bezier(.2,.85,.15,1);
+    cursor:pointer;
+  }
+  .lid-wrap.open{
+    transform: rotateX(-115deg);
+  }
+
+  .lid-top{
+    position:absolute;
+    inset:0;
+    border-radius:28px 28px 22px 22px;
+    background: linear-gradient(145deg, #24243a, #10101b);
+    border:1px solid rgba(255,255,255,.10);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+    transform: translateZ(18px);
+  }
+  .lid-top::after{
+    content:"";
+    position:absolute;
+    left:22px; right:22px; top:18px; height:44px;
+    border-radius:14px;
+    border:1px solid rgba(216,179,90,.35);
+    background: linear-gradient(90deg, rgba(216,179,90,.20), rgba(216,179,90,.05));
+  }
+
+  /* Inside of lid (message) */
+  .lid-under{
+    position:absolute;
+    inset:0;
+    border-radius:28px 28px 22px 22px;
+    background: linear-gradient(180deg, #111119, #0a0a10);
+    border:1px solid rgba(255,255,255,.10);
+    transform: rotateX(180deg) translateZ(18px);
+    display:grid;
+    place-items:center;
+    padding:22px;
+  }
+  .card{
+    width:100%;
+    height:100%;
+    border-radius:18px;
+    background: linear-gradient(180deg, rgba(245,241,230,.92), rgba(245,241,230,.78));
+    color:#1a1a22;
+    border:1px solid rgba(0,0,0,.10);
+    box-shadow: 0 14px 40px rgba(0,0,0,.35);
+    display:grid;
+    place-items:center;
+    text-align:center;
+    padding:20px;
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";
+    position:absolute; inset:-40px;
+    background: radial-gradient(400px 240px at 30% 30%, rgba(216,179,90,.35), transparent 60%);
+    transform: rotate(12deg);
+  }
+  .msg{
+    position:relative;
+    z-index:1;
+    display:grid;
+    gap:10px;
+  }
+  .msg .to{
+    font-size:13px;
+    letter-spacing:.08em;
+    opacity:.85;
+  }
+  .msg .main{
+    font-size:26px;
+    line-height:1.15;
+    font-weight:700;
+  }
+  .msg .sub{
+    font-size:14px;
+    opacity:.85;
+  }
+
+  /* Bottle */
+  .bottle-wrap{
+    position:absolute;
+    left:50%;
+    bottom:7%;
+    width:160px;
+    height:340px;
+    transform-style:preserve-3d;
+    transform: translateX(-50%) translateZ(30px);
+    transition: filter 400ms ease;
+    user-select:none;
+    touch-action:none;
+  }
+
+  .bottle{
+    position:absolute; inset:0;
+    transform-style:preserve-3d;
+    transform: translateZ(0);
+  }
+
+  .glass{
+    position:absolute;
+    left:18px; right:18px;
+    top:40px; bottom:10px;
+    border-radius: 80px 80px 26px 26px;
+    background: linear-gradient(180deg, rgba(90,120,95,.35), rgba(40,55,45,.45));
+    border:1px solid rgba(255,255,255,.10);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.2);
+  }
+
+  .neck{
+    position:absolute;
+    left:52px; right:52px;
+    top:0; height:70px;
+    border-radius: 24px 24px 16px 16px;
+    background: linear-gradient(180deg, rgba(80,110,90,.30), rgba(40,55,45,.35));
+    border:1px solid rgba(255,255,255,.10);
+  }
+
+  .foil{
+    position:absolute;
+    left:54px; right:54px;
+    top:14px; height:40px;
+    border-radius: 14px;
+    background: linear-gradient(90deg, rgba(216,179,90,.8), rgba(216,179,90,.35));
+    box-shadow: 0 8px 18px rgba(0,0,0,.35);
+  }
+
+  .label{
+    position:absolute;
+    left:26px; right:26px;
+    top:145px; height:120px;
+    border-radius:18px;
+    transform-style:preserve-3d;
+  }
+
+  /* front label */
+  .label .front, .label .back{
+    position:absolute; inset:0;
+    border-radius:18px;
+    backface-visibility:hidden;
+    border:1px solid rgba(0,0,0,.10);
+    display:grid;
+    place-items:center;
+    text-align:center;
+    padding:14px;
+    overflow:hidden;
+  }
+  .label .front{
+    background: linear-gradient(180deg, rgba(245,241,230,.95), rgba(245,241,230,.80));
+    color:#1b1b24;
+  }
+  .label .back{
+    background: linear-gradient(180deg, rgba(240,240,245,.92), rgba(220,220,230,.75));
+    color:#1b1b24;
+    transform: rotateY(180deg);
+  }
+
+  .label h3{
+    margin:0;
+    font-size:14px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+  }
+  .label .goldline{
+    width:70%;
+    height:1px;
+    background: linear-gradient(90deg, transparent, rgba(216,179,90,.9), transparent);
+    margin:10px auto;
+  }
+  .label .sig{
+    font-size:12px;
+    opacity:.8;
+  }
+
+  /* Right panel (controls) */
+  .controls{
+    padding:18px 18px 16px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .title{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .title h2{
+    margin:0;
+    font-size:18px;
+    letter-spacing:.02em;
+  }
+  .title p{
+    margin:0;
+    font-size:12px;
+    opacity:.75;
+    line-height:1.4;
+  }
+
+  .row{
+    display:flex;
+    gap:10px;
+  }
+  button{
+    flex:1;
+    padding:10px 12px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.20);
+    color:#fff;
+    cursor:pointer;
+    font-weight:600;
+  }
+  button:hover{ background: rgba(255,255,255,.06); }
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .field label{
+    font-size:12px;
+    opacity:.8;
+  }
+  .field input, .field textarea{
+    width:100%;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.18);
+    color:#fff;
+    padding:10px 12px;
+    outline:none;
+    font-size:13px;
+  }
+  .field textarea{ min-height:78px; resize:vertical; }
+  .small{
+    font-size:11px;
+    opacity:.75;
+    line-height:1.45;
+  }
+
+  /* Motion bindings (JS updates CSS vars) */
+  .bottle-wrap{
+    transform:
+      translateX(calc(-50% + var(--dragX, 0px)))
+      translateY(var(--dragY, 0px))
+      translateZ(30px);
+  }
+  .bottle{
+    transform:
+      rotateY(var(--rotY, 0deg))
+      rotateX(var(--rotX, 0deg));
+    transition: transform 80ms linear;
+  }
+
+  /* Flip label with same rotation */
+  .label{
+    transform: rotateY(var(--rotY, 0deg));
+  }
+
+  @media (max-width: 860px){
+    .stage{ grid-template-columns: 1fr; height:auto; }
+    .panel.scene{ height: 62vh; }
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="panel scene" id="scene">
+      <div class="hint">Tap the lid • Drag/Swipe the bottle</div>
+      <div class="gift">
+        <div class="box"></div>
+
+        <div class="lid-wrap" id="lid" aria-label="lid">
+          <div class="lid-top"></div>
+          <div class="lid-under">
+            <div class="card">
+              <div class="msg">
+                <div class="to" id="toLine">TO: Someone Special</div>
+                <div class="main" id="mainLine">Happy Birthday!</div>
+                <div class="sub" id="subLine">Open this and enjoy a wonderful night 🍷</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottle-wrap" id="bottleWrap">
+          <div class="bottle" id="bottle">
+            <div class="neck"></div>
+            <div class="foil"></div>
+            <div class="glass"></div>
+            <div class="label">
+              <div class="front">
+                <div>
+                  <h3>GRAND CRU</h3>
+                  <div class="goldline"></div>
+                  <div class="sig">Swipe to rotate → back label</div>
+                </div>
+              </div>
+              <div class="back">
+                <div>
+                  <h3>BACK LABEL</h3>
+                  <div class="goldline"></div>
+                  <div class="sig">Notes / Story / Message</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="panel controls">
+      <div class="title">
+        <h2>Customize</h2>
+        <p>Message under the lid + interactive bottle demo (pure HTML/CSS/JS)</p>
+      </div>
+
+      <div class="row">
+        <button id="openBtn">Open/Close Lid</button>
+        <button id="resetBtn">Reset Bottle</button>
+      </div>
+
+      <div class="field">
+        <label>TO</label>
+        <input id="toInput" value="TO: Someone Special" />
+      </div>
+
+      <div class="field">
+        <label>Main message</label>
+        <input id="mainInput" value="Happy Birthday!" />
+      </div>
+
+      <div class="field">
+        <label>Sub message</label>
+        <textarea id="subInput">Open this and enjoy a wonderful night 🍷</textarea>
+      </div>
+
+      <div class="small">
+        操作：フタをタップ→開く。ボトルをドラッグ/スワイプ→箱の中で移動＋回転。回転するとラベル裏面が見えます。
+      </div>
+    </div>
+  </div>
+
+<script>
+  const lid = document.getElementById('lid');
+  const openBtn = document.getElementById('openBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  // Message bindings
+  const toLine = document.getElementById('toLine');
+  const mainLine = document.getElementById('mainLine');
+  const subLine = document.getElementById('subLine');
+  const toInput = document.getElementById('toInput');
+  const mainInput = document.getElementById('mainInput');
+  const subInput = document.getElementById('subInput');
+
+  function syncText(){
+    toLine.textContent = toInput.value || "TO:";
+    mainLine.textContent = mainInput.value || "";
+    subLine.textContent = subInput.value || "";
+  }
+  [toInput, mainInput, subInput].forEach(el => el.addEventListener('input', syncText));
+  syncText();
+
+  function toggleLid(){
+    lid.classList.toggle('open');
+  }
+  lid.addEventListener('click', toggleLid);
+  openBtn.addEventListener('click', toggleLid);
+
+  // Bottle drag/swipe interaction
+  const bottleWrap = document.getElementById('bottleWrap');
+  const scene = document.getElementById('scene');
+
+  let dragging = false;
+  let startX = 0, startY = 0;
+  let baseDragX = 0, baseDragY = 0;
+  let rotY = 0, rotX = 0;
+
+  function setVars(){
+    bottleWrap.style.setProperty('--dragX', `${baseDragX}px`);
+    bottleWrap.style.setProperty('--dragY', `${baseDragY}px`);
+    bottleWrap.style.setProperty('--rotY', `${rotY}deg`);
+    bottleWrap.style.setProperty('--rotX', `${rotX}deg`);
+  }
+  setVars();
+
+  function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
+
+  function pointerDown(e){
+    dragging = true;
+    bottleWrap.setPointerCapture(e.pointerId);
+    startX = e.clientX;
+    startY = e.clientY;
+    e.preventDefault();
+  }
+  function pointerMove(e){
+    if(!dragging) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+
+    // Move bottle a bit with drag
+    baseDragX = clamp(dx * 0.35, -90, 90);
+    baseDragY = clamp(dy * 0.20, -40, 40);
+
+    // Rotate bottle with drag (swipe left/right rotates)
+    rotY = clamp(dx * 0.45, -180, 180);
+    rotX = clamp(-dy * 0.20, -25, 25);
+
+    setVars();
+  }
+  function pointerUp(e){
+    dragging = false;
+  }
+
+  bottleWrap.addEventListener('pointerdown', pointerDown);
+  bottleWrap.addEventListener('pointermove', pointerMove);
+  bottleWrap.addEventListener('pointerup', pointerUp);
+  bottleWrap.addEventListener('pointercancel', pointerUp);
+
+  resetBtn.addEventListener('click', () => {
+    baseDragX = 0; baseDragY = 0; rotY = 0; rotX = 0;
+    setVars();
+  });
+</script>
+</body>
+</html>
