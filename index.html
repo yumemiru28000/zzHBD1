@@ -2152,7 +2152,154 @@
 
   <script>
     const BASE_URL = "https://yumemiru28000.github.io/zzHBD1/index.html";
+const wines = [
+      {
+        id: "wine1",
+        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine1.png",
+        qrImage: "",
+        q1_name: "青の安らぎ",
+        q2_producer: "ユメミるワイナリー",
+        q3_origin: "ズズにゃん島",
+        q4_variety: "ズズにゃん島産ぶどう",
+        q5_vintage: "2026",
+        q6_style: "Signature", // Rankに変えるので中身はそのまま
+        q7_alcohol: "12.5%",
 
+        q8_world_phrase: "穏やかな波のような安寧",
+        q9_world_line: "静けさと安らぎをあなたに",
+
+        q10_message_lines: [
+          "お誕生日おめでとうございます！",
+          "素敵な1年になりますように✨",
+          "そして、おいしいお酒に巡りあえますように🍷"
+        ],
+
+        q11_pairing: "なんでも",
+        q12_storage: "あなたにとって大切な場所",
+        q13_craft: "波の穏やかな海で海底熟成させたもの",
+
+        display_en: "CALM OF BLUE",
+        tagline: "ISLAND NIGHT SELECTION",
+        openCount: 0
+      },
+      {
+        id: "wine2",
+        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine2.png",
+        qrImage: "",
+        q1_name: "Orseille Rose Wine",
+        q2_producer: "星ノワイナリー",
+        q3_origin: "日本",
+        q4_variety: "星ノパープル",
+        q5_vintage: "1980",
+        q6_style: "Signature",
+        q7_alcohol: "12.0%",
+
+        q8_world_phrase: "気分上々",
+        q9_world_line: "楽しい時間を共に",
+
+        q10_message_lines: [
+          "お誕生日おめでとうございます！"
+        ],
+
+        q11_pairing: "イタリアン",
+        q12_storage: "涼しくて暗いところ",
+        q13_craft: "職人が丁寧に作りました",
+
+        display_en: "ROSE MOMENT",
+        tagline: "A PERFECT MATCH WITH ITALIAN CUISINE",
+        openCount: 0
+      },
+      {
+        id: "wine3",
+        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine3.png",
+        qrImage: "",
+        q1_name: "蒼海の眠り",
+        q2_producer: "瀬戸内・信長アマネ醸造所",
+        q3_origin: "日本・瀬戸内海沖",
+        q4_variety: "甲州種 100%、シャルドネブレンド",
+        q5_vintage: "2020",
+        q6_style: "Premium",
+        q7_alcohol: "12.0%",
+
+        q8_world_phrase: "荒立った心を鎮め、深海に抱かれているような深い安らぎと眠りをもたらす。",
+        q9_world_line: "「波のゆらぎが育てた、深海のアートピース。」",
+
+        q10_message_lines: [
+          "まるで海底で熟成されたワインのように、",
+          "時という波に揉まれることで、",
+          "かべるねふらんさんの中で良い意味で角が取れ、",
+          "かけがえのない人間的な厚みやまろやかさが生まれているのを感じます。",
+          "年齢とともに重ねていく経験の跡は、",
+          "まさに豊かな人生の海を泳いできた時間の証明ですね。",
+          "そんな素敵な年の重ね方をされているかべるねふらんさんに、",
+          "お誕生日おめでとう。"
+        ],
+
+        q11_pairing: "生牡蠣（レモン添え）、白身魚の昆布締め、伊勢海老のグリル。",
+        q12_storage: "直射日光を避け、暗く静かな場所",
+        q13_craft: "海底熟成",
+
+        display_en: "SILENCE OF THE DEEP",
+        tagline: "PAIRING WITH OCEAN DELICACIES",
+        openCount: 0
+      },
+      {
+        id: "wine4",
+        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine4.png",
+        qrImage: "",
+        q1_name: "Nyadal",
+        q2_producer: "せぴあわいなりー",
+        q3_origin: "かにゃだ",
+        q4_variety: "Nyadal Blanc",
+        q5_vintage: "2025",
+        q6_style: "Premium",
+        q7_alcohol: "12.5%",
+
+        q8_world_phrase: "あまえねこになる",
+        q9_world_line: "ねこにおすすめ！",
+
+        q10_message_lines: [
+          "かべるねさんお誕生日おめでと～～～♡♡♡♡♡"
+        ],
+
+        q11_pairing: "ちーずとかけーき",
+        q12_storage: "つめたいはこ！",
+        q13_craft: "ねこたちがこおったぶどうをあっさくしました！",
+
+        display_en: "NYADAL SWEET TIME",
+        tagline: "A GIFT FOR CAT LOVERS",
+        openCount: 0
+      },
+      {
+        id: "wine5",
+        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine5.png",
+        qrImage: "",
+        q1_name: "すっごく美味しいワイン",
+        q2_producer: "NEKOmata Vineyard",
+        q3_origin: "Neko island",
+        q4_variety: "星を宿すユニ・ブラン",
+        q5_vintage: "1900",
+        q6_style: "Casual Sip",
+        q7_alcohol: "12.0%",
+
+        q8_world_phrase: "世界が美しく見える",
+        q9_world_line: "あなたの星を見上げてください",
+
+        q10_message_lines: [
+          "🍇かべるねふらんさん！",
+          "心からお誕生日おめでとうございます！",
+          "これからもよろしくお願いします💕🎂✨"
+        ],
+
+        q11_pairing: "この世界の食べ物はすべて",
+        q12_storage: "あなたの心の奥",
+        q13_craft: "業界の秘密です！😆",
+
+        display_en: "YOUR STAR MOMENT",
+        tagline: "A CELEBRATION JUST FOR YOU",
+        openCount: 0
+      }
+    ];
     // wine3 を最初の中央に
     let currentIndex = wines.findIndex(w => w.id === "wine3");
     if (currentIndex < 0) currentIndex = 0;
