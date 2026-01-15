@@ -119,7 +119,7 @@
       transform: translateY(0);
     }
 
-    /* ===== ホーム ===== */
+    /* ===== Home ===== */
 
     .home-screen {
       align-items: center;
@@ -556,8 +556,8 @@
     }
 
     .overlay-qr-canvas-wrap {
-      width: 120px;
-      height: 120px;
+      width: 140px;
+      height: 140px;
       padding: 4px;
       border-radius: 14px;
       background: #ffffff;
@@ -605,7 +605,7 @@
       text-align: right;
     }
 
-    /* ===== wineXp ===== */
+    /* ===== WineXP ===== */
 
     .winexp-screen {
       padding: 32px 16px 20px;
@@ -843,7 +843,7 @@
       overflow: hidden;
     }
 
-    /* 小さいぼやけたボトルは削除: ::before を使わない */
+    /* 小さいぼやけボトル削除：::before を使わない */
 
     .info-block {
       margin-bottom: 18px;
@@ -1181,7 +1181,6 @@
       transform: translateY(-50%) scale(1.04);
     }
 
-    /* □＋△の家アイコン */
     .home-button-icon {
       position: relative;
       width: 16px;
@@ -1189,7 +1188,6 @@
       margin-top: 2px;
     }
     .home-button-icon::before {
-      /* △屋根 */
       content: "";
       position: absolute;
       left: 50%;
@@ -1204,7 +1202,6 @@
       border-radius: 3px 3px 0 0;
     }
     .home-button-icon::after {
-      /* □本体 */
       content: "";
       position: absolute;
       left: 50%;
@@ -1283,10 +1280,8 @@
       border: 1px solid rgba(191,219,254,0.9);
     }
 
-    /* ===== Diary / Calendar 部分は前回のまま（スタイルは同じなので省略せずに使用） */
-    /* ... （この下にDiary / Calendar用のスタイルが続くが、上の回答から変更なし） */
+    /* ===== Diary / Calendar ===== */
 
-    /* ここから Diary / Calendar スタイル（前回と同内容） */
     .diary-screen {
       padding: 32px 16px 20px;
       display: flex;
@@ -1300,26 +1295,31 @@
         padding: 40px 36px 24px;
       }
     }
+
     .diary-header {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
+
     .diary-title {
       font-size: 16px;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--text-soft);
     }
+
     .diary-subtitle {
       font-size: 11px;
       color: var(--text-weak);
     }
+
     .diary-card-row {
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
     }
+
     .diary-card {
       flex: 1 1 260px;
       min-width: 240px;
@@ -1332,6 +1332,7 @@
         0 0 0 1px rgba(15,23,42,1);
       padding: 16px 16px 18px;
     }
+
     .diary-card-title {
       font-size: 12px;
       letter-spacing: 0.2em;
@@ -1339,11 +1340,14 @@
       color: var(--text-soft);
       margin-bottom: 10px;
     }
+
     .diary-card-desc {
       font-size: 11px;
       color: var(--text-weak);
       margin-bottom: 12px;
+      white-space: pre-line;
     }
+
     .diary-primary-button {
       margin-top: 4px;
       padding: 6px 10px 7px;
@@ -1359,6 +1363,7 @@
       align-items: center;
       gap: 6px;
     }
+
     .diary-secondary-button {
       margin-top: 4px;
       padding: 5px 9px 6px;
@@ -1374,24 +1379,28 @@
       align-items: center;
       gap: 6px;
     }
+
     .diary-form-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 12px 16px;
       margin-top: 10px;
     }
+
     .diary-field {
       display: flex;
       flex-direction: column;
       gap: 4px;
       font-size: 12px;
     }
+
     .diary-label {
       font-size: 11px;
       color: var(--text-soft);
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
+
     .diary-input,
     .diary-textarea {
       border-radius: 10px;
@@ -1402,10 +1411,12 @@
       font-size: 12px;
       outline: none;
     }
+
     .diary-textarea {
       min-height: 72px;
       resize: vertical;
     }
+
     .diary-row {
       display: flex;
       flex-wrap: wrap;
@@ -1413,11 +1424,13 @@
       margin-top: 10px;
       align-items: center;
     }
+
     .color-dot-picker {
       display: flex;
       gap: 6px;
       align-items: center;
     }
+
     .color-dot-option {
       width: 14px;
       height: 14px;
@@ -1426,20 +1439,23 @@
       cursor: pointer;
       box-shadow: 0 0 0 1px rgba(15,23,42,0.9);
     }
+
     .color-dot-option--active {
       box-shadow:
         0 0 0 2px #e5e7eb,
         0 0 0 4px rgba(15,23,42,1);
     }
+
     .diary-qr-preview {
       margin-top: 10px;
       display: flex;
       align-items: center;
       gap: 10px;
     }
+
     .diary-qr-canvas-wrap {
-      width: 120px;
-      height: 120px;
+      width: 140px;
+      height: 140px;
       padding: 6px;
       border-radius: 16px;
       background: #ffffff;
@@ -1447,6 +1463,7 @@
       align-items: center;
       justify-content: center;
     }
+
     .diary-qr-actions {
       display: flex;
       flex-direction: column;
@@ -1454,6 +1471,7 @@
       font-size: 11px;
       color: var(--text-soft);
     }
+
     .diary-small-button {
       padding: 4px 8px 5px;
       border-radius: 999px;
@@ -1465,15 +1483,18 @@
       align-items: center;
       gap: 6px;
     }
+
     .diary-upload {
       margin-top: 10px;
       font-size: 11px;
       color: var(--text-soft);
     }
+
     .diary-upload input {
       margin-top: 4px;
       font-size: 11px;
     }
+
     .calendar-screen {
       padding: 32px 16px 20px;
       display: flex;
@@ -1482,17 +1503,20 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
+
     @media (min-width: 768px) {
       .calendar-screen {
         padding: 40px 36px 24px;
       }
     }
+
     .calendar-year-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
       gap: 10px;
       margin-top: 16px;
     }
+
     .year-card {
       padding: 10px 12px;
       border-radius: 14px;
@@ -1503,10 +1527,12 @@
       cursor: pointer;
       color: var(--text-soft);
     }
+
     .year-card:hover {
       border-color: rgba(249,115,22,0.8);
       color: #fed7aa;
     }
+
     .calendar-month-header {
       display: flex;
       justify-content: space-between;
@@ -1515,16 +1541,19 @@
       margin-top: 8px;
       margin-bottom: 8px;
     }
+
     .calendar-month-title {
       font-size: 14px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--text-soft);
     }
+
     .calendar-month-nav {
       display: flex;
       gap: 6px;
     }
+
     .calendar-nav-btn {
       width: 22px;
       height: 22px;
@@ -1538,17 +1567,20 @@
       align-items: center;
       justify-content: center;
     }
+
     .calendar-body-row {
       display: grid;
       grid-template-columns: 2fr 1.4fr;
       gap: 16px;
       margin-top: 4px;
     }
+
     @media (max-width: 768px) {
       .calendar-body-row {
         grid-template-columns: 1fr;
       }
     }
+
     .calendar-grid {
       border-radius: 18px;
       border: 1px solid rgba(55,65,81,0.9);
@@ -1558,6 +1590,7 @@
         0 0 0 1px rgba(15,23,42,1);
       padding: 10px 10px 12px;
     }
+
     .calendar-weekdays {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -1566,9 +1599,11 @@
       text-align: center;
       margin-bottom: 4px;
     }
+
     .calendar-weekdays div {
       padding: 2px 0;
     }
+
     .calendar-dates {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -1576,6 +1611,7 @@
       text-align: center;
       gap: 4px;
     }
+
     .calendar-day {
       padding: 6px 0 8px;
       border-radius: 12px;
@@ -1583,12 +1619,15 @@
       position: relative;
       color: var(--text-soft);
     }
+
     .calendar-day--inactive {
       opacity: 0.3;
     }
+
     .calendar-day--has-entry {
       cursor: pointer;
     }
+
     .calendar-dot {
       position: absolute;
       left: 50%;
@@ -1599,6 +1638,7 @@
       border-radius: 999px;
       border: 1px solid rgba(15,23,42,1);
     }
+
     .calendar-details {
       border-radius: 18px;
       border: 1px solid rgba(55,65,81,0.9);
@@ -1609,6 +1649,7 @@
       padding: 12px 12px 14px;
       font-size: 12px;
     }
+
     .calendar-details-title {
       font-size: 12px;
       letter-spacing: 0.16em;
@@ -1616,6 +1657,7 @@
       color: var(--text-soft);
       margin-bottom: 8px;
     }
+
     .calendar-entry-card {
       border-radius: 12px;
       border: 1px solid rgba(75,85,99,0.9);
@@ -1623,26 +1665,31 @@
       margin-bottom: 6px;
       background: rgba(15,23,42,0.98);
     }
+
     .calendar-entry-name {
       font-size: 12px;
       color: var(--text-main);
       margin-bottom: 2px;
     }
+
     .calendar-entry-meta {
       font-size: 11px;
       color: var(--text-soft);
       margin-bottom: 2px;
     }
+
     .calendar-entry-comment {
       font-size: 11px;
       color: var(--text-weak);
       white-space: pre-line;
     }
+
     .calendar-footer-nav {
       margin-top: 10px;
       display: flex;
       justify-content: flex-end;
     }
+
     .calendar-back-btn {
       padding: 5px 9px 6px;
       border-radius: 999px;
@@ -1748,14 +1795,17 @@
       <div class="content-frame">
         <div class="diary-header">
           <div class="diary-title">DIARY</div>
-          <div class="diary-subtitle">島の夜と、あなたのお酒の記憶を一緒に並べるノート。</div>
+          <div class="diary-subtitle">
+島の夜と、あなたのお酒の記憶を一緒に並べるノート。
+          </div>
         </div>
 
         <div class="diary-card-row">
           <div class="diary-card">
             <div class="diary-card-title">New Entry</div>
             <div class="diary-card-desc">
-              新しく1日の記録を書き起こし、その日の気分や体調も含めた「一枚のQR」に閉じ込めます。
+Basic
+必須なのは日付だけ。あとは書ける範囲で。
             </div>
             <button class="diary-primary-button" id="diary-new-entry-button">
               <span>New Diary</span>
@@ -1765,7 +1815,8 @@
           <div class="diary-card">
             <div class="diary-card-title">From QR</div>
             <div class="diary-card-desc">
-              以前保存した日記QR画像を読み込み、同じノートにページを足す・カレンダーで眺めることができます。
+以前保存した日記QR画像を読み込み、
+同じノートにページを足す・カレンダーで眺めることができます。
             </div>
             <button class="diary-secondary-button" id="diary-append-button">
               <span>Append</span>
@@ -1783,12 +1834,16 @@
       <div class="content-frame">
         <div class="diary-header">
           <div class="diary-title">DIARY – NEW</div>
-          <div class="diary-subtitle">今日の一杯と、あなたのコンディションを軽くメモします。</div>
+          <div class="diary-subtitle">
+今日の一杯と、あなたのコンディションを軽くメモします。
+          </div>
         </div>
 
         <div class="diary-card">
           <div class="diary-card-title">Basic</div>
-          <div class="diary-card-desc">必須なのは日付だけ。あとは書ける範囲で。</div>
+          <div class="diary-card-desc">
+必須なのは日付だけ。あとは書ける範囲で。
+          </div>
 
           <div class="diary-form-grid">
             <div class="diary-field">
@@ -1820,7 +1875,9 @@
 
         <div class="diary-card">
           <div class="diary-card-title">Tasting</div>
-          <div class="diary-card-desc">味・香り・見た目、覚えておきたいことだけ。</div>
+          <div class="diary-card-desc">
+味・香り・見た目、覚えておきたいことだけ。
+          </div>
 
           <div class="diary-form-grid">
             <div class="diary-field">
@@ -1845,7 +1902,9 @@
 
         <div class="diary-card">
           <div class="diary-card-title">Condition</div>
-          <div class="diary-card-desc">体と気分のメモ。未来の自分のために。</div>
+          <div class="diary-card-desc">
+体と気分のメモ。未来の自分のために。
+          </div>
 
           <div class="diary-form-grid">
             <div class="diary-field">
@@ -1891,7 +1950,9 @@
 
         <div class="diary-card">
           <div class="diary-card-title">QR</div>
-          <div class="diary-card-desc">この日記1ページぶんを1枚のQRとして保存します。</div>
+          <div class="diary-card-desc">
+この日記1ページぶんを1枚のQRとして保存します。
+          </div>
 
           <button class="diary-primary-button" id="diary-generate-qr-button">
             <span>Generate QR</span>
@@ -1899,12 +1960,12 @@
 
           <div class="diary-qr-preview" id="diary-qr-preview" style="display:none;">
             <div class="diary-qr-canvas-wrap">
-              <canvas id="diary-qr-canvas" width="256" height="256"></canvas>
+              <canvas id="diary-qr-canvas" width="512" height="512"></canvas>
             </div>
             <div class="diary-qr-actions">
               <button class="diary-small-button" id="diary-qr-save-button">Save PNG</button>
               <div style="font-size:11px;color:var(--text-weak);">
-                PNGとして保存し、後日「Append」や「View」で読み込めます。
+PNGとして保存し、後日「Append」や「View」で読み込めます。
               </div>
             </div>
           </div>
@@ -1921,13 +1982,15 @@
       <div class="content-frame">
         <div class="diary-header">
           <div class="diary-title">DIARY – APPEND</div>
-          <div class="diary-subtitle">既存のQRノートに、新しい1日を追加します。</div>
+          <div class="diary-subtitle">
+既存のQRノートに、新しい1日を追加します。
+          </div>
         </div>
 
         <div class="diary-card">
           <div class="diary-card-title">1. QRを読み込む</div>
           <div class="diary-card-desc">
-            以前保存した「日記QR」の画像を選んでください。
+以前保存した「日記QR」の画像を選んでください。
           </div>
           <div class="diary-upload">
             <input type="file" id="diary-append-file" accept="image/*" />
@@ -1938,7 +2001,7 @@
         <div class="diary-card" id="diary-append-form-card" style="display:none;">
           <div class="diary-card-title">2. 新しい1日を追加</div>
           <div class="diary-card-desc">
-            読み込まれたノートはそのままに、1件だけ新しいページを追加します。
+読んだノートはそのまま、1件だけ新しいページを追加して新しいQRを作ります。
           </div>
 
           <div class="diary-form-grid">
@@ -1948,11 +2011,11 @@
             </div>
             <div class="diary-field">
               <div class="diary-label">名前</div>
-              <input id="diary-name-append" class="diary-input" type="text" />
+              <input id="diary-name-append" class="diary-input" type="text" placeholder="誰が飲んだか" />
             </div>
             <div class="diary-field">
               <div class="diary-label">お酒の種類</div>
-              <input id="diary-type-append" class="diary-input" type="text" />
+              <input id="diary-type-append" class="diary-input" type="text" placeholder="日本酒 / ワイン / ウイスキー…" />
             </div>
             <div class="diary-field">
               <div class="diary-label">銘柄 / ブランド</div>
@@ -1963,21 +2026,62 @@
           <div class="diary-form-grid" style="margin-top:8px;">
             <div class="diary-field">
               <div class="diary-label">量</div>
-              <input id="diary-amount-append" class="diary-input" type="text" />
+              <input id="diary-amount-append" class="diary-input" type="text" placeholder="ml / 合 / グラス数" />
             </div>
             <div class="diary-field">
               <div class="diary-label">ABV%</div>
-              <input id="diary-abv-append" class="diary-input" type="text" />
+              <input id="diary-abv-append" class="diary-input" type="text" placeholder="アルコール度数" />
             </div>
             <div class="diary-field">
               <div class="diary-label">味の評価</div>
-              <input id="diary-taste-append" class="diary-input" type="text" />
+              <input id="diary-taste-append" class="diary-input" type="text" placeholder="甘い / 辛い / 5段階など" />
+            </div>
+            <div class="diary-field">
+              <div class="diary-label">香り</div>
+              <input id="diary-aroma-append" class="diary-input" type="text" placeholder="フルーティー / スモーキー…" />
+            </div>
+          </div>
+
+          <div class="diary-form-grid" style="margin-top:8px;">
+            <div class="diary-field">
+              <div class="diary-label">色・見た目</div>
+              <input id="diary-color-append" class="diary-input" type="text" placeholder="透明 / 琥珀色…" />
             </div>
           </div>
 
           <div class="diary-field" style="margin-top:8px;">
             <div class="diary-label">総合コメント</div>
-            <textarea id="diary-comment-append" class="diary-textarea"></textarea>
+            <textarea id="diary-comment-append" class="diary-textarea" placeholder="自由にメモ"></textarea>
+          </div>
+
+          <div class="diary-form-grid" style="margin-top:8px;">
+            <div class="diary-field">
+              <div class="diary-label">時間帯</div>
+              <input id="diary-timezone-append" class="diary-input" type="text" placeholder="昼 / 夜 / 宴会…" />
+            </div>
+            <div class="diary-field">
+              <div class="diary-label">気分</div>
+              <input id="diary-mood-append" class="diary-input" type="text" placeholder="楽しい / 疲れている…" />
+            </div>
+            <div class="diary-field">
+              <div class="diary-label">ペアリング</div>
+              <input id="diary-food-append" class="diary-input" type="text" placeholder="チーズ / 刺身 / ピザ…" />
+            </div>
+            <div class="diary-field">
+              <div class="diary-label">場所</div>
+              <input id="diary-place-append" class="diary-input" type="text" placeholder="自宅 / バー / 外食…" />
+            </div>
+          </div>
+
+          <div class="diary-form-grid" style="margin-top:8px;">
+            <div class="diary-field">
+              <div class="diary-label">酔いの程度</div>
+              <input id="diary-drunken-append" class="diary-input" type="text" placeholder="軽く / 普通 / 酔った" />
+            </div>
+            <div class="diary-field">
+              <div class="diary-label">翌日の体調</div>
+              <input id="diary-nextday-append" class="diary-input" type="text" placeholder="頭痛 / 良好 / 眠い…" />
+            </div>
           </div>
 
           <div class="diary-row" style="margin-top:8px;">
@@ -1997,7 +2101,7 @@
 
           <div class="diary-qr-preview" id="diary-append-qr-preview" style="display:none;">
             <div class="diary-qr-canvas-wrap">
-              <canvas id="diary-append-qr-canvas" width="256" height="256"></canvas>
+              <canvas id="diary-append-qr-canvas" width="512" height="512"></canvas>
             </div>
             <div class="diary-qr-actions">
               <button class="diary-small-button" id="diary-append-qr-save-button">Save PNG</button>
@@ -2016,13 +2120,15 @@
       <div class="content-frame">
         <div class="diary-header">
           <div class="diary-title">DIARY – VIEW</div>
-          <div class="diary-subtitle">QRから読み取った記録を、カレンダーに並べて眺めます。</div>
+          <div class="diary-subtitle">
+QRから読み取った記録を、カレンダーに並べて眺めます。
+          </div>
         </div>
 
         <div class="diary-card">
           <div class="diary-card-title">1. QRを読み込む</div>
           <div class="diary-card-desc">
-            日記QR画像を選択し、「読み取る」を押してください。
+日記QR画像を選択し、「読み取る」を押してください。
           </div>
           <div class="diary-upload">
             <input type="file" id="diary-view-file" accept="image/*" />
@@ -2035,7 +2141,9 @@
 
         <div class="diary-card" id="calendar-year-card" style="display:none;">
           <div class="diary-card-title">2. 年を選ぶ</div>
-          <div class="diary-card-desc">日記の中に登場する年だけ、少し明るくなっています。</div>
+          <div class="diary-card-desc">
+日記の中に登場する年だけ、少し明るくなっています。
+          </div>
 
           <div class="calendar-year-grid" id="calendar-year-grid"></div>
         </div>
@@ -2047,7 +2155,9 @@
       <div class="content-frame">
         <div class="diary-header">
           <div class="diary-title" id="calendar-header-title">DIARY – CALENDAR</div>
-          <div class="diary-subtitle" id="calendar-header-subtitle">選んだ年の中で、夜ごとの足跡を見ていきます。</div>
+          <div class="diary-subtitle" id="calendar-header-subtitle">
+選んだ年の中で、夜ごとの足跡を見ていきます。
+          </div>
         </div>
 
         <div class="calendar-month-header">
@@ -2066,7 +2176,9 @@
             <div class="calendar-dates" id="calendar-dates"></div>
           </div>
           <div class="calendar-details">
-            <div class="calendar-details-title" id="calendar-details-title">記録のある日を選ぶと、ここに一覧が出ます。</div>
+            <div class="calendar-details-title" id="calendar-details-title">
+記録のある日を選ぶと、ここに一覧が出ます。
+            </div>
             <div id="calendar-details-body"></div>
           </div>
         </div>
@@ -2091,7 +2203,7 @@
         </div>
         <div class="overlay-bottle-list" id="overlay-bottle-list"></div>
         <div class="overlay-footer-note">
-          Tap QR to preview / Save to download the image.
+Tap QR to preview / Save to download the image.
         </div>
       </div>
     </div>
@@ -2247,7 +2359,7 @@
       }
     ];
 
-    let currentIndex = 2; // 最初は wine3 を中央に
+    let currentIndex = 2; // 初期は wine3
     let activeWineIndex = null;
     let homeIsVisible = true;
     let interactionLocked = false;
@@ -2294,7 +2406,7 @@
     const seWine1 = document.getElementById("se-wine1");
     const nyaAudio = document.getElementById("nya-audio");
 
-    /* Diary DOM */
+    // Diary DOM
     const diaryNewBackButton = document.getElementById("diary-new-back-button");
     const diaryAppendBackButton = document.getElementById("diary-append-back-button");
 
@@ -2331,7 +2443,15 @@
     const diaryAmountAppendInput = document.getElementById("diary-amount-append");
     const diaryAbvAppendInput = document.getElementById("diary-abv-append");
     const diaryTasteAppendInput = document.getElementById("diary-taste-append");
+    const diaryAromaAppendInput = document.getElementById("diary-aroma-append");
+    const diaryColorAppendInput = document.getElementById("diary-color-append");
     const diaryCommentAppendInput = document.getElementById("diary-comment-append");
+    const diaryTimezoneAppendInput = document.getElementById("diary-timezone-append");
+    const diaryMoodAppendInput = document.getElementById("diary-mood-append");
+    const diaryFoodAppendInput = document.getElementById("diary-food-append");
+    const diaryPlaceAppendInput = document.getElementById("diary-place-append");
+    const diaryDrunkenAppendInput = document.getElementById("diary-drunken-append");
+    const diaryNextdayAppendInput = document.getElementById("diary-nextday-append");
     const diaryColorPickerAppend = document.getElementById("diary-color-picker-append");
     const diaryAppendGenerateButton = document.getElementById("diary-append-generate-button");
     const diaryAppendQrPreview = document.getElementById("diary-append-qr-preview");
@@ -2365,20 +2485,31 @@
     let calendarCurrentYear = null;
     let calendarCurrentMonth = null;
 
-    /* ===== Wine Home Rendering ===== */
+    /* ===== Screen helper ===== */
+    function hideAllScreensExcept(screen) {
+      [
+        homeScreen,
+        winexpScreen,
+        diaryHomeScreen,
+        diaryNewScreen,
+        diaryAppendScreen,
+        diaryViewScreen,
+        calendarMonthScreen
+      ].forEach(s => {
+        if (s === screen) return;
+        s.classList.add("screen--hidden");
+        s.classList.remove("screen--active");
+      });
+    }
+
+    /* ===== Wine Home ===== */
     function renderHomeBottles() {
       bottleStrip.innerHTML = "";
-
       const visibleMain = 3;
       if (wines.length <= visibleMain) {
-        const start = 0;
-        const end = wines.length;
-        for (let i = start; i < end; i++) {
-          appendBottleItem(i, false, false);
-        }
+        for (let i = 0; i < wines.length; i++) appendBottleItem(i, false, false);
         return;
       }
-
       let start = currentIndex - 1;
       let end = currentIndex + 2;
       if (start < 0) {
@@ -2389,32 +2520,20 @@
         end = wines.length;
         start = end - visibleMain;
       }
-
       const leftIndex = start - 1;
       const rightIndex = end;
-
-      if (leftIndex >= 0) {
-        appendBottleItem(leftIndex, true, true);
-      }
-      for (let i = start; i < end; i++) {
-        appendBottleItem(i, false, false);
-      }
-      if (rightIndex < wines.length) {
-        appendBottleItem(rightIndex, true, false);
-      }
+      if (leftIndex >= 0) appendBottleItem(leftIndex, true, true);
+      for (let i = start; i < end; i++) appendBottleItem(i, false, false);
+      if (rightIndex < wines.length) appendBottleItem(rightIndex, true, false);
     }
 
     function appendBottleItem(i, isSide, isLeftSide) {
       const wine = wines[i];
       const item = document.createElement("div");
       item.className = "bottle-item";
-      if (isSide) {
-        item.classList.add("bottle-item--side");
-      } else if (i === currentIndex) {
-        item.classList.add("bottle-item--focused");
-      } else {
-        item.classList.add("bottle-item--dimmed");
-      }
+      if (isSide) item.classList.add("bottle-item--side");
+      else if (i === currentIndex) item.classList.add("bottle-item--focused");
+      else item.classList.add("bottle-item--dimmed");
 
       const wrap = document.createElement("div");
       wrap.className = "bottle-image-wrapper";
@@ -2433,56 +2552,34 @@
       wrap.appendChild(img);
       wrap.appendChild(shadow);
       wrap.appendChild(reflection);
-
       item.appendChild(wrap);
       bottleStrip.appendChild(item);
 
       if (isSide) {
         item.addEventListener("click", () => {
           if (!homeIsVisible) return;
-          if (isLeftSide) {
-            currentIndex = Math.max(0, currentIndex - 1);
-          } else {
-            currentIndex = Math.min(wines.length - 1, currentIndex + 1);
-          }
-          try {
-            seWine1.currentTime = 0;
-            seWine1.play();
-          } catch (_) {}
+          if (isLeftSide) currentIndex = Math.max(0, currentIndex - 1);
+          else currentIndex = Math.min(wines.length - 1, currentIndex + 1);
+          try { seWine1.currentTime = 0; seWine1.play(); } catch {}
           renderHomeBottles();
         });
       } else {
         item.addEventListener("click", () => {
-          if (homeIsVisible) {
-            handleBottleTap(i, item);
-          }
+          if (homeIsVisible) handleBottleTap(i, item);
         });
       }
     }
 
     function handleBottleTap(index, bottleElement) {
       activeWineIndex = index;
-
       bottleElement.style.transition = "filter 0.12s var(--transition-standard)";
       bottleElement.style.filter = "brightness(0.92)";
-      setTimeout(() => {
-        bottleElement.style.filter = "";
-      }, 120);
-
+      setTimeout(() => bottleElement.style.filter = "", 120);
       setTimeout(() => {
         homeScreen.style.transition = "filter 0.65s var(--transition-soft)";
         homeScreen.style.filter = "blur(10px) brightness(0.85)";
         showWineXp(index);
       }, 150);
-    }
-
-    function hideAllScreensExcept(screen) {
-      [homeScreen, winexpScreen, diaryHomeScreen, diaryNewScreen, diaryAppendScreen, diaryViewScreen, calendarMonthScreen]
-        .forEach(s => {
-          if (s === screen) return;
-          s.classList.add("screen--hidden");
-          s.classList.remove("screen--active");
-        });
     }
 
     function showWineXp(index) {
@@ -2494,12 +2591,10 @@
       homeButton.classList.add("home-button--visible");
 
       const wine = wines[index];
-
       const key = revisitCountKeyPrefix + wine.id;
       const prevCount = parseInt(localStorage.getItem(key) || "0", 10);
-      const newCount = prevCount + 1;
-      localStorage.setItem(key, String(newCount));
-      wine.openCount = newCount;
+      wine.openCount = prevCount + 1;
+      localStorage.setItem(key, String(wine.openCount));
 
       interactionLocked = true;
       winexpScreen.classList.add("winexp-screen--locked-interaction");
@@ -2510,13 +2605,10 @@
 
       winexpTitleJp.textContent = wine.q1_name || "";
       winexpTitleEn.textContent = wine.display_en || "";
-
       if (wine.tagline) {
         wineTitleBubble.style.display = "inline-flex";
         wineTitleBubbleText.textContent = wine.tagline;
-      } else {
-        wineTitleBubble.style.display = "none";
-      }
+      } else wineTitleBubble.style.display = "none";
 
       if (wine.bottleImage) {
         winexpBottleHero.style.display = "flex";
@@ -2526,11 +2618,7 @@
         winexpBottleHero.style.display = "none";
       }
 
-      if (wine.id === "wine4") {
-        pawButton.style.display = "inline-flex";
-      } else {
-        pawButton.style.display = "none";
-      }
+      pawButton.style.display = (wine.id === "wine4") ? "inline-flex" : "none";
 
       renderBasicInfo(wine);
 
@@ -2547,10 +2635,7 @@
       winexpScreen.scrollTop = 0;
       setupScrollAnimations();
 
-      try {
-        seWine1.currentTime = 0;
-        seWine1.play();
-      } catch (_) {}
+      try { seWine1.currentTime = 0; seWine1.play(); } catch {}
     }
 
     function renderBasicInfo(wine) {
@@ -2585,7 +2670,6 @@
       messageWax.classList.remove("message-wax--visible");
       messageCard.classList.remove("message-card--open");
       messageBody.innerHTML = "";
-
       setTimeout(() => {
         messageWax.classList.add("message-wax--visible");
       }, 600);
@@ -2594,12 +2678,10 @@
       const onWaxClick = () => {
         if (opened || interactionLocked) return;
         opened = true;
-
         messageWax.style.transform = "scale(0.94) translateY(3px)";
         setTimeout(() => {
           messageWax.style.transform = "scale(0.98) translateY(1px)";
         }, 200);
-
         setTimeout(() => {
           messageCard.classList.add("message-card--open");
           const msgLines = wine.q10_message_lines || [];
@@ -2615,7 +2697,6 @@
           });
         }, 400);
       };
-
       messageWax.onclick = onWaxClick;
     }
 
@@ -2626,55 +2707,38 @@
         { icon: "🌙", title: "Storage", content: wine.q12_storage },
         { icon: "🌊", title: "Craft", content: wine.q13_craft }
       ];
-      accData.forEach((item) => {
+      accData.forEach(item => {
         if (!item.content) return;
         const accItem = document.createElement("div");
         accItem.className = "accordion-item";
-
         const header = document.createElement("div");
         header.className = "accordion-header";
-
         const labelWrap = document.createElement("div");
         labelWrap.className = "accordion-label-wrap";
-
         const iconEl = document.createElement("div");
         iconEl.className = "accordion-icon";
         iconEl.textContent = item.icon;
-
         const titleEl = document.createElement("div");
         titleEl.className = "accordion-title";
         titleEl.textContent = item.title;
-
         labelWrap.appendChild(iconEl);
         labelWrap.appendChild(titleEl);
-
         const arrow = document.createElement("div");
         arrow.className = "accordion-arrow";
         arrow.textContent = ">";
-
         header.appendChild(labelWrap);
         header.appendChild(arrow);
-
         const body = document.createElement("div");
         body.className = "accordion-body";
-
         const text = document.createElement("div");
         text.className = "accordion-text";
         text.textContent = item.content;
-
         body.appendChild(text);
-
         accItem.appendChild(header);
         accItem.appendChild(body);
         accordionList.appendChild(accItem);
-
         header.addEventListener("click", () => {
-          const isOpen = accItem.classList.contains("accordion-item--open");
-          if (isOpen) {
-            accItem.classList.remove("accordion-item--open");
-          } else {
-            accItem.classList.add("accordion-item--open");
-          }
+          accItem.classList.toggle("accordion-item--open");
         });
       });
     }
@@ -2685,22 +2749,15 @@
         const vh = winexpScreen.clientHeight;
         infoBlocks.forEach((block, idx) => {
           const rect = block.getBoundingClientRect();
-          const offset = rect.top;
-          if (offset < vh - 90) {
-            setTimeout(() => {
-              block.classList.add("info-block--visible");
-            }, idx * 200);
+          if (rect.top < vh - 90) {
+            setTimeout(() => block.classList.add("info-block--visible"), idx * 200);
           }
         });
         const worldRect = worldSection.getBoundingClientRect();
         if (worldRect.top < vh - 140) {
           worldSection.classList.add("world-section--active");
-          setTimeout(() => {
-            worldLinePrimary.classList.add("world-line-primary--visible");
-          }, 150);
-          setTimeout(() => {
-            worldLineSecondary.classList.add("world-line-secondary--visible");
-          }, 650);
+          setTimeout(() => worldLinePrimary.classList.add("world-line-primary--visible"), 150);
+          setTimeout(() => worldLineSecondary.classList.add("world-line-secondary--visible"), 650);
         }
       };
       winexpScreen.removeEventListener("scroll", handleScroll);
@@ -2747,75 +2804,56 @@
       qrOverlay.classList.remove("overlay--open");
     }
 
-    qrToggle.addEventListener("click", () => {
-      openQrOverlay();
-    });
-    qrClose.addEventListener("click", () => {
-      closeQrOverlay();
-    });
-    qrOverlay.addEventListener("click", (e) => {
-      if (e.target === qrOverlay) {
-        closeQrOverlay();
-      }
+    qrToggle.addEventListener("click", openQrOverlay);
+    qrClose.addEventListener("click", closeQrOverlay);
+    qrOverlay.addEventListener("click", e => {
+      if (e.target === qrOverlay) closeQrOverlay();
     });
 
     function renderOverlayBottles() {
       overlayBottleList.innerHTML = "";
-      wines.forEach((wine) => {
+      wines.forEach(wine => {
         const item = document.createElement("div");
         item.className = "overlay-bottle";
-
         const imgWrap = document.createElement("div");
         imgWrap.className = "overlay-bottle-img-wrap";
-
         const img = document.createElement("img");
         img.className = "overlay-bottle-img";
         img.src = wine.bottleImage;
         img.alt = wine.q1_name;
-
         const shadow = document.createElement("div");
         shadow.className = "overlay-bottle-shadow";
-
         imgWrap.appendChild(img);
         imgWrap.appendChild(shadow);
-
         const nameEl = document.createElement("div");
         nameEl.className = "overlay-name";
         nameEl.textContent = wine.q1_name;
-
         const qrArea = document.createElement("div");
         qrArea.className = "overlay-qr-area";
-
         const qrCanvasWrap = document.createElement("div");
         qrCanvasWrap.className = "overlay-qr-canvas-wrap";
-
         const qrCanvas = document.createElement("canvas");
         qrCanvas.width = 256;
         qrCanvas.height = 256;
         qrCanvasWrap.appendChild(qrCanvas);
-
         const qrUrl = `${BASE_URL}?wine=${encodeURIComponent(wine.id)}`;
         new QRious({
           element: qrCanvas,
           value: qrUrl,
-          size: 200,
+          size: 256,
           level: "H",
           background: "#ffffff",
           foreground: "#000000"
         });
-
         const actionRow = document.createElement("div");
         actionRow.className = "overlay-qr-action-row";
-
         const previewBtn = document.createElement("div");
         previewBtn.className = "overlay-qr-icon";
         previewBtn.textContent = "QR";
-
         const saveBtn = document.createElement("div");
         saveBtn.className = "overlay-qr-icon";
         saveBtn.textContent = "Save";
-
-        previewBtn.addEventListener("click", (e) => {
+        previewBtn.addEventListener("click", e => {
           e.stopPropagation();
           const dataUrl = qrCanvas.toDataURL("image/png");
           const win = window.open();
@@ -2823,8 +2861,7 @@
             win.document.write('<img src="' + dataUrl + '" style="width:100%;height:auto;"/>');
           }
         });
-
-        saveBtn.addEventListener("click", (e) => {
+        saveBtn.addEventListener("click", e => {
           e.stopPropagation();
           const dataUrl = qrCanvas.toDataURL("image/png");
           const a = document.createElement("a");
@@ -2834,17 +2871,13 @@
           a.click();
           document.body.removeChild(a);
         });
-
         actionRow.appendChild(previewBtn);
         actionRow.appendChild(saveBtn);
-
         qrArea.appendChild(qrCanvasWrap);
         qrArea.appendChild(actionRow);
-
         item.appendChild(imgWrap);
         item.appendChild(nameEl);
         item.appendChild(qrArea);
-
         overlayBottleList.appendChild(item);
       });
     }
@@ -2875,17 +2908,12 @@
       if (idx >= 0) {
         currentIndex = idx;
         renderHomeBottles();
-        setTimeout(() => {
-          showWineXp(idx);
-        }, 200);
+        setTimeout(() => showWineXp(idx), 200);
       }
     }
 
     pawButton.addEventListener("click", () => {
-      try {
-        nyaAudio.currentTime = 0;
-        nyaAudio.play();
-      } catch (_) {}
+      try { nyaAudio.currentTime = 0; nyaAudio.play(); } catch {}
     });
 
     /* ===== Diary Navigation ===== */
@@ -2901,18 +2929,26 @@
       hideAllScreensExcept(diaryNewScreen);
       diaryNewScreen.classList.remove("screen--hidden");
       diaryNewScreen.classList.add("screen--active");
+      diaryQrPreview.style.display = "none";
     });
 
     diaryAppendButton.addEventListener("click", () => {
       hideAllScreensExcept(diaryAppendScreen);
       diaryAppendScreen.classList.remove("screen--hidden");
       diaryAppendScreen.classList.add("screen--active");
+      diaryAppendFormCard.style.display = "none";
+      diaryAppendQrPreview.style.display = "none";
+      diaryAppendStatus.textContent = "";
+      diaryAppendFile.value = "";
     });
 
     diaryViewButton.addEventListener("click", () => {
       hideAllScreensExcept(diaryViewScreen);
       diaryViewScreen.classList.remove("screen--hidden");
       diaryViewScreen.classList.add("screen--active");
+      diaryViewStatus.textContent = "";
+      calendarYearCard.style.display = "none";
+      diaryViewFile.value = "";
     });
 
     diaryNewBackButton.addEventListener("click", () => {
@@ -2953,30 +2989,30 @@
     setupColorPicker(diaryColorPicker, "#f97316", c => diaryColorSelected = c);
     setupColorPicker(diaryColorPickerAppend, "#f97316", c => diaryColorSelectedAppend = c);
 
-    /* ===== Diary QR Create ===== */
+    /* ===== Diary Build / Encode ===== */
     function buildDiaryEntryFromInputs(prefix = "") {
-      const date = prefix === "-append" ? diaryDateAppendInput.value : diaryDateInput.value;
+      const isAppend = prefix === "-append";
+      const date = isAppend ? diaryDateAppendInput.value : diaryDateInput.value;
       if (!date) return null;
-      const entry = {
+      return {
         date,
-        name: (prefix === "-append" ? diaryNameAppendInput.value : diaryNameInput.value) || "",
-        type: (prefix === "-append" ? diaryTypeAppendInput.value : diaryTypeInput.value) || "",
-        brand: (prefix === "-append" ? diaryBrandAppendInput.value : diaryBrandInput.value) || "",
-        amount: (prefix === "-append" ? diaryAmountAppendInput.value : diaryAmountInput.value) || "",
-        abv: (prefix === "-append" ? diaryAbvAppendInput.value : diaryAbvInput.value) || "",
-        taste: (prefix === "-append" ? diaryTasteAppendInput.value : diaryTasteInput.value) || "",
-        aroma: (prefix === "-append" ? "" : diaryAromaInput.value) || "",
-        colorNote: (prefix === "-append" ? "" : diaryColorInput.value) || "",
-        comment: (prefix === "-append" ? diaryCommentAppendInput.value : diaryCommentInput.value) || "",
-        timezone: (prefix === "-append" ? "" : diaryTimezoneInput.value) || "",
-        mood: (prefix === "-append" ? "" : diaryMoodInput.value) || "",
-        food: (prefix === "-append" ? "" : diaryFoodInput.value) || "",
-        place: (prefix === "-append" ? "" : diaryPlaceInput.value) || "",
-        drunken: (prefix === "-append" ? "" : diaryDrunkenInput.value) || "",
-        nextday: (prefix === "-append" ? "" : diaryNextdayInput.value) || "",
-        dotColor: prefix === "-append" ? diaryColorSelectedAppend : diaryColorSelected
+        name: isAppend ? diaryNameAppendInput.value : diaryNameInput.value,
+        type: isAppend ? diaryTypeAppendInput.value : diaryTypeInput.value,
+        brand: isAppend ? diaryBrandAppendInput.value : diaryBrandInput.value,
+        amount: isAppend ? diaryAmountAppendInput.value : diaryAmountInput.value,
+        abv: isAppend ? diaryAbvAppendInput.value : diaryAbvInput.value,
+        taste: isAppend ? diaryTasteAppendInput.value : diaryTasteInput.value,
+        aroma: isAppend ? diaryAromaAppendInput.value : diaryAromaInput.value,
+        colorNote: isAppend ? diaryColorAppendInput.value : diaryColorInput.value,
+        comment: isAppend ? diaryCommentAppendInput.value : diaryCommentInput.value,
+        timezone: isAppend ? diaryTimezoneAppendInput.value : diaryTimezoneInput.value,
+        mood: isAppend ? diaryMoodAppendInput.value : diaryMoodInput.value,
+        food: isAppend ? diaryFoodAppendInput.value : diaryFoodInput.value,
+        place: isAppend ? diaryPlaceAppendInput.value : diaryPlaceInput.value,
+        drunken: isAppend ? diaryDrunkenAppendInput.value : diaryDrunkenInput.value,
+        nextday: isAppend ? diaryNextdayAppendInput.value : diaryNextdayInput.value,
+        dotColor: isAppend ? diaryColorSelectedAppend : diaryColorSelected
       };
-      return entry;
     }
 
     function buildDiaryStruct(entries) {
@@ -2988,13 +3024,14 @@
       new QRious({
         element: canvas,
         value: json,
-        size: 200,
+        size: 512,
         level: "H",
         background: "#ffffff",
         foreground: "#000000"
       });
     }
 
+    /* ===== Diary New QR ===== */
     diaryGenerateQrButton.addEventListener("click", () => {
       const entry = buildDiaryEntryFromInputs("");
       if (!entry) {
@@ -3023,25 +3060,23 @@
       reader.onload = function(e) {
         const img = new Image();
         img.onload = function() {
+          const size = 512;
           const canvas = document.createElement("canvas");
-          canvas.width = img.width;
-          canvas.height = img.height;
+          canvas.width = size;
+          canvas.height = size;
           const ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0);
-          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-          const code = jsQR(imageData.data, canvas.width, canvas.height);
-          if (code) {
-            callback(null, code.data);
-          } else {
-            callback(new Error("QRコードを認識できませんでした。"));
-          }
+          ctx.drawImage(img, 0, 0, size, size);
+          const imageData = ctx.getImageData(0, 0, size, size);
+          const code = jsQR(imageData.data, size, size);
+          if (code) callback(null, code.data);
+          else callback(new Error("QRコードを認識できませんでした。"));
         };
         img.src = e.target.result;
       };
       reader.readAsDataURL(file);
     }
 
-    /* Append */
+    /* ===== Diary Append ===== */
     diaryAppendFile.addEventListener("change", () => {
       const file = diaryAppendFile.files[0];
       if (!file) return;
@@ -3062,7 +3097,7 @@
           loadedDiaryStruct = parsed;
           diaryAppendStatus.textContent = "ノートを読み込みました。新しい1日を追加できます。";
           diaryAppendFormCard.style.display = "block";
-        } catch (e) {
+        } catch {
           diaryAppendStatus.textContent = "QRの中身を解析できませんでした。";
         }
       });
@@ -3095,7 +3130,7 @@
       document.body.removeChild(a);
     });
 
-    /* View + Calendar */
+    /* ===== Diary View & Calendar ===== */
     diaryViewReadButton.addEventListener("click", () => {
       const file = diaryViewFile.files[0];
       if (!file) {
@@ -3123,7 +3158,7 @@
           diaryViewStatus.textContent = "読み取り成功。年を選んでください。";
           calendarYearCard.style.display = "block";
           renderCalendarYearChoices();
-        } catch (e) {
+        } catch {
           diaryViewStatus.textContent = "QRの中身を解析できませんでした。";
         }
       });
@@ -3137,10 +3172,9 @@
         const y = new Date(entry.date).getFullYear();
         if (!isNaN(y)) years.add(y);
       });
-      const yearList = Array.from(years).sort((a,b)=>a-b);
+      const yearList = Array.from(years).sort((a,b) => a-b);
       const allYears = [];
       for (let y = 2020; y <= 2035; y++) allYears.push(y);
-
       allYears.forEach(y => {
         const card = document.createElement("div");
         card.className = "year-card";
@@ -3149,9 +3183,7 @@
           card.style.borderColor = "rgba(249,115,22,0.8)";
           card.style.color = "#fed7aa";
         }
-        card.addEventListener("click", () => {
-          openCalendarForYear(y);
-        });
+        card.addEventListener("click", () => openCalendarForYear(y));
         calendarYearGrid.appendChild(card);
       });
     }
@@ -3197,13 +3229,11 @@
       for (let i = 0; i < totalCells; i++) {
         const cell = document.createElement("div");
         cell.className = "calendar-day";
-
         if (i < startWeekday || currentDay > daysInMonth) {
           cell.classList.add("calendar-day--inactive");
           calendarDates.appendChild(cell);
           continue;
         }
-
         const day = currentDay;
         cell.textContent = day;
         const key = `${year}-${month+1}-${day}`;
@@ -3213,8 +3243,7 @@
           const dot = document.createElement("div");
           dot.className = "calendar-dot";
           const colors = entries.map(e => e.dotColor || "#f97316");
-          const mainColor = colors[0];
-          dot.style.background = mainColor;
+          dot.style.background = colors[0];
           cell.appendChild(dot);
           cell.addEventListener("click", () => {
             showCalendarDetails(year, month, day, entries);
@@ -3222,7 +3251,6 @@
         } else {
           cell.classList.add("calendar-day--inactive");
         }
-
         calendarDates.appendChild(cell);
         currentDay++;
       }
