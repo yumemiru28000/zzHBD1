@@ -633,7 +633,31 @@
     /* Q1〜Q7：基本情報エリア */
     .winexp-section {
       margin-top: 36px;
+      position: relative;
+      overflow: hidden;
     }
+
+    /* ここから追加：説明ゾーンにうっすらボトル画像 */
+    .winexp-section::before {
+      content: "";
+      position: absolute;
+      right: -5%;
+      top: 10%;
+      width: 40%;
+      height: 80%;
+      background-repeat: no-repeat;
+      background-position: center right;
+      background-size: contain;
+      opacity: 0.12;           /* かな���うすく */
+      pointer-events: none;
+      filter: blur(1px);
+      transition: opacity 0.6s var(--transition-soft);
+    }
+
+    .winexp-section--has-image::before {
+      opacity: 0.18;           /* ほんの少しだけ強く */
+    }
+    /* 追加ここまで */
 
     .info-block {
       margin-bottom: 18px;
@@ -1132,18 +1156,7 @@
         tagline: "ISLAND NIGHT SELECTION",
 
         openCount: 0
-      },
-
-      // 例：ワインを増やす場合はここに同じ構造で追加
-      /*
-      {
-        id: "wine2",
-        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/yumemirusougenn/main/wine2.png",
-        qrImage: "https://raw.githubusercontent.com/yumemiru28000/yumemirusougenn/main/wine2_qr.png",
-        q1_name: "赤のささやき",
-        ...
       }
-      */
     ];
 
     /************************************************************
@@ -1309,6 +1322,37 @@
       // 基本情報（Q1〜Q7）
       renderBasicInfo(wine);
 
+      // 説明ゾーンの背面にうっすらボトル
+      basicInfoSection.style.setProperty(
+        "--basic-bg-image",
+        `url("${wine.bottleImage}")`
+      );
+      basicInfoSection.classList.add("winexp-section--has-image");
+      // CSSの ::before で使う
+      basicInfoSection.style.setProperty(
+        "background-image",
+        `url("${wine.bottleImage}")`
+      );
+      basicInfoSection.style.background = "transparent"; // 本体背景は透明
+
+      const styleEl = document.getElementById("basic-info-bg-style");
+      if (!styleEl) {
+        const se = document.createElement("style");
+        se.id = "basic-info-bg-style";
+        se.textContent = `
+          #basic-info-section::before {
+            background-image: url("${wine.bottleImage}");
+          }
+        `;
+        document.head.appendChild(se);
+      } else {
+        styleEl.textContent = `
+          #basic-info-section::before {
+            background-image: url("${wine.bottleImage}");
+          }
+        `;
+      }
+
       // 世界観ゾーン（Q8 / Q9）
       worldLinePrimary.textContent = wine.q8_world_phrase || "";
       worldLineSecondary.textContent = wine.q9_world_line || "";
@@ -1322,7 +1366,7 @@
       // 折りたたみ Q11〜Q13
       renderAccordions(wine);
 
-      // 夜＆��夜演出
+      // 夜＆深夜演出
       updateNightEffects();
 
       // 再訪演出（開いた回数に応じて）
@@ -1390,7 +1434,7 @@
         if (opened || interactionLocked) return;
         opened = true;
 
-        // 封��解除 0.4s 相当（演出的に少し縮むイメージ）
+        // 封蝋解除 0.4s 相当（演出的に少し縮むイメージ）
         messageWax.style.transform = "scale(0.94) translateY(3px)";
         setTimeout(() => {
           messageWax.style.transform = "scale(0.98) translateY(1px)";
@@ -1489,13 +1533,12 @@
       const infoBlocks = Array.from(basicInfoSection.querySelectorAll(".info-block"));
 
       const handleScroll = () => {
-        const scrollTop = winexpScreen.scrollTop;
         const vh = winexpScreen.clientHeight;
 
         // Q1〜Q7：ゆっくり1つずつ出現
         infoBlocks.forEach((block, idx) => {
           const rect = block.getBoundingClientRect();
-          const offset = rect.top - 0; // screen内
+          const offset = rect.top;
           if (offset < vh - 80) {
             setTimeout(() => {
               block.classList.add("info-block--visible");
@@ -1601,9 +1644,8 @@
       goHome();
     });
 
-
     /************************************************************
-     *  QR オーバーレイ ここまではそのまま
+     *  QR オーバーレイ
      ************************************************************/
 
     function openQrOverlay() {
