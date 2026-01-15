@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <title>ゆめみるワインラベル</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- QRコード生成ライブラリ（QRious） -->
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
   <style>
     :root {
       --bg-gradient-top: #020617;
@@ -324,7 +326,7 @@
         0 0 16px rgba(56,189,248,0.4);
     }
 
-    /* ページングドット（任意視覚） */
+    /* ページングドット */
     .pager-dots {
       margin-top: 8px;
       display: flex;
@@ -369,7 +371,7 @@
 
     .overlay-inner {
       width: 100%;
-      max-width: 640px;
+      max-width: 720px;
       padding: 24px 16px 18px;
       background: radial-gradient(circle at top, rgba(15,23,42,0.96) 0%, rgba(2,6,23,0.98) 60%, rgba(15,23,42,0.98) 100%);
       border-radius: 20px;
@@ -393,7 +395,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
+      gap: 8px;
     }
     .overlay-title {
       font-size: 14px;
@@ -422,28 +425,30 @@
 
     .overlay-bottle-list {
       display: flex;
-      flex-wrap: nowrap;
+      flex-wrap: wrap;
       gap: 18px;
-      overflow-x: auto;
-      padding: 6px 4px 4px;
-      scrollbar-width: none;
-    }
-    .overlay-bottle-list::-webkit-scrollbar {
-      display: none;
+      padding: 10px 4px 4px;
+      max-height: 360px;
+      overflow-y: auto;
+      scrollbar-width: thin;
     }
 
     .overlay-bottle {
       position: relative;
-      flex: 0 0 84px;
+      flex: 0 0 160px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      padding: 8px 8px 10px;
+      border-radius: 16px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(31,41,55,0.9);
     }
     .overlay-bottle-img-wrap {
       position: relative;
-      width: 60px;
-      height: 120px;
+      width: 70px;
+      height: 140px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -468,9 +473,42 @@
       filter: blur(6px);
       opacity: 0.9;
     }
+
+    .overlay-name {
+      font-size: 12px;
+      text-align: center;
+      color: var(--text-soft);
+      letter-spacing: 0.08em;
+    }
+
+    .overlay-qr-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .overlay-qr-canvas-wrap {
+      width: 96px;
+      height: 96px;
+      padding: 4px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 30% 0, rgba(15,23,42,0.9), rgba(2,6,23,1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .overlay-qr-action-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
     .overlay-qr-icon {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 999px;
       border: 1px solid rgba(148,163,184,0.7);
       display: flex;
@@ -495,7 +533,7 @@
     }
 
     .overlay-footer-note {
-      margin-top: 14px;
+      margin-top: 10px;
       font-size: 11px;
       color: var(--text-weak);
       text-align: right;
@@ -625,7 +663,6 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* 2.5秒までは「眺める時間」 */
     .winexp-screen--locked-interaction {
       pointer-events: none;
     }
@@ -637,7 +674,6 @@
       overflow: hidden;
     }
 
-    /* ここから追加：説明ゾーンにうっすらボトル画像 */
     .winexp-section::before {
       content: "";
       position: absolute;
@@ -648,16 +684,15 @@
       background-repeat: no-repeat;
       background-position: center right;
       background-size: contain;
-      opacity: 0.12;           /* かな���うすく */
+      opacity: 0.12;
       pointer-events: none;
       filter: blur(1px);
-      transition: opacity 0.6s var(--transition-soft);
+      transition: opacity 0.6s var(--transition-soft), background-image 0.3s ease-out;
     }
 
     .winexp-section--has-image::before {
-      opacity: 0.18;           /* ほんの少しだけ強く */
+      opacity: 0.18;
     }
-    /* 追加ここまで */
 
     .info-block {
       margin-bottom: 18px;
@@ -1027,6 +1062,73 @@
       }
     }
 
+    /* ========== BGM コントロール ========== */
+
+    .audio-control {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      padding: 6px 10px 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.85);
+      border: 1px solid rgba(51,65,85,0.9);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-soft);
+      backdrop-filter: blur(14px);
+      box-shadow:
+        0 0 0 1px rgba(15,23,42,0.9),
+        0 10px 30px rgba(15,23,42,0.9);
+      z-index: 19;
+    }
+
+    .audio-label {
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .audio-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #60a5fa 0%, #1d4ed8 40%, #020617 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #e5e7eb;
+    }
+
+    .audio-slider {
+      appearance: none;
+      width: 90px;
+      height: 3px;
+      background: rgba(55,65,81,0.9);
+      border-radius: 999px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .audio-slider::-webkit-slider-thumb {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #60a5fa;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.4);
+      border: 1px solid rgba(191,219,254,0.9);
+      margin-top: -4.5px;
+    }
+    .audio-slider::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #60a5fa;
+      border: 1px solid rgba(191,219,254,0.9);
+    }
+
   </style>
 </head>
 <body>
@@ -1110,26 +1212,52 @@
           <div class="overlay-close" id="qr-close">Close</div>
         </div>
         <div class="overlay-bottle-list" id="overlay-bottle-list">
-          <!-- JSでボトル一覧を生成 -->
+          <!-- JSでボトル一覧＋QRを生成 -->
         </div>
-        <div class="overlay-footer-note">Tap the icon to save/share the QR.</div>
+        <div class="overlay-footer-note">
+          Tap QR to preview / Save to download the image.
+        </div>
       </div>
+    </div>
+
+    <!-- BGM コントロール -->
+    <div class="audio-control">
+      <div class="audio-icon">♪</div>
+      <div class="audio-label">Ambient</div>
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value="0.5"
+        class="audio-slider"
+        id="bgm-volume"
+      />
     </div>
   </div>
 
+  <!-- BGM と SE 音源（パスは環境に合わせて変更） -->
+  <audio id="bgm-audio" src="Somehow.mp3" loop></audio>
+  <audio id="se-wine1" src="s1.mp3"></audio>
+
   <script>
     /************************************************************
+     *  設定：ベースURL（QRコードに埋め込むURL）
+     *  実際の公開URLに置き換える：
+     *  例）https://yumemiru28000.github.io/zzHBD1/index.html
+     ************************************************************/
+    const BASE_URL = "https://example.com/index.html";
+
+    /************************************************************
      *  データ構造：ここを書き換えるだけでワイン追加
-     *  bottleImage, qrImage はフルURLを記述
      ************************************************************/
 
     const wines = [
       {
         id: "wine1",
         bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine1.png",
-        qrImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine1_qr.png",
+        qrImage: "", // 使わず、JSで自動生成する方を使う
 
-        // Q1〜Q13（すべて文字。必要に応じて中身変更）
         q1_name: "青の安らぎ",
         q2_producer: "ユメミるワイナリー",
         q3_origin: "ズズにゃん島",
@@ -1151,23 +1279,25 @@
         q12_storage: "直射日光を避け、15〜18℃前後の穏やかな場所で。開栓後は静かな冷蔵庫で2〜3日を目安にお楽しみください。",
         q13_craft: "ズズにゃん島の風と潮騒を閉じ込めるように、低温でゆっくりと発酵。余計な手を加えず、夜の静けさだけをグラスに残しました。",
 
-        // サブ英字タイトル、タグラインなど
         display_en: "CALM OF BLUE",
         tagline: "ISLAND NIGHT SELECTION",
 
         openCount: 0
       }
+
+      // 新しいワインを追加する場合は、ここに同じ構造でオブジェクトを追加するだけで
+      // ホーム表示・wineXp・QR生成・保存ボタンがすべて自動対応します。
     ];
 
     /************************************************************
      *  状態管理
      ************************************************************/
 
-    let currentIndex = 0;       // 今ホームで中央にいる wine の index
-    let activeWineIndex = null; // wineXp で開いているワイン
-    let homeIsVisible = true;   // 画面状態
-    let interactionLocked = false; // wineXp 初期2.5秒は true
-    let revisitCountKeyPrefix = "wine-open-count-"; // localStorage key prefix
+    let currentIndex = 0;
+    let activeWineIndex = null;
+    let homeIsVisible = true;
+    let interactionLocked = false;
+    let revisitCountKeyPrefix = "wine-open-count-";
 
     /************************************************************
      *  DOM 取得
@@ -1198,6 +1328,10 @@
     const revisitBadge = document.getElementById("revisit-badge");
     const revisitText = document.getElementById("revisit-text");
 
+    const bgmAudio = document.getElementById("bgm-audio");
+    const bgmVolumeSlider = document.getElementById("bgm-volume");
+    const seWine1 = document.getElementById("se-wine1");
+
     /************************************************************
      *  ホーム画面のボトル表示
      ************************************************************/
@@ -1222,7 +1356,6 @@
         } else {
           item.classList.add("bottle-item--dimmed");
         }
-        // 呼吸アニメーションの開始時間をずらす
         const breathDelay = (i - start) * 1.5;
         item.style.animationDelay = `${breathDelay}s`;
 
@@ -1268,7 +1401,7 @@
     function handleBottleTap(index, bottleElement) {
       activeWineIndex = index;
 
-      // タップ直後の暗転（-8%）0.12s
+      // タップ直後の暗転
       bottleElement.style.transition = "filter 0.12s var(--transition-standard)";
       bottleElement.style.filter = "brightness(0.92)";
       setTimeout(() => {
@@ -1277,11 +1410,8 @@
 
       // 0.15s後に、拡大＆背景ぼかし
       setTimeout(() => {
-        // ホーム側の背景ぼかし
         homeScreen.style.transition = "filter 0.65s var(--transition-soft)";
         homeScreen.style.filter = "blur(10px) brightness(0.85)";
-
-        // 0.65sかけて wineXp をフェードイン（ページ切り替えを感じさせない）
         showWineXp(index);
       }, 150);
     }
@@ -1293,7 +1423,7 @@
 
       winexpScreen.classList.remove("screen--hidden");
       winexpScreen.classList.add("screen--active");
-      document.body.style.overflow = "hidden"; // 背景スクロール止め
+      document.body.style.overflow = "hidden";
 
       homeButton.classList.add("home-button--visible");
 
@@ -1314,46 +1444,34 @@
         winexpScreen.classList.remove("winexp-screen--locked-interaction");
       }, 2500);
 
-      // タイトル等のテキスト反映
+      // タイトル等
       winexpTitleJp.textContent = wine.q1_name || "";
       winexpTitleEn.textContent = wine.display_en || "";
       winexpTagline.textContent = wine.tagline || "";
 
-      // 基本情報（Q1〜Q7）
+      // 基本情報
       renderBasicInfo(wine);
 
       // 説明ゾーンの背面にうっすらボトル
+      basicInfoSection.classList.add("winexp-section--has-image");
       basicInfoSection.style.setProperty(
         "--basic-bg-image",
         `url("${wine.bottleImage}")`
       );
-      basicInfoSection.classList.add("winexp-section--has-image");
-      // CSSの ::before で使う
-      basicInfoSection.style.setProperty(
-        "background-image",
-        `url("${wine.bottleImage}")`
-      );
-      basicInfoSection.style.background = "transparent"; // 本体背景は透明
-
-      const styleEl = document.getElementById("basic-info-bg-style");
+      // ::before の background-image を動的に更新
+      let styleEl = document.getElementById("basic-info-bg-style");
       if (!styleEl) {
-        const se = document.createElement("style");
-        se.id = "basic-info-bg-style";
-        se.textContent = `
-          #basic-info-section::before {
-            background-image: url("${wine.bottleImage}");
-          }
-        `;
-        document.head.appendChild(se);
-      } else {
-        styleEl.textContent = `
-          #basic-info-section::before {
-            background-image: url("${wine.bottleImage}");
-          }
-        `;
+        styleEl = document.createElement("style");
+        styleEl.id = "basic-info-bg-style";
+        document.head.appendChild(styleEl);
       }
+      styleEl.textContent = `
+        #basic-info-section::before {
+          background-image: url("${wine.bottleImage}");
+        }
+      `;
 
-      // 世界観ゾーン（Q8 / Q9）
+      // 世界観ゾーン
       worldLinePrimary.textContent = wine.q8_world_phrase || "";
       worldLineSecondary.textContent = wine.q9_world_line || "";
       worldSection.classList.remove("world-section--active");
@@ -1362,21 +1480,26 @@
 
       // 誕生日メッセージ
       setupMessage(wine);
-
-      // 折りたたみ Q11〜Q13
+      // 折りたたみ
       renderAccordions(wine);
-
-      // 夜＆深夜演出
+      // 夜演出
       updateNightEffects();
-
-      // 再訪演出（開いた回数に応じて）
+      // 再訪演出
       updateRevisitBadge(wine);
 
       // スクロール位置を先頭に戻す
       winexpScreen.scrollTop = 0;
-
-      // スクロール監視開始（各セクションのディレイ表示）
       setupScrollAnimations();
+
+      // 特定のグラス（例：wine1）を開いたときにSE再生
+      if (wine.id === "wine1") {
+        try {
+          seWine1.currentTime = 0;
+          seWine1.play();
+        } catch (e) {
+          // 自動再生制限でエラーになる場合は無視
+        }
+      }
     }
 
     function renderBasicInfo(wine) {
@@ -1413,7 +1536,6 @@
     }
 
     function setupMessage(wine) {
-      // 初期状態（封蝋だけ見えている）
       messageWax.classList.remove("message-wax--visible");
       messageCard.classList.remove("message-card--open");
 
@@ -1423,24 +1545,20 @@
         line.classList.remove("message-line--visible");
       });
 
-      // 表示をゆっくり
       setTimeout(() => {
         messageWax.classList.add("message-wax--visible");
       }, 600);
 
-      // タップでカードを開く
       let opened = false;
       const onWaxClick = () => {
         if (opened || interactionLocked) return;
         opened = true;
 
-        // 封蝋解除 0.4s 相当（演出的に少し縮むイメージ）
         messageWax.style.transform = "scale(0.94) translateY(3px)";
         setTimeout(() => {
           messageWax.style.transform = "scale(0.98) translateY(1px)";
         }, 200);
 
-        // カード展開 0.7s
         setTimeout(() => {
           messageCard.classList.add("message-card--open");
 
@@ -1526,7 +1644,7 @@
     }
 
     /************************************************************
-     *  スクロール連動アニメーション（Q1〜Q7, Q8, Q9）
+     *  スクロール連動アニメーション
      ************************************************************/
 
     function setupScrollAnimations() {
@@ -1535,7 +1653,6 @@
       const handleScroll = () => {
         const vh = winexpScreen.clientHeight;
 
-        // Q1〜Q7：ゆっくり1つずつ出現
         infoBlocks.forEach((block, idx) => {
           const rect = block.getBoundingClientRect();
           const offset = rect.top;
@@ -1546,7 +1663,6 @@
           }
         });
 
-        // 世界観ゾーン Q8 / Q9
         const worldRect = worldSection.getBoundingClientRect();
         if (worldRect.top < vh - 140) {
           worldSection.classList.add("world-section--active");
@@ -1576,7 +1692,6 @@
     function updateNightEffects() {
       if (isNightTime()) {
         nightStars.classList.add("night-stars--visible");
-        // 背景は少し暗めに
         winexpBgLayer.style.filter = "brightness(0.9)";
       } else {
         nightStars.classList.remove("night-stars--visible");
@@ -1591,17 +1706,14 @@
     function updateRevisitBadge(wine) {
       const count = wine.openCount || 0;
       if (count <= 1) {
-        // 初回は非表示
         revisitBadge.classList.remove("revisit-badge--visible");
         return;
       }
 
-      // 星を増やす
       let starCount = Math.min(count, 5);
       let stars = "★".repeat(starCount);
       revisitBadge.querySelector(".revisit-star").textContent = stars;
 
-      // メッセージを少しずつ変化
       let extraLine = "";
       if (count >= 3 && count < 6) {
         extraLine = "GROWING MEMORY";
@@ -1632,13 +1744,10 @@
       document.body.style.overflow = "hidden";
 
       homeButton.classList.remove("home-button--visible");
-
-      // 背景のぼかし解除
       homeScreen.style.filter = "none";
     }
 
     homeButton.addEventListener("click", () => {
-      // 戻り演出 0.5s 相当
       homeScreen.style.transition = "transform 0.5s var(--transition-standard), opacity 0.5s var(--transition-standard)";
       homeScreen.style.transform = "translateY(0)";
       goHome();
@@ -1646,6 +1755,9 @@
 
     /************************************************************
      *  QR オーバーレイ
+     *  各ワインの QR は
+     *  BASE_URL + ?wine=wineId
+     *  を埋め���む
      ************************************************************/
 
     function openQrOverlay() {
@@ -1663,17 +1775,14 @@
       closeQrOverlay();
     });
     qrOverlay.addEventListener("click", (e) => {
-      // 背景クリックで閉じる（中身クリックは閉じない）
       if (e.target === qrOverlay) {
         closeQrOverlay();
       }
     });
 
-    /************************************************************
-     *  QRオーバーレイ用：ボトル一覧の生成
-     ************************************************************/
     function renderOverlayBottles() {
       overlayBottleList.innerHTML = "";
+
       wines.forEach((wine) => {
         const item = document.createElement("div");
         item.className = "overlay-bottle";
@@ -1692,39 +1801,136 @@
         imgWrap.appendChild(img);
         imgWrap.appendChild(shadow);
 
-        const qrIcon = document.createElement("div");
-        qrIcon.className = "overlay-qr-icon";
-        qrIcon.textContent = "QR";
+        const nameEl = document.createElement("div");
+        nameEl.className = "overlay-name";
+        nameEl.textContent = wine.q1_name;
 
-        qrIcon.addEventListener("click", (e) => {
+        const qrArea = document.createElement("div");
+        qrArea.className = "overlay-qr-area";
+
+        const qrCanvasWrap = document.createElement("div");
+        qrCanvasWrap.className = "overlay-qr-canvas-wrap";
+
+        const qrCanvas = document.createElement("canvas");
+        qrCanvas.width = 128;
+        qrCanvas.height = 128;
+        qrCanvasWrap.appendChild(qrCanvas);
+
+        // QRコード生成
+        const qrUrl = `${BASE_URL}?wine=${encodeURIComponent(wine.id)}`;
+        const qr = new QRious({
+          element: qrCanvas,
+          value: qrUrl,
+          size: 120,
+          level: "H",
+          background: "transparent",
+          foreground: "#e5e7eb"
+        });
+
+        const actionRow = document.createElement("div");
+        actionRow.className = "overlay-qr-action-row";
+
+        const previewBtn = document.createElement("div");
+        previewBtn.className = "overlay-qr-icon";
+        previewBtn.textContent = "QR";
+
+        const saveBtn = document.createElement("div");
+        saveBtn.className = "overlay-qr-icon";
+        saveBtn.textContent = "Save";
+
+        // プレビュー：新しいタブで開く
+        previewBtn.addEventListener("click", (e) => {
           e.stopPropagation();
-          // QR画像を別タブで開く or ダウンロード
-          if (wine.qrImage) {
-            window.open(wine.qrImage, "_blank");
+          const dataUrl = qrCanvas.toDataURL("image/png");
+          const win = window.open();
+          if (win) {
+            win.document.write('<img src="' + dataUrl + '" style="width:100%;height:auto;"/>');
           }
         });
 
+        // 保存：a[download] でPNGダウンロード
+        saveBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const dataUrl = qrCanvas.toDataURL("image/png");
+          const a = document.createElement("a");
+          a.href = dataUrl;
+          a.download = `${wine.id}_qr.png`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        });
+
+        actionRow.appendChild(previewBtn);
+        actionRow.appendChild(saveBtn);
+
+        qrArea.appendChild(qrCanvasWrap);
+        qrArea.appendChild(actionRow);
+
         item.appendChild(imgWrap);
-        item.appendChild(qrIcon);
+        item.appendChild(nameEl);
+        item.appendChild(qrArea);
+
         overlayBottleList.appendChild(item);
       });
+    }
+
+    /************************************************************
+     *  BGM コントロール
+     ************************************************************/
+
+    function setupBgm() {
+      bgmAudio.volume = parseFloat(bgmVolumeSlider.value || "0.5");
+
+      bgmVolumeSlider.addEventListener("input", () => {
+        bgmAudio.volume = parseFloat(bgmVolumeSlider.value || "0.5");
+      });
+
+      // ユーザー操作後に再生開始（自動再生制限対策）
+      const tryStart = () => {
+        bgmAudio.play().catch(() => {});
+        document.removeEventListener("click", tryStart);
+        document.removeEventListener("touchstart", tryStart);
+      };
+      document.addEventListener("click", tryStart);
+      document.addEventListener("touchstart", tryStart);
+    }
+
+    /************************************************************
+     *  URLパラメータから wine を直接開く
+     *  ?wine=wine1 など
+     ************************************************************/
+
+    function getWineIdFromQuery() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("wine");
+    }
+
+    function openWineFromQueryIfNeeded() {
+      const wineId = getWineIdFromQuery();
+      if (!wineId) return;
+      const idx = wines.findIndex(w => w.id === wineId);
+      if (idx >= 0) {
+        // ホームの中央インデックスも合わせておく
+        currentIndex = idx;
+        renderHomeBottles();
+        // 少し遅らせてから遷移演出
+        setTimeout(() => {
+          showWineXp(idx);
+        }, 200);
+      }
     }
 
     /************************************************************
      *  最初に1回だけ実行する「初期化」
      ************************************************************/
     function init() {
-      // ホームのボトルを描画
       renderHomeBottles();
-
-      // QRオーバーレイのミニボトル一覧を描画
       renderOverlayBottles();
-
-      // 初回、夜演出の状態だけ整える
       updateNightEffects();
+      setupBgm();
+      openWineFromQueryIfNeeded();
     }
 
-    // DOMが読み込まれたら初期化
     document.addEventListener("DOMContentLoaded", init);
   </script>
 </body>
