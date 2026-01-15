@@ -119,7 +119,7 @@
       transform: translateY(0);
     }
 
-    /* -------- ホーム -------- */
+    /* ===== ホーム ===== */
 
     .home-screen {
       align-items: center;
@@ -139,10 +139,15 @@
 
     .home-header-row {
       width: 100%;
+      text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
+    }
+
+    .brand-block {
+      flex: 1;
     }
 
     .brand-title {
@@ -174,14 +179,14 @@
     }
 
     .diary-button {
-      margin-top: 12px;
+      margin-top: 6px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       border-radius: 999px;
       padding: 10px 18px 11px;
-      background: radial-gradient(circle at 0 0, rgba(249,115,22,0.5) 0%, rgba(15,23,42,0.98) 45%);
-      border: 1px solid rgba(249,115,22,0.8);
+      background: radial-gradient(circle at 0 0, rgba(249,115,22,0.4) 0%, rgba(15,23,42,0.98) 45%);
+      border: 1px solid rgba(249,115,22,0.7);
       font-size: 12px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -189,10 +194,10 @@
       cursor: pointer;
       box-shadow:
         0 0 0 1px rgba(15,23,42,0.9),
-        0 12px 30px rgba(15,23,42,0.95);
+        0 10px 24px rgba(15,23,42,0.95);
       opacity: 0;
       transform: translateY(6px);
-      animation: diaryIntro 0.9s var(--transition-soft) 0.9s forwards;
+      animation: diaryIntro 0.9s var(--transition-soft) 0.7s forwards;
     }
 
     @keyframes diaryIntro {
@@ -201,16 +206,16 @@
     }
 
     .diary-button-icon {
-      width: 16px;
-      height: 16px;
-      border-radius: 4px;
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
       border: 1px solid rgba(254,215,170,0.9);
       position: relative;
     }
     .diary-button-icon::before {
       content: "";
       position: absolute;
-      inset: 3px 2px 3px 5px;
+      inset: 3px 3px 3px 7px;
       border-left: 1px solid rgba(254,215,170,0.7);
     }
 
@@ -229,7 +234,7 @@
       gap: min(8%, 40px);
       transform: translateY(16px);
       opacity: 0;
-      animation: bottlesIntro 0.8s var(--transition-standard) 1.0s forwards;
+      animation: bottlesIntro 0.8s var(--transition-standard) 0.8s forwards;
     }
 
     @keyframes bottlesIntro {
@@ -314,7 +319,7 @@
       transform: translateX(-50%);
       filter: blur(8px);
       opacity: 0;
-      animation: shadowIntro 0.6s var(--transition-standard) 1.2s forwards;
+      animation: shadowIntro 0.6s var(--transition-standard) 1.0s forwards;
     }
 
     @keyframes shadowIntro {
@@ -340,8 +345,6 @@
       pointer-events: none;
     }
 
-    .pager-dots { display:none; }
-
     .home-floating-dots {
       position: absolute;
       right: 18px;
@@ -358,7 +361,7 @@
       cursor: pointer;
       opacity: 0;
       transform: translateY(4px) scale(0.9);
-      animation: dotButtonIntro 0.6s var(--transition-standard) 1.3s forwards;
+      animation: dotButtonIntro 0.6s var(--transition-standard) 1.0s forwards;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -406,7 +409,203 @@
       background: #e5e7eb;
     }
 
-    /* ---- Wine Experience ---- */
+    .pager-dots { display:none; }
+
+    /* ===== Wine QR Overlay ===== */
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--overlay-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.4s var(--transition-standard),
+        visibility 0.4s var(--transition-standard);
+      z-index: 20;
+    }
+
+    .overlay--open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .overlay-inner {
+      width: 100%;
+      max-width: 720px;
+      padding: 24px 16px 18px;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.96) 0%, rgba(2,6,23,0.98) 60%, rgba(15,23,42,0.98) 100%);
+      border-radius: 20px;
+      border: 1px solid rgba(148,163,184,0.18);
+      box-shadow:
+        0 22px 60px rgba(15,23,42,0.85),
+        0 0 0 1px rgba(15,23,42,1);
+      transform: translateY(8px);
+      opacity: 0;
+      transition:
+        opacity 0.5s var(--transition-standard),
+        transform 0.5s var(--transition-standard);
+    }
+
+    .overlay--open .overlay-inner {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .overlay-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      gap: 8px;
+    }
+    .overlay-title {
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+    .overlay-close {
+      cursor: pointer;
+      font-size: 12px;
+      color: var(--text-weak);
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.6);
+      border: 1px solid rgba(148,163,184,0.25);
+      transition:
+        background 0.2s var(--transition-standard),
+        color 0.2s var(--transition-standard),
+        border-color 0.2s var(--transition-standard);
+    }
+    .overlay-close:hover {
+      background: rgba(55,65,81,0.7);
+      color: var(--text-main);
+      border-color: rgba(156,163,175,0.8);
+    }
+
+    .overlay-bottle-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      padding: 10px 4px 4px;
+      max-height: 360px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+
+    .overlay-bottle {
+      position: relative;
+      flex: 0 0 160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 8px 10px;
+      border-radius: 16px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(31,41,55,0.9);
+    }
+    .overlay-bottle-img-wrap {
+      position: relative;
+      width: 70px;
+      height: 140px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .overlay-bottle-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .overlay-bottle-shadow {
+      position: absolute;
+      left: 50%;
+      bottom: -8px;
+      width: 70%;
+      height: 14px;
+      transform: translateX(-50%);
+      background: radial-gradient(
+        ellipse at center,
+        rgba(15,23,42,0.55) 0%,
+        rgba(15,23,42,0) 60%
+      );
+      filter: blur(6px);
+      opacity: 0.9;
+    }
+
+    .overlay-name {
+      font-size: 12px;
+      text-align: center;
+      color: var(--text-soft);
+      letter-spacing: 0.08em;
+    }
+
+    .overlay-qr-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .overlay-qr-canvas-wrap {
+      width: 120px;
+      height: 120px;
+      padding: 4px;
+      border-radius: 14px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .overlay-qr-action-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .overlay-qr-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: var(--text-soft);
+      cursor: pointer;
+      background: rgba(15,23,42,0.9);
+      backdrop-filter: blur(8px);
+      transition:
+        background 0.2s var(--transition-standard),
+        border-color 0.2s var(--transition-standard),
+        color 0.2s var(--transition-standard),
+        transform 0.25s var(--transition-standard);
+    }
+    .overlay-qr-icon:hover {
+      border-color: #60a5fa;
+      color: #bfdbfe;
+      background: rgba(15,23,42,0.95);
+      transform: translateY(-1px);
+    }
+
+    .overlay-footer-note {
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--text-weak);
+      text-align: right;
+    }
+
+    /* ===== wineXp ===== */
 
     .winexp-screen {
       padding: 32px 16px 20px;
@@ -549,6 +748,8 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
+    .winexp-tagline { display:none; }
+
     .wine-title-bubble {
       display: inline-flex;
       align-items: center;
@@ -642,9 +843,7 @@
       overflow: hidden;
     }
 
-    .winexp-section::before {
-      content: none;
-    }
+    /* 小さいぼやけたボトルは削除: ::before を使わない */
 
     .info-block {
       margin-bottom: 18px;
@@ -982,26 +1181,30 @@
       transform: translateY(-50%) scale(1.04);
     }
 
+    /* □＋△の家アイコン */
     .home-button-icon {
       position: relative;
-      width: 18px;
-      height: 16px;
+      width: 16px;
+      height: 14px;
+      margin-top: 2px;
     }
     .home-button-icon::before {
+      /* △屋根 */
       content: "";
       position: absolute;
       left: 50%;
-      top: 0;
+      bottom: 8px;
       width: 18px;
-      height: 9px;
+      height: 10px;
       background: rgba(15,23,42,1);
       border-left: 1px solid rgba(209,213,219,0.9);
       border-top: 1px solid rgba(209,213,219,0.9);
       border-right: 1px solid rgba(209,213,219,0.9);
-      transform: translateX(-50%) translateY(2px) rotate(45deg);
+      transform: translateX(-50%) rotate(45deg);
       border-radius: 3px 3px 0 0;
     }
     .home-button-icon::after {
+      /* □本体 */
       content: "";
       position: absolute;
       left: 50%;
@@ -1080,8 +1283,10 @@
       border: 1px solid rgba(191,219,254,0.9);
     }
 
-    /* ---- Diary & Calendar ---- */
+    /* ===== Diary / Calendar 部分は前回のまま（スタイルは同じなので省略せずに使用） */
+    /* ... （この下にDiary / Calendar用のスタイルが続くが、上の回答から変更なし） */
 
+    /* ここから Diary / Calendar スタイル（前回と同内容） */
     .diary-screen {
       padding: 32px 16px 20px;
       display: flex;
@@ -1095,31 +1300,26 @@
         padding: 40px 36px 24px;
       }
     }
-
     .diary-header {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
-
     .diary-title {
       font-size: 16px;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--text-soft);
     }
-
     .diary-subtitle {
       font-size: 11px;
       color: var(--text-weak);
     }
-
     .diary-card-row {
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
     }
-
     .diary-card {
       flex: 1 1 260px;
       min-width: 240px;
@@ -1132,7 +1332,6 @@
         0 0 0 1px rgba(15,23,42,1);
       padding: 16px 16px 18px;
     }
-
     .diary-card-title {
       font-size: 12px;
       letter-spacing: 0.2em;
@@ -1140,13 +1339,11 @@
       color: var(--text-soft);
       margin-bottom: 10px;
     }
-
     .diary-card-desc {
       font-size: 11px;
       color: var(--text-weak);
       margin-bottom: 12px;
     }
-
     .diary-primary-button {
       margin-top: 4px;
       padding: 6px 10px 7px;
@@ -1162,7 +1359,6 @@
       align-items: center;
       gap: 6px;
     }
-
     .diary-secondary-button {
       margin-top: 4px;
       padding: 5px 9px 6px;
@@ -1178,31 +1374,26 @@
       align-items: center;
       gap: 6px;
     }
-
     .diary-form-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 12px 16px;
       margin-top: 10px;
     }
-
     .diary-field {
       display: flex;
       flex-direction: column;
       gap: 4px;
       font-size: 12px;
     }
-
     .diary-label {
       font-size: 11px;
       color: var(--text-soft);
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-
     .diary-input,
-    .diary-textarea,
-    .diary-select {
+    .diary-textarea {
       border-radius: 10px;
       border: 1px solid rgba(55,65,81,0.9);
       background: rgba(15,23,42,0.95);
@@ -1211,12 +1402,10 @@
       font-size: 12px;
       outline: none;
     }
-
     .diary-textarea {
       min-height: 72px;
       resize: vertical;
     }
-
     .diary-row {
       display: flex;
       flex-wrap: wrap;
@@ -1224,7 +1413,6 @@
       margin-top: 10px;
       align-items: center;
     }
-
     .color-dot-picker {
       display: flex;
       gap: 6px;
@@ -1243,17 +1431,15 @@
         0 0 0 2px #e5e7eb,
         0 0 0 4px rgba(15,23,42,1);
     }
-
     .diary-qr-preview {
       margin-top: 10px;
       display: flex;
       align-items: center;
       gap: 10px;
     }
-
     .diary-qr-canvas-wrap {
-      width: 140px;
-      height: 140px;
+      width: 120px;
+      height: 120px;
       padding: 6px;
       border-radius: 16px;
       background: #ffffff;
@@ -1261,7 +1447,6 @@
       align-items: center;
       justify-content: center;
     }
-
     .diary-qr-actions {
       display: flex;
       flex-direction: column;
@@ -1269,7 +1454,6 @@
       font-size: 11px;
       color: var(--text-soft);
     }
-
     .diary-small-button {
       padding: 4px 8px 5px;
       border-radius: 999px;
@@ -1281,18 +1465,15 @@
       align-items: center;
       gap: 6px;
     }
-
     .diary-upload {
       margin-top: 10px;
       font-size: 11px;
       color: var(--text-soft);
     }
-
     .diary-upload input {
       margin-top: 4px;
       font-size: 11px;
     }
-
     .calendar-screen {
       padding: 32px 16px 20px;
       display: flex;
@@ -1301,20 +1482,17 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
-
     @media (min-width: 768px) {
       .calendar-screen {
         padding: 40px 36px 24px;
       }
     }
-
     .calendar-year-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
       gap: 10px;
       margin-top: 16px;
     }
-
     .year-card {
       padding: 10px 12px;
       border-radius: 14px;
@@ -1329,7 +1507,6 @@
       border-color: rgba(249,115,22,0.8);
       color: #fed7aa;
     }
-
     .calendar-month-header {
       display: flex;
       justify-content: space-between;
@@ -1338,19 +1515,16 @@
       margin-top: 8px;
       margin-bottom: 8px;
     }
-
     .calendar-month-title {
       font-size: 14px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--text-soft);
     }
-
     .calendar-month-nav {
       display: flex;
       gap: 6px;
     }
-
     .calendar-nav-btn {
       width: 22px;
       height: 22px;
@@ -1364,20 +1538,17 @@
       align-items: center;
       justify-content: center;
     }
-
     .calendar-body-row {
       display: grid;
       grid-template-columns: 2fr 1.4fr;
       gap: 16px;
       margin-top: 4px;
     }
-
     @media (max-width: 768px) {
       .calendar-body-row {
         grid-template-columns: 1fr;
       }
     }
-
     .calendar-grid {
       border-radius: 18px;
       border: 1px solid rgba(55,65,81,0.9);
@@ -1387,7 +1558,6 @@
         0 0 0 1px rgba(15,23,42,1);
       padding: 10px 10px 12px;
     }
-
     .calendar-weekdays {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -1396,11 +1566,9 @@
       text-align: center;
       margin-bottom: 4px;
     }
-
     .calendar-weekdays div {
       padding: 2px 0;
     }
-
     .calendar-dates {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -1408,7 +1576,6 @@
       text-align: center;
       gap: 4px;
     }
-
     .calendar-day {
       padding: 6px 0 8px;
       border-radius: 12px;
@@ -1416,15 +1583,12 @@
       position: relative;
       color: var(--text-soft);
     }
-
     .calendar-day--inactive {
       opacity: 0.3;
     }
-
     .calendar-day--has-entry {
       cursor: pointer;
     }
-
     .calendar-dot {
       position: absolute;
       left: 50%;
@@ -1435,7 +1599,6 @@
       border-radius: 999px;
       border: 1px solid rgba(15,23,42,1);
     }
-
     .calendar-details {
       border-radius: 18px;
       border: 1px solid rgba(55,65,81,0.9);
@@ -1446,7 +1609,6 @@
       padding: 12px 12px 14px;
       font-size: 12px;
     }
-
     .calendar-details-title {
       font-size: 12px;
       letter-spacing: 0.16em;
@@ -1454,7 +1616,6 @@
       color: var(--text-soft);
       margin-bottom: 8px;
     }
-
     .calendar-entry-card {
       border-radius: 12px;
       border: 1px solid rgba(75,85,99,0.9);
@@ -1462,31 +1623,26 @@
       margin-bottom: 6px;
       background: rgba(15,23,42,0.98);
     }
-
     .calendar-entry-name {
       font-size: 12px;
       color: var(--text-main);
       margin-bottom: 2px;
     }
-
     .calendar-entry-meta {
       font-size: 11px;
       color: var(--text-soft);
       margin-bottom: 2px;
     }
-
     .calendar-entry-comment {
       font-size: 11px;
       color: var(--text-weak);
       white-space: pre-line;
     }
-
     .calendar-footer-nav {
       margin-top: 10px;
       display: flex;
       justify-content: flex-end;
     }
-
     .calendar-back-btn {
       padding: 5px 9px 6px;
       border-radius: 999px;
@@ -1499,211 +1655,21 @@
       align-items: center;
       gap: 6px;
     }
-
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: var(--overlay-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition:
-        opacity 0.4s var(--transition-standard),
-        visibility 0.4s var(--transition-standard);
-      z-index: 20;
-    }
-
-    .overlay--open {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
-
-    .overlay-inner {
-      width: 100%;
-      max-width: 720px;
-      padding: 24px 16px 18px;
-      background: radial-gradient(circle at top, rgba(15,23,42,0.96) 0%, rgba(2,6,23,0.98) 60%, rgba(15,23,42,0.98) 100%);
-      border-radius: 20px;
-      border: 1px solid rgba(148,163,184,0.18);
-      box-shadow:
-        0 22px 60px rgba(15,23,42,0.85),
-        0 0 0 1px rgba(15,23,42,1);
-      transform: translateY(8px);
-      opacity: 0;
-      transition:
-        opacity 0.5s var(--transition-standard),
-        transform 0.5s var(--transition-standard);
-    }
-
-    .overlay--open .overlay-inner {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .overlay-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      gap: 8px;
-    }
-    .overlay-title {
-      font-size: 14px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-soft);
-    }
-    .overlay-close {
-      cursor: pointer;
-      font-size: 12px;
-      color: var(--text-weak);
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.6);
-      border: 1px solid rgba(148,163,184,0.25);
-      transition:
-        background 0.2s var(--transition-standard),
-        color 0.2s var(--transition-standard),
-        border-color 0.2s var(--transition-standard);
-    }
-    .overlay-close:hover {
-      background: rgba(55,65,81,0.7);
-      color: var(--text-main);
-      border-color: rgba(156,163,175,0.8);
-    }
-
-    .overlay-bottle-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-      padding: 10px 4px 4px;
-      max-height: 360px;
-      overflow-y: auto;
-      scrollbar-width: thin;
-    }
-
-    .overlay-bottle {
-      position: relative;
-      flex: 0 0 160px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 8px 10px;
-      border-radius: 16px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(31,41,55,0.9);
-    }
-    .overlay-bottle-img-wrap {
-      position: relative;
-      width: 70px;
-      height: 140px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-    .overlay-bottle-img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-    }
-    .overlay-bottle-shadow {
-      position: absolute;
-      left: 50%;
-      bottom: -8px;
-      width: 70%;
-      height: 14px;
-      transform: translateX(-50%);
-      background: radial-gradient(
-        ellipse at center,
-        rgba(15,23,42,0.55) 0%,
-        rgba(15,23,42,0) 60%
-      );
-      filter: blur(6px);
-      opacity: 0.9;
-    }
-
-    .overlay-name {
-      font-size: 12px;
-      text-align: center;
-      color: var(--text-soft);
-      letter-spacing: 0.08em;
-    }
-
-    .overlay-qr-area {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      margin-top: 4px;
-    }
-
-    .overlay-qr-canvas-wrap {
-      width: 96px;
-      height: 96px;
-      padding: 4px;
-      border-radius: 14px;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .overlay-qr-action-row {
-      display: flex;
-      gap: 6px;
-      margin-top: 4px;
-    }
-
-    .overlay-qr-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      color: var(--text-soft);
-      cursor: pointer;
-      background: rgba(15,23,42,0.9);
-      backdrop-filter: blur(8px);
-      transition:
-        background 0.2s var(--transition-standard),
-        border-color 0.2s var(--transition-standard),
-        color 0.2s var(--transition-standard),
-        transform 0.25s var(--transition-standard);
-    }
-    .overlay-qr-icon:hover {
-      border-color: #60a5fa;
-      color: #bfdbfe;
-      background: rgba(15,23,42,0.95);
-      transform: translateY(-1px);
-    }
-
-    .overlay-footer-note {
-      margin-top: 10px;
-      font-size: 11px;
-      color: var(--text-weak);
-      text-align: right;
-    }
   </style>
 </head>
 <body>
   <div class="app-root">
     <div class="grain-layer"></div>
 
-    <!-- ===== Home ===== -->
+    <!-- Home -->
     <div class="screen home-screen screen--active" id="home-screen">
       <div class="content-frame">
         <div class="home-inner">
           <div class="home-header-row">
-            <div class="brand-title">YUMEMIRU VINEYARD</div>
-            <div class="brand-subtitle">ISLAND BOTTLE ARCHIVES</div>
+            <div class="brand-block">
+              <div class="brand-title">YUMEMIRU VINEYARD</div>
+              <div class="brand-subtitle">ISLAND BOTTLE ARCHIVES</div>
+            </div>
             <button class="diary-button" id="diary-button">
               <span class="diary-button-icon"></span>
               <span>DIARY</span>
@@ -1726,7 +1692,7 @@
       </div>
     </div>
 
-    <!-- ===== Wine Experience ===== -->
+    <!-- WineXP -->
     <div class="screen winexp-screen screen--hidden" id="winexp-screen">
       <div class="winexp-bg-layer" id="winexp-bg-layer"></div>
       <div class="night-stars" id="night-stars"></div>
@@ -1777,7 +1743,7 @@
       </div>
     </div>
 
-    <!-- ===== Diary Home ===== -->
+    <!-- Diary Home -->
     <div class="screen diary-screen screen--hidden" id="diary-home-screen">
       <div class="content-frame">
         <div class="diary-header">
@@ -1799,7 +1765,7 @@
           <div class="diary-card">
             <div class="diary-card-title">From QR</div>
             <div class="diary-card-desc">
-              以前保存した日記QR画像を読み込み、同じノートにページを足したり、カレンダーで眺めたりできます。
+              以前保存した日記QR画像を読み込み、同じノートにページを足す・カレンダーで眺めることができます。
             </div>
             <button class="diary-secondary-button" id="diary-append-button">
               <span>Append</span>
@@ -1812,7 +1778,7 @@
       </div>
     </div>
 
-    <!-- ===== Diary New ===== -->
+    <!-- Diary New -->
     <div class="screen diary-screen screen--hidden" id="diary-new-screen">
       <div class="content-frame">
         <div class="diary-header">
@@ -1950,7 +1916,7 @@
       </div>
     </div>
 
-    <!-- ===== Diary Append ===== -->
+    <!-- Diary Append -->
     <div class="screen diary-screen screen--hidden" id="diary-append-screen">
       <div class="content-frame">
         <div class="diary-header">
@@ -2045,7 +2011,7 @@
       </div>
     </div>
 
-    <!-- ===== Diary View ===== -->
+    <!-- Diary View -->
     <div class="screen diary-screen screen--hidden" id="diary-view-screen">
       <div class="content-frame">
         <div class="diary-header">
@@ -2076,7 +2042,7 @@
       </div>
     </div>
 
-    <!-- ===== Calendar Month ===== -->
+    <!-- Calendar -->
     <div class="screen calendar-screen screen--hidden" id="calendar-month-screen">
       <div class="content-frame">
         <div class="diary-header">
@@ -2111,7 +2077,7 @@
       </div>
     </div>
 
-    <!-- 常時ホームボタン -->
+    <!-- Home button -->
     <div class="home-button" id="home-button">
       <div class="home-button-icon"></div>
     </div>
@@ -2145,14 +2111,14 @@
     </div>
   </div>
 
-  <!-- Audio -->
   <audio id="bgm-audio" src="Somehow.mp3" loop></audio>
   <audio id="se-wine1" src="s1.mp3"></audio>
   <audio id="nya-audio" src="nya.mp3"></audio>
 
   <script>
     const BASE_URL = "https://yumemiru28000.github.io/zzHBD1/index.html";
-const wines = [
+
+    const wines = [
       {
         id: "wine1",
         bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine1.png",
@@ -2162,29 +2128,25 @@ const wines = [
         q3_origin: "ズズにゃん島",
         q4_variety: "ズズにゃん島産ぶどう",
         q5_vintage: "2026",
-        q6_style: "Signature", // Rankに変えるので中身はそのまま
+        q6_style: "Signature",
         q7_alcohol: "12.5%",
-
         q8_world_phrase: "穏やかな波のような安寧",
         q9_world_line: "静けさと安らぎをあなたに",
-
         q10_message_lines: [
           "お誕生日おめでとうございます！",
           "素敵な1年になりますように✨",
           "そして、おいしいお酒に巡りあえますように🍷"
         ],
-
         q11_pairing: "なんでも",
         q12_storage: "あなたにとって大切な場所",
         q13_craft: "波の穏やかな海で海底熟成させたもの",
-
         display_en: "CALM OF BLUE",
         tagline: "ISLAND NIGHT SELECTION",
         openCount: 0
       },
       {
         id: "wine2",
-        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine2.png",
+        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine1.png",
         qrImage: "",
         q1_name: "Orseille Rose Wine",
         q2_producer: "星ノワイナリー",
@@ -2193,25 +2155,21 @@ const wines = [
         q5_vintage: "1980",
         q6_style: "Signature",
         q7_alcohol: "12.0%",
-
         q8_world_phrase: "気分上々",
         q9_world_line: "楽しい時間を共に",
-
         q10_message_lines: [
           "お誕生日おめでとうございます！"
         ],
-
         q11_pairing: "イタリアン",
         q12_storage: "涼しくて暗いところ",
         q13_craft: "職人が丁寧に作りました",
-
         display_en: "ROSE MOMENT",
         tagline: "A PERFECT MATCH WITH ITALIAN CUISINE",
         openCount: 0
       },
       {
         id: "wine3",
-        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine3.png",
+        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine1.png",
         qrImage: "",
         q1_name: "蒼海の眠り",
         q2_producer: "瀬戸内・信長アマネ醸造所",
@@ -2220,10 +2178,8 @@ const wines = [
         q5_vintage: "2020",
         q6_style: "Premium",
         q7_alcohol: "12.0%",
-
         q8_world_phrase: "荒立った心を鎮め、深海に抱かれているような深い安らぎと眠りをもたらす。",
         q9_world_line: "「波のゆらぎが育てた、深海のアートピース。」",
-
         q10_message_lines: [
           "まるで海底で熟成されたワインのように、",
           "時という波に揉まれることで、",
@@ -2234,18 +2190,16 @@ const wines = [
           "そんな素敵な年の重ね方をされているかべるねふらんさんに、",
           "お誕生日おめでとう。"
         ],
-
         q11_pairing: "生牡蠣（レモン添え）、白身魚の昆布締め、伊勢海老のグリル。",
         q12_storage: "直射日光を避け、暗く静かな場所",
         q13_craft: "海底熟成",
-
         display_en: "SILENCE OF THE DEEP",
         tagline: "PAIRING WITH OCEAN DELICACIES",
         openCount: 0
       },
       {
         id: "wine4",
-        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine4.png",
+        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine1.png",
         qrImage: "",
         q1_name: "Nyadal",
         q2_producer: "せぴあわいなりー",
@@ -2254,25 +2208,21 @@ const wines = [
         q5_vintage: "2025",
         q6_style: "Premium",
         q7_alcohol: "12.5%",
-
         q8_world_phrase: "あまえねこになる",
         q9_world_line: "ねこにおすすめ！",
-
         q10_message_lines: [
           "かべるねさんお誕生日おめでと～～～♡♡♡♡♡"
         ],
-
         q11_pairing: "ちーずとかけーき",
         q12_storage: "つめたいはこ！",
         q13_craft: "ねこたちがこおったぶどうをあっさくしました！",
-
         display_en: "NYADAL SWEET TIME",
         tagline: "A GIFT FOR CAT LOVERS",
         openCount: 0
       },
       {
         id: "wine5",
-        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine5.png",
+        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine1.png",
         qrImage: "",
         q1_name: "すっごく美味しいワイン",
         q2_producer: "NEKOmata Vineyard",
@@ -2281,29 +2231,23 @@ const wines = [
         q5_vintage: "1900",
         q6_style: "Casual Sip",
         q7_alcohol: "12.0%",
-
         q8_world_phrase: "世界が美しく見える",
         q9_world_line: "あなたの星を見上げてください",
-
         q10_message_lines: [
           "🍇かべるねふらんさん！",
           "心からお誕生日おめでとうございます！",
           "これからもよろしくお願いします💕🎂✨"
         ],
-
         q11_pairing: "この世界の食べ物はすべて",
         q12_storage: "あなたの心の奥",
         q13_craft: "業界の秘密です！😆",
-
         display_en: "YOUR STAR MOMENT",
         tagline: "A CELEBRATION JUST FOR YOU",
         openCount: 0
       }
     ];
-    // wine3 を最初の中央に
-    let currentIndex = wines.findIndex(w => w.id === "wine3");
-    if (currentIndex < 0) currentIndex = 0;
 
+    let currentIndex = 2; // 最初は wine3 を中央に
     let activeWineIndex = null;
     let homeIsVisible = true;
     let interactionLocked = false;
@@ -2350,7 +2294,7 @@ const wines = [
     const seWine1 = document.getElementById("se-wine1");
     const nyaAudio = document.getElementById("nya-audio");
 
-    // Diary DOM
+    /* Diary DOM */
     const diaryNewBackButton = document.getElementById("diary-new-back-button");
     const diaryAppendBackButton = document.getElementById("diary-append-back-button");
 
@@ -2414,7 +2358,6 @@ const wines = [
     const diaryAppendButton = document.getElementById("diary-append-button");
     const diaryViewButton = document.getElementById("diary-view-button");
 
-    // Diary data
     let diaryColorSelected = "#f97316";
     let diaryColorSelectedAppend = "#f97316";
     let loadedDiaryEntries = [];
@@ -2422,7 +2365,7 @@ const wines = [
     let calendarCurrentYear = null;
     let calendarCurrentMonth = null;
 
-    /* ==== Home ボトル（3本＋左右薄い） ==== */
+    /* ===== Wine Home Rendering ===== */
     function renderHomeBottles() {
       bottleStrip.innerHTML = "";
 
@@ -2533,17 +2476,21 @@ const wines = [
       }, 150);
     }
 
+    function hideAllScreensExcept(screen) {
+      [homeScreen, winexpScreen, diaryHomeScreen, diaryNewScreen, diaryAppendScreen, diaryViewScreen, calendarMonthScreen]
+        .forEach(s => {
+          if (s === screen) return;
+          s.classList.add("screen--hidden");
+          s.classList.remove("screen--active");
+        });
+    }
+
     function showWineXp(index) {
       homeIsVisible = false;
-      homeScreen.classList.add("screen--hidden");
-      homeScreen.classList.remove("screen--active");
-
       hideAllScreensExcept(winexpScreen);
-
       winexpScreen.classList.remove("screen--hidden");
       winexpScreen.classList.add("screen--active");
       document.body.style.overflow = "hidden";
-
       homeButton.classList.add("home-button--visible");
 
       const wine = wines[index];
@@ -2608,7 +2555,6 @@ const wines = [
 
     function renderBasicInfo(wine) {
       basicInfoSection.innerHTML = "";
-
       const blocks = [
         { label: "Wine", value: wine.q1_name },
         { label: "Producer", value: wine.q2_producer },
@@ -2618,21 +2564,17 @@ const wines = [
         { label: "Vintage", value: wine.q5_vintage },
         { label: "Alcohol", value: wine.q7_alcohol }
       ];
-
       blocks.forEach((b, idx) => {
         if (!b.value) return;
         const block = document.createElement("div");
         block.className = "info-block";
         block.style.transitionDelay = `${0.2 * idx}s`;
-
         const label = document.createElement("div");
         label.className = "info-label";
         label.textContent = b.label;
-
         const value = document.createElement("div");
         value.className = "info-value";
         value.textContent = b.value;
-
         block.appendChild(label);
         block.appendChild(value);
         basicInfoSection.appendChild(block);
@@ -2660,21 +2602,17 @@ const wines = [
 
         setTimeout(() => {
           messageCard.classList.add("message-card--open");
-
           const msgLines = wine.q10_message_lines || [];
           const baseDelay = 200;
-
           msgLines.forEach((text, idx) => {
             const lineEl = document.createElement("div");
             lineEl.className = "message-line";
             lineEl.textContent = text;
             messageBody.appendChild(lineEl);
-
             setTimeout(() => {
               lineEl.classList.add("message-line--visible");
             }, baseDelay + idx * 350);
           });
-
         }, 400);
       };
 
@@ -2683,13 +2621,11 @@ const wines = [
 
     function renderAccordions(wine) {
       accordionList.innerHTML = "";
-
       const accData = [
         { icon: "🍽", title: "Pairing", content: wine.q11_pairing },
         { icon: "🌙", title: "Storage", content: wine.q12_storage },
         { icon: "🌊", title: "Craft", content: wine.q13_craft }
       ];
-
       accData.forEach((item) => {
         if (!item.content) return;
         const accItem = document.createElement("div");
@@ -2745,10 +2681,8 @@ const wines = [
 
     function setupScrollAnimations() {
       const infoBlocks = Array.from(basicInfoSection.querySelectorAll(".info-block"));
-
       const handleScroll = () => {
         const vh = winexpScreen.clientHeight;
-
         infoBlocks.forEach((block, idx) => {
           const rect = block.getBoundingClientRect();
           const offset = rect.top;
@@ -2758,7 +2692,6 @@ const wines = [
             }, idx * 200);
           }
         });
-
         const worldRect = worldSection.getBoundingClientRect();
         if (worldRect.top < vh - 140) {
           worldSection.classList.add("world-section--active");
@@ -2770,7 +2703,6 @@ const wines = [
           }, 650);
         }
       };
-
       winexpScreen.removeEventListener("scroll", handleScroll);
       winexpScreen.addEventListener("scroll", handleScroll);
       handleScroll();
@@ -2791,27 +2723,10 @@ const wines = [
       }
     }
 
-    function hideAllScreensExcept(screen) {
-      [
-        homeScreen,
-        winexpScreen,
-        diaryHomeScreen,
-        diaryNewScreen,
-        diaryAppendScreen,
-        diaryViewScreen,
-        calendarMonthScreen
-      ].forEach(s => {
-        if (s === screen) return;
-        s.classList.add("screen--hidden");
-        s.classList.remove("screen--active");
-      });
-    }
-
     function goHome() {
       if (homeIsVisible) return;
       homeIsVisible = true;
       hideAllScreensExcept(homeScreen);
-      homeScreen.classList.remove("screen--hidden");
       homeScreen.classList.add("screen--active");
       document.body.style.overflow = "hidden";
       homeButton.classList.remove("home-button--visible");
@@ -2824,7 +2739,6 @@ const wines = [
       goHome();
     });
 
-    /* Wine QR Overlay */
     function openQrOverlay() {
       qrOverlay.classList.add("overlay--open");
     }
@@ -2847,7 +2761,6 @@ const wines = [
 
     function renderOverlayBottles() {
       overlayBottleList.innerHTML = "";
-
       wines.forEach((wine) => {
         const item = document.createElement("div");
         item.className = "overlay-bottle";
@@ -2885,7 +2798,7 @@ const wines = [
         new QRious({
           element: qrCanvas,
           value: qrUrl,
-          size: 256,
+          size: 200,
           level: "H",
           background: "#ffffff",
           foreground: "#000000"
@@ -2936,13 +2849,11 @@ const wines = [
       });
     }
 
-    /* BGM */
     function setupBgm() {
       bgmAudio.volume = parseFloat(bgmVolumeSlider.value || "0.5");
       bgmVolumeSlider.addEventListener("input", () => {
         bgmAudio.volume = parseFloat(bgmVolumeSlider.value || "0.5");
       });
-
       const tryStart = () => {
         bgmAudio.play().catch(() => {});
         document.removeEventListener("click", tryStart);
@@ -2977,7 +2888,7 @@ const wines = [
       } catch (_) {}
     });
 
-    /* Diary Navigation */
+    /* ===== Diary Navigation ===== */
     diaryButton.addEventListener("click", () => {
       homeIsVisible = false;
       hideAllScreensExcept(diaryHomeScreen);
@@ -3022,7 +2933,7 @@ const wines = [
       diaryViewScreen.classList.add("screen--active");
     });
 
-    /* Diary Color Picker */
+    /* ===== Diary Color Picker ===== */
     function setupColorPicker(container, initial, setter) {
       let active = initial;
       Array.from(container.querySelectorAll(".color-dot-option")).forEach(opt => {
@@ -3042,39 +2953,34 @@ const wines = [
     setupColorPicker(diaryColorPicker, "#f97316", c => diaryColorSelected = c);
     setupColorPicker(diaryColorPickerAppend, "#f97316", c => diaryColorSelectedAppend = c);
 
-    /* Diary struct */
+    /* ===== Diary QR Create ===== */
     function buildDiaryEntryFromInputs(prefix = "") {
       const date = prefix === "-append" ? diaryDateAppendInput.value : diaryDateInput.value;
       if (!date) return null;
-
       const entry = {
         date,
-        name: prefix === "-append" ? diaryNameAppendInput.value : diaryNameInput.value,
-        type: prefix === "-append" ? diaryTypeAppendInput.value : diaryTypeInput.value,
-        brand: prefix === "-append" ? diaryBrandAppendInput.value : diaryBrandInput.value,
-        amount: prefix === "-append" ? diaryAmountAppendInput.value : diaryAmountInput.value,
-        abv: prefix === "-append" ? diaryAbvAppendInput.value : diaryAbvInput.value,
-        taste: prefix === "-append" ? diaryTasteAppendInput.value : diaryTasteInput.value,
-        aroma: prefix === "-append" ? "" : diaryAromaInput.value,
-        colorNote: prefix === "-append" ? "" : diaryColorInput.value,
-        comment: prefix === "-append" ? diaryCommentAppendInput.value : diaryCommentInput.value,
-        timezone: prefix === "-append" ? "" : diaryTimezoneInput.value,
-        mood: prefix === "-append" ? "" : diaryMoodInput.value,
-        food: prefix === "-append" ? "" : diaryFoodInput.value,
-        place: prefix === "-append" ? "" : diaryPlaceInput.value,
-        drunken: prefix === "-append" ? "" : diaryDrunkenInput.value,
-        nextday: prefix === "-append" ? "" : diaryNextdayInput.value,
+        name: (prefix === "-append" ? diaryNameAppendInput.value : diaryNameInput.value) || "",
+        type: (prefix === "-append" ? diaryTypeAppendInput.value : diaryTypeInput.value) || "",
+        brand: (prefix === "-append" ? diaryBrandAppendInput.value : diaryBrandInput.value) || "",
+        amount: (prefix === "-append" ? diaryAmountAppendInput.value : diaryAmountInput.value) || "",
+        abv: (prefix === "-append" ? diaryAbvAppendInput.value : diaryAbvInput.value) || "",
+        taste: (prefix === "-append" ? diaryTasteAppendInput.value : diaryTasteInput.value) || "",
+        aroma: (prefix === "-append" ? "" : diaryAromaInput.value) || "",
+        colorNote: (prefix === "-append" ? "" : diaryColorInput.value) || "",
+        comment: (prefix === "-append" ? diaryCommentAppendInput.value : diaryCommentInput.value) || "",
+        timezone: (prefix === "-append" ? "" : diaryTimezoneInput.value) || "",
+        mood: (prefix === "-append" ? "" : diaryMoodInput.value) || "",
+        food: (prefix === "-append" ? "" : diaryFoodInput.value) || "",
+        place: (prefix === "-append" ? "" : diaryPlaceInput.value) || "",
+        drunken: (prefix === "-append" ? "" : diaryDrunkenInput.value) || "",
+        nextday: (prefix === "-append" ? "" : diaryNextdayInput.value) || "",
         dotColor: prefix === "-append" ? diaryColorSelectedAppend : diaryColorSelected
       };
       return entry;
     }
 
     function buildDiaryStruct(entries) {
-      return {
-        type: "diary",
-        version: 1,
-        entries
-      };
+      return { type: "diary", version: 1, entries };
     }
 
     function encodeDiaryToQR(canvas, struct) {
@@ -3082,7 +2988,7 @@ const wines = [
       new QRious({
         element: canvas,
         value: json,
-        size: 256,
+        size: 200,
         level: "H",
         background: "#ffffff",
         foreground: "#000000"
@@ -3095,6 +3001,7 @@ const wines = [
         alert("日付は必須です。");
         return;
       }
+      diaryQrPreview.style.display = "none";
       const struct = buildDiaryStruct([entry]);
       encodeDiaryToQR(diaryQrCanvas, struct);
       diaryQrPreview.style.display = "flex";
@@ -3110,6 +3017,7 @@ const wines = [
       document.body.removeChild(a);
     });
 
+    /* ===== QR Reader ===== */
     function readQrImageFile(file, callback) {
       const reader = new FileReader();
       reader.onload = function(e) {
@@ -3133,10 +3041,13 @@ const wines = [
       reader.readAsDataURL(file);
     }
 
+    /* Append */
     diaryAppendFile.addEventListener("change", () => {
       const file = diaryAppendFile.files[0];
       if (!file) return;
       diaryAppendStatus.textContent = "読み取り中…";
+      diaryAppendFormCard.style.display = "none";
+      diaryAppendQrPreview.style.display = "none";
       readQrImageFile(file, (err, data) => {
         if (err) {
           diaryAppendStatus.textContent = "エラー: " + err.message;
@@ -3167,6 +3078,7 @@ const wines = [
         alert("日付は必須です。");
         return;
       }
+      diaryAppendQrPreview.style.display = "none";
       const newEntries = loadedDiaryStruct.entries.concat(entry);
       const struct = buildDiaryStruct(newEntries);
       encodeDiaryToQR(diaryAppendQrCanvas, struct);
@@ -3183,6 +3095,7 @@ const wines = [
       document.body.removeChild(a);
     });
 
+    /* View + Calendar */
     diaryViewReadButton.addEventListener("click", () => {
       const file = diaryViewFile.files[0];
       if (!file) {
@@ -3190,6 +3103,7 @@ const wines = [
         return;
       }
       diaryViewStatus.textContent = "読み取り中…";
+      calendarYearCard.style.display = "none";
       readQrImageFile(file, (err, data) => {
         if (err) {
           diaryViewStatus.textContent = "エラー: " + err.message;
@@ -3248,10 +3162,8 @@ const wines = [
       hideAllScreensExcept(calendarMonthScreen);
       calendarMonthScreen.classList.remove("screen--hidden");
       calendarMonthScreen.classList.add("screen--active");
-
       calendarHeaderTitle.textContent = `DIARY – ${year}`;
       calendarHeaderSubtitle.textContent = "矢印で月を移動して、その年の飲酒の足跡を眺めます。";
-
       renderCalendarMonth();
     }
 
@@ -3259,9 +3171,7 @@ const wines = [
       if (calendarCurrentYear == null || calendarCurrentMonth == null) return;
       const year = calendarCurrentYear;
       const month = calendarCurrentMonth;
-
       calendarMonthTitle.textContent = `${year} / ${month+1}`;
-
       calendarDates.innerHTML = "";
       calendarDetailsTitle.textContent = "記録のある日を選ぶと、ここに一覧が出ます。";
       calendarDetailsBody.innerHTML = "";
@@ -3296,18 +3206,16 @@ const wines = [
 
         const day = currentDay;
         cell.textContent = day;
-
         const key = `${year}-${month+1}-${day}`;
         if (entriesByDate[key]) {
           cell.classList.add("calendar-day--has-entry");
           const entries = entriesByDate[key];
-
           const dot = document.createElement("div");
           dot.className = "calendar-dot";
           const colors = entries.map(e => e.dotColor || "#f97316");
-          dot.style.background = colors[0];
+          const mainColor = colors[0];
+          dot.style.background = mainColor;
           cell.appendChild(dot);
-
           cell.addEventListener("click", () => {
             showCalendarDetails(year, month, day, entries);
           });
@@ -3323,15 +3231,12 @@ const wines = [
     function showCalendarDetails(year, month, day, entries) {
       calendarDetailsTitle.textContent = `${year}/${month+1}/${day} の記録`;
       calendarDetailsBody.innerHTML = "";
-
       entries.forEach(entry => {
         const card = document.createElement("div");
         card.className = "calendar-entry-card";
-
         const name = document.createElement("div");
         name.className = "calendar-entry-name";
         name.textContent = entry.brand || entry.type || "(No title)";
-
         const meta = document.createElement("div");
         meta.className = "calendar-entry-meta";
         meta.textContent = [
@@ -3339,7 +3244,6 @@ const wines = [
           entry.type || "",
           entry.amount || ""
         ].filter(Boolean).join(" / ");
-
         const comment = document.createElement("div");
         comment.className = "calendar-entry-comment";
         const parts = [];
@@ -3347,7 +3251,6 @@ const wines = [
         if (entry.mood) parts.push(`気分: ${entry.mood}`);
         if (entry.comment) parts.push(entry.comment);
         comment.textContent = parts.join("\n");
-
         card.appendChild(name);
         card.appendChild(meta);
         card.appendChild(comment);
@@ -3375,6 +3278,7 @@ const wines = [
       renderCalendarMonth();
     });
 
+    /* ===== init ===== */
     function init() {
       renderHomeBottles();
       renderOverlayBottles();
