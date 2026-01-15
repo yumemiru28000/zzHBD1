@@ -1601,8 +1601,9 @@
       goHome();
     });
 
+
     /************************************************************
-     *  QR オーバーレイ
+     *  QR オーバーレイ ここまではそのまま
      ************************************************************/
 
     function openQrOverlay() {
@@ -1619,5 +1620,70 @@
     qrClose.addEventListener("click", () => {
       closeQrOverlay();
     });
-    qrOverlay.addEventListener](#)
-
+    qrOverlay.addEventListener("click", (e) => {
+      // 背景クリックで閉じる（中身クリックは閉じない）
+      if (e.target === qrOverlay) {
+        closeQrOverlay();
+      }
+    });
+
+    /************************************************************
+     *  QRオーバーレイ用：ボトル一覧の生成
+     ************************************************************/
+    function renderOverlayBottles() {
+      overlayBottleList.innerHTML = "";
+      wines.forEach((wine) => {
+        const item = document.createElement("div");
+        item.className = "overlay-bottle";
+
+        const imgWrap = document.createElement("div");
+        imgWrap.className = "overlay-bottle-img-wrap";
+
+        const img = document.createElement("img");
+        img.className = "overlay-bottle-img";
+        img.src = wine.bottleImage;
+        img.alt = wine.q1_name;
+
+        const shadow = document.createElement("div");
+        shadow.className = "overlay-bottle-shadow";
+
+        imgWrap.appendChild(img);
+        imgWrap.appendChild(shadow);
+
+        const qrIcon = document.createElement("div");
+        qrIcon.className = "overlay-qr-icon";
+        qrIcon.textContent = "QR";
+
+        qrIcon.addEventListener("click", (e) => {
+          e.stopPropagation();
+          // QR画像を別タブで開く or ダウンロード
+          if (wine.qrImage) {
+            window.open(wine.qrImage, "_blank");
+          }
+        });
+
+        item.appendChild(imgWrap);
+        item.appendChild(qrIcon);
+        overlayBottleList.appendChild(item);
+      });
+    }
+
+    /************************************************************
+     *  最初に1回だけ実行する「初期化」
+     ************************************************************/
+    function init() {
+      // ホームのボトルを描画
+      renderHomeBottles();
+
+      // QRオーバーレイのミニボトル一覧を描画
+      renderOverlayBottles();
+
+      // 初回、夜演出の状態だけ整える
+      updateNightEffects();
+    }
+
+    // DOMが読み込まれたら初期化
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>
