@@ -1209,5 +1209,415 @@
         } else {
           item.classList.add("bottle-item--dimmed");
         }
-        // 呼吸アニメーションの開始時間をずら
+        // 呼吸アニメーションの開始時間をずらす
+        const breathDelay = (i - start) * 1.5;
+        item.style.animationDelay = `${breathDelay}s`;
+
+        const wrap = document.createElement("div");
+        wrap.className = "bottle-image-wrapper";
+
+        const img = document.createElement("img");
+        img.className = "bottle-image";
+        img.src = wine.bottleImage;
+        img.alt = wine.q1_name;
+
+        const shadow = document.createElement("div");
+        shadow.className = "bottle-shadow";
+
+        const reflection = document.createElement("div");
+        reflection.className = "bottle-reflection";
+
+        wrap.appendChild(img);
+        wrap.appendChild(shadow);
+        wrap.appendChild(reflection);
+
+        item.appendChild(wrap);
+        bottleStrip.appendChild(item);
+
+        item.addEventListener("click", () => {
+          if (homeIsVisible) {
+            handleBottleTap(i, item);
+          }
+        });
+
+        // ページングドット
+        const dot = document.createElement("div");
+        dot.className = "pager-dot";
+        if (i === currentIndex) dot.classList.add("pager-dot--active");
+        pagerDots.appendChild(dot);
+      }
+    }
+
+    /************************************************************
+     *  ボトルタップ → wineXp 遷移
+     ************************************************************/
+
+    function handleBottleTap(index, bottleElement) {
+      activeWineIndex = index;
+
+      // タップ直後の暗転（-8%）0.12s
+      bottleElement.style.transition = "filter 0.12s var(--transition-standard)";
+      bottleElement.style.filter = "brightness(0.92)";
+      setTimeout(() => {
+        bottleElement.style.filter = "";
+      }, 120);
+
+      // 0.15s後に、拡大＆背景ぼかし
+      setTimeout(() => {
+        // ホーム側の背景ぼかし
+        homeScreen.style.transition = "filter 0.65s var(--transition-soft)";
+        homeScreen.style.filter = "blur(10px) brightness(0.85)";
+
+        // 0.65sかけて wineXp をフェードイン（ページ切り替えを感じさせない）
+        showWineXp(index);
+      }, 150);
+    }
+
+    function showWineXp(index) {
+      homeIsVisible = false;
+      homeScreen.classList.add("screen--hidden");
+      homeScreen.classList.remove("screen--active");
+
+      winexpScreen.classList.remove("screen--hidden");
+      winexpScreen.classList.add("screen--active");
+      document.body.style.overflow = "hidden"; // 背景スクロール止め
+
+      homeButton.classList.add("home-button--visible");
+
+      const wine = wines[index];
+
+      // 再訪カウントアップ
+      const key = revisitCountKeyPrefix + wine.id;
+      const prevCount = parseInt(localStorage.getItem(key) || "0", 10);
+      const newCount = prevCount + 1;
+      localStorage.setItem(key, String(newCount));
+      wine.openCount = newCount;
+
+      // ファーストビュー2.5秒は操作ロック
+      interactionLocked = true;
+      winexpScreen.classList.add("winexp-screen--locked-interaction");
+      setTimeout(() => {
+        interactionLocked = false;
+        winexpScreen.classList.remove("winexp-screen--locked-interaction");
+      }, 2500);
+
+      // タイトル等のテキスト反映
+      winexpTitleJp.textContent = wine.q1_name || "";
+      winexpTitleEn.textContent = wine.display_en || "";
+      winexpTagline.textContent = wine.tagline || "";
+
+      // 基本情報（Q1〜Q7）
+      renderBasicInfo(wine);
+
+      // 世界観ゾーン（Q8 / Q9）
+      worldLinePrimary.textContent = wine.q8_world_phrase || "";
+      worldLineSecondary.textContent = wine.q9_world_line || "";
+      worldSection.classList.remove("world-section--active");
+      worldLinePrimary.classList.remove("world-line-primary--visible");
+      worldLineSecondary.classList.remove("world-line-secondary--visible");
+
+      // 誕生日メッセージ
+      setupMessage(wine);
+
+      // 折りたたみ Q11〜Q13
+      renderAccordions(wine);
+
+      // 夜＆��夜演出
+      updateNightEffects();
+
+      // 再訪演出（開いた回数に応じて）
+      updateRevisitBadge(wine);
+
+      // スクロール位置を先頭に戻す
+      winexpScreen.scrollTop = 0;
+
+      // スクロール監視開始（各セクションのディレイ表示）
+      setupScrollAnimations();
+    }
+
+    function renderBasicInfo(wine) {
+      basicInfoSection.innerHTML = "";
+
+      const blocks = [
+        { label: "Wine", value: wine.q1_name },
+        { label: "Producer", value: wine.q2_producer },
+        { label: "Origin", value: wine.q3_origin },
+        { label: "Variety", value: wine.q4_variety },
+        { label: "Vintage", value: wine.q5_vintage },
+        { label: "Style", value: wine.q6_style },
+        { label: "Alcohol", value: wine.q7_alcohol }
+      ];
+
+      blocks.forEach((b, idx) => {
+        if (!b.value) return;
+        const block = document.createElement("div");
+        block.className = "info-block";
+        block.style.transitionDelay = `${0.15 * idx}s`;
+
+        const label = document.createElement("div");
+        label.className = "info-label";
+        label.textContent = b.label;
+
+        const value = document.createElement("div");
+        value.className = "info-value";
+        value.textContent = b.value;
+
+        block.appendChild(label);
+        block.appendChild(value);
+        basicInfoSection.appendChild(block);
+      });
+    }
+
+    function setupMessage(wine) {
+      // 初期状態（封蝋だけ見えている）
+      messageWax.classList.remove("message-wax--visible");
+      messageCard.classList.remove("message-card--open");
+
+      const lines = messageCard.querySelectorAll(".message-line");
+      lines.forEach((line) => {
+        line.textContent = "";
+        line.classList.remove("message-line--visible");
+      });
+
+      // 表示をゆっくり
+      setTimeout(() => {
+        messageWax.classList.add("message-wax--visible");
+      }, 600);
+
+      // タップでカードを開く
+      let opened = false;
+      const onWaxClick = () => {
+        if (opened || interactionLocked) return;
+        opened = true;
+
+        // 封��解除 0.4s 相当（演出的に少し縮むイメージ）
+        messageWax.style.transform = "scale(0.94) translateY(3px)";
+        setTimeout(() => {
+          messageWax.style.transform = "scale(0.98) translateY(1px)";
+        }, 200);
+
+        // カード展開 0.7s
+        setTimeout(() => {
+          messageCard.classList.add("message-card--open");
+
+          const msgLines = wine.q10_message_lines || [];
+          const baseDelay = 200;
+
+          msgLines.forEach((text, idx) => {
+            const lineEl = messageCard.querySelector(`.message-line[data-line-index="${idx}"]`);
+            if (lineEl) {
+              lineEl.textContent = text;
+              setTimeout(() => {
+                lineEl.classList.add("message-line--visible");
+              }, baseDelay + idx * 350);
+            }
+          });
+
+        }, 400);
+      };
+
+      messageWax.onclick = onWaxClick;
+    }
+
+    function renderAccordions(wine) {
+      accordionList.innerHTML = "";
+
+      const accData = [
+        { icon: "🍽", title: "Pairing", content: wine.q11_pairing },
+        { icon: "🌙", title: "Storage", content: wine.q12_storage },
+        { icon: "🌊", title: "Craft", content: wine.q13_craft }
+      ];
+
+      accData.forEach((item) => {
+        if (!item.content) return;
+        const accItem = document.createElement("div");
+        accItem.className = "accordion-item";
+
+        const header = document.createElement("div");
+        header.className = "accordion-header";
+
+        const labelWrap = document.createElement("div");
+        labelWrap.className = "accordion-label-wrap";
+
+        const iconEl = document.createElement("div");
+        iconEl.className = "accordion-icon";
+        iconEl.textContent = item.icon;
+
+        const titleEl = document.createElement("div");
+        titleEl.className = "accordion-title";
+        titleEl.textContent = item.title;
+
+        labelWrap.appendChild(iconEl);
+        labelWrap.appendChild(titleEl);
+
+        const arrow = document.createElement("div");
+        arrow.className = "accordion-arrow";
+        arrow.textContent = ">";
+
+        header.appendChild(labelWrap);
+        header.appendChild(arrow);
+
+        const body = document.createElement("div");
+        body.className = "accordion-body";
+
+        const text = document.createElement("div");
+        text.className = "accordion-text";
+        text.textContent = item.content;
+
+        body.appendChild(text);
+
+        accItem.appendChild(header);
+        accItem.appendChild(body);
+        accordionList.appendChild(accItem);
+
+        header.addEventListener("click", () => {
+          const isOpen = accItem.classList.contains("accordion-item--open");
+          if (isOpen) {
+            accItem.classList.remove("accordion-item--open");
+          } else {
+            accItem.classList.add("accordion-item--open");
+          }
+        });
+      });
+    }
+
+    /************************************************************
+     *  スクロール連動アニメーション（Q1〜Q7, Q8, Q9）
+     ************************************************************/
+
+    function setupScrollAnimations() {
+      const infoBlocks = Array.from(basicInfoSection.querySelectorAll(".info-block"));
+
+      const handleScroll = () => {
+        const scrollTop = winexpScreen.scrollTop;
+        const vh = winexpScreen.clientHeight;
+
+        // Q1〜Q7：ゆっくり1つずつ出現
+        infoBlocks.forEach((block, idx) => {
+          const rect = block.getBoundingClientRect();
+          const offset = rect.top - 0; // screen内
+          if (offset < vh - 80) {
+            setTimeout(() => {
+              block.classList.add("info-block--visible");
+            }, idx * 150);
+          }
+        });
+
+        // 世界観ゾーン Q8 / Q9
+        const worldRect = worldSection.getBoundingClientRect();
+        if (worldRect.top < vh - 140) {
+          worldSection.classList.add("world-section--active");
+          setTimeout(() => {
+            worldLinePrimary.classList.add("world-line-primary--visible");
+          }, 100);
+          setTimeout(() => {
+            worldLineSecondary.classList.add("world-line-secondary--visible");
+          }, 500);
+        }
+      };
+
+      winexpScreen.removeEventListener("scroll", handleScroll);
+      winexpScreen.addEventListener("scroll", handleScroll);
+      handleScroll();
+    }
+
+    /************************************************************
+     *  夜・深夜演出
+     ************************************************************/
+
+    function isNightTime() {
+      const h = new Date().getHours();
+      return h >= 22 || h < 5;
+    }
+
+    function updateNightEffects() {
+      if (isNightTime()) {
+        nightStars.classList.add("night-stars--visible");
+        // 背景は少し暗めに
+        winexpBgLayer.style.filter = "brightness(0.9)";
+      } else {
+        nightStars.classList.remove("night-stars--visible");
+        winexpBgLayer.style.filter = "brightness(1)";
+      }
+    }
+
+    /************************************************************
+     *  再訪（openCount）による演出
+     ************************************************************/
+
+    function updateRevisitBadge(wine) {
+      const count = wine.openCount || 0;
+      if (count <= 1) {
+        // 初回は非表示
+        revisitBadge.classList.remove("revisit-badge--visible");
+        return;
+      }
+
+      // 星を増やす
+      let starCount = Math.min(count, 5);
+      let stars = "★".repeat(starCount);
+      revisitBadge.querySelector(".revisit-star").textContent = stars;
+
+      // メッセージを少しずつ変化
+      let extraLine = "";
+      if (count >= 3 && count < 6) {
+        extraLine = "GROWING MEMORY";
+      } else if (count >= 6 && count < 10) {
+        extraLine = "YOUR WINE KEEPS GROWING";
+      } else if (count >= 10) {
+        extraLine = "THANK YOU FOR LOVING THIS WINE";
+      } else {
+        extraLine = "SECOND POUR";
+      }
+      revisitText.textContent = extraLine;
+
+      revisitBadge.classList.add("revisit-badge--visible");
+    }
+
+    /************************************************************
+     *  ホームへ戻る
+     ************************************************************/
+
+    function goHome() {
+      if (homeIsVisible) return;
+      homeIsVisible = true;
+      winexpScreen.classList.add("screen--hidden");
+      winexpScreen.classList.remove("screen--active");
+
+      homeScreen.classList.remove("screen--hidden");
+      homeScreen.classList.add("screen--active");
+      document.body.style.overflow = "hidden";
+
+      homeButton.classList.remove("home-button--visible");
+
+      // 背景のぼかし解除
+      homeScreen.style.filter = "none";
+    }
+
+    homeButton.addEventListener("click", () => {
+      // 戻り演出 0.5s 相当
+      homeScreen.style.transition = "transform 0.5s var(--transition-standard), opacity 0.5s var(--transition-standard)";
+      homeScreen.style.transform = "translateY(0)";
+      goHome();
+    });
+
+    /************************************************************
+     *  QR オーバーレイ
+     ************************************************************/
+
+    function openQrOverlay() {
+      qrOverlay.classList.add("overlay--open");
+    }
+
+    function closeQrOverlay() {
+      qrOverlay.classList.remove("overlay--open");
+    }
+
+    qrToggle.addEventListener("click", () => {
+      openQrOverlay();
+    });
+    qrClose.addEventListener("click", () => {
+      closeQrOverlay();
+    });
+    qrOverlay.addEventListener](#)
 
