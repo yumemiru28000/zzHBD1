@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>ワインセラー</title>
+  <title>ワインセラー Diary + Graph</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- QRコード生成ライブラリ（QRious） -->
   <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
@@ -21,7 +21,7 @@
       --overlay-bg: rgba(15, 23, 42, 0.8);
       --transition-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
       --transition-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
-      --bottle-breath-duration: 8s;
+      --bottle-breath-duration: 10s;
       --diary-accent: #f97316;
     }
 
@@ -54,7 +54,7 @@
       color: var(--text-main);
       isolation: isolate;
       overflow: hidden;
-      animation: appFadeIn 1.0s var(--transition-standard) forwards;
+      animation: appFadeIn 1.6s var(--transition-standard) forwards;
       opacity: 0;
     }
 
@@ -99,17 +99,17 @@
       inset: 0;
       display: flex;
       flex-direction: column;
-  transition:
-    opacity 1.0s var(--transition-standard),
-    transform 1.0s var(--transition-standard),
-    visibility 1.0s var(--transition-standard);
+      transition:
+        opacity 1.0s var(--transition-standard),
+        transform 1.0s var(--transition-standard),
+        visibility 1.0s var(--transition-standard);
     }
 
     .screen--hidden {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transform: translateY(10px);
+      transform: translateY(14px);
     }
 
     .screen--active {
@@ -158,8 +158,8 @@
       color: var(--text-soft);
       margin-bottom: 4px;
       opacity: 0;
-      transform: translateY(6px);
-      animation: brandIntro 0.8s var(--transition-soft) 0.3s forwards;
+      transform: translateY(8px);
+      animation: brandIntro 1.2s var(--transition-soft) 0.3s forwards;
     }
 
     .brand-subtitle {
@@ -169,12 +169,12 @@
       text-transform: uppercase;
       color: var(--text-weak);
       opacity: 0;
-      transform: translateY(6px);
-      animation: brandIntro 0.9s var(--transition-soft) 0.6s forwards;
+      transform: translateY(8px);
+      animation: brandIntro 1.4s var(--transition-soft) 0.6s forwards;
     }
 
     @keyframes brandIntro {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -184,7 +184,7 @@
       align-items: center;
       gap: 8px;
       border-radius: 999px;
-      padding: 10px 18px 11px;
+      padding: 10px 20px 11px;
       background: radial-gradient(circle at 0 0, rgba(249,115,22,0.4) 0%, rgba(15,23,42,0.98) 45%);
       border: 1px solid rgba(249,115,22,0.7);
       font-size: 12px;
@@ -196,12 +196,12 @@
         0 0 0 1px rgba(15,23,42,0.9),
         0 10px 24px rgba(15,23,42,0.95);
       opacity: 0;
-      transform: translateY(6px);
-      animation: diaryIntro 0.9s var(--transition-soft) 0.7s forwards;
+      transform: translateY(10px);
+      animation: diaryIntro 1.4s var(--transition-soft) 0.7s forwards;
     }
 
     @keyframes diaryIntro {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
@@ -232,14 +232,14 @@
       align-items: flex-end;
       justify-content: center;
       gap: min(8%, 40px);
-      transform: translateY(16px);
+      transform: translateY(20px);
       opacity: 0;
-      animation: bottlesIntro 0.8s var(--transition-standard) 0.8s forwards;
+      animation: bottlesIntro 1.4s var(--transition-standard) 0.8s forwards;
     }
 
     @keyframes bottlesIntro {
       from {
-        transform: translateY(20px);
+        transform: translateY(24px);
         opacity: 0;
       }
       to {
@@ -258,9 +258,9 @@
       cursor: pointer;
       transform-origin: bottom center;
       transition:
-        transform 0.4s var(--transition-standard),
-        filter 0.3s var(--transition-standard),
-        opacity 0.3s var(--transition-standard);
+        transform 0.5s var(--transition-standard),
+        filter 0.4s var(--transition-standard),
+        opacity 0.4s var(--transition-standard);
       animation: bottleBreath var(--bottle-breath-duration) ease-in-out infinite;
     }
 
@@ -319,7 +319,7 @@
       transform: translateX(-50%);
       filter: blur(8px);
       opacity: 0;
-      animation: shadowIntro 0.6s var(--transition-standard) 1.0s forwards;
+      animation: shadowIntro 1.0s var(--transition-standard) 1.0s forwards;
     }
 
     @keyframes shadowIntro {
@@ -361,14 +361,14 @@
       cursor: pointer;
       opacity: 0;
       transform: translateY(4px) scale(0.9);
-      animation: dotButtonIntro 0.6s var(--transition-standard) 1.0s forwards;
+      animation: dotButtonIntro 0.8s var(--transition-standard) 1.2s forwards;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     @keyframes dotButtonIntro {
-      from { opacity: 0; transform: translateY(8px) scale(0.85); }
+      from { opacity: 0; transform: translateY(10px) scale(0.85); }
       to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 
@@ -410,6 +410,75 @@
     }
 
     .pager-dots { display:none; }
+
+    /* Home Calendar Shortcut */
+
+    .home-calendar-shortcut {
+      position: absolute;
+      left: 18px;
+      bottom: 72px;
+      width: 140px;
+      padding: 10px 10px 12px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 0 0, rgba(59,130,246,0.25) 0%, rgba(15,23,42,0.96) 48%);
+      border: 1px solid rgba(55,65,81,0.9);
+      box-shadow:
+        0 12px 30px rgba(15,23,42,0.95),
+        0 0 0 1px rgba(15,23,42,1);
+      font-size: 11px;
+      color: var(--text-soft);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      opacity: 0.9;
+    }
+
+    .home-calendar-shortcut-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #bfdbfe;
+    }
+
+    .home-calendar-shortcut-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1px solid rgba(129,140,248,0.9);
+      position: relative;
+    }
+    .home-calendar-shortcut-icon::before {
+      content: "";
+      position: absolute;
+      inset: 3px 2px 5px;
+      border-radius: 2px;
+      border-top: 1px solid rgba(129,140,248,0.9);
+      border-left: 1px solid rgba(129,140,248,0.9);
+      border-right: 1px solid rgba(129,140,248,0.9);
+    }
+    .home-calendar-shortcut-icon::after {
+      content: "";
+      position: absolute;
+      inset: 7px 2px 3px;
+      border-radius: 2px;
+      border: 1px solid rgba(148,163,184,0.8);
+    }
+
+    .home-calendar-shortcut-desc {
+      font-size: 10px;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .home-calendar-shortcut input {
+      margin-top: 4px;
+      font-size: 10px;
+      width: 100%;
+    }
 
     /* ===== Wine QR Overlay ===== */
     .overlay {
@@ -604,7 +673,7 @@
       text-align: right;
     }
 
-    /* ===== WineXP (見出し・メッセージなど) ===== */
+    /* ===== WineXP (省略せず既存通り) ===== */
 
     .winexp-screen {
       padding: 32px 16px 20px;
@@ -690,7 +759,7 @@
       margin-bottom: 6px;
       opacity: 0;
       transform: scale(1.02) translateY(4px);
-      animation: winexpTitleIn 1.1s ease-out forwards;
+      animation: winexpTitleIn 1.6s ease-out forwards;
       animation-delay: 0.9s;
     }
 
@@ -738,7 +807,7 @@
       color: var(--text-soft);
       opacity: 0;
       transform: translateY(5px);
-      animation: winexpSubtitleIn 0.9s var(--transition-standard) forwards;
+      animation: winexpSubtitleIn 1.4s var(--transition-standard) forwards;
       animation-delay: 1.3s;
     }
 
@@ -746,8 +815,6 @@
       from { opacity: 0; transform: translateY(5px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
-    .winexp-tagline { display:none; }
 
     .wine-title-bubble {
       display: inline-flex;
@@ -768,7 +835,7 @@
       position: relative;
       opacity: 0;
       transform: translateY(8px);
-      animation: wineBubbleIn 0.9s var(--transition-standard) forwards;
+      animation: wineBubbleIn 1.4s var(--transition-standard) forwards;
       animation-delay: 1.9s;
     }
 
@@ -801,7 +868,7 @@
       position: relative;
       opacity: 0;
       transform: translateY(12px) scale(0.96);
-      animation: heroBottleIn 0.9s var(--transition-soft) forwards;
+      animation: heroBottleIn 1.4s var(--transition-soft) forwards;
       animation-delay: 0.9s;
     }
 
@@ -972,9 +1039,9 @@
       opacity: 0;
       transform: scale(0.92) translateY(4px);
       transition:
-        opacity 0.6s var(--transition-standard),
-        transform 1.2s var(--transition-soft),
-        box-shadow 0.4s var(--transition-standard);
+        opacity 0.8s var(--transition-standard),
+        transform 1.6s var(--transition-soft),
+        box-shadow 0.6s var(--transition-standard);
     }
 
     .message-wax--visible {
@@ -1006,12 +1073,12 @@
       max-height: 0;
       opacity: 0;
       transition:
-        transform 0.8s var(--transition-soft),
-        max-height 0.8s var(--transition-soft),
-        opacity 0.8s var(--transition-soft),
-        padding-top 0.8s var(--transition-soft),
-        padding-bottom 0.8s var(--transition-soft),
-        margin-top 0.8s var(--transition-soft);
+        transform 1.2s var(--transition-soft),
+        max-height 1.2s var(--transition-soft),
+        opacity 1.2s var(--transition-soft),
+        padding-top 1.2s var(--transition-soft),
+        padding-bottom 1.2s var(--transition-soft),
+        margin-top 1.2s var(--transition-soft);
       position: relative;
     }
 
@@ -1277,7 +1344,7 @@
       border: 1px solid rgba(191,219,254,0.9);
     }
 
-    /* ===== Diary / Calendar ===== */
+    /* ===== Diary / Calendar / Graph UI ===== */
 
     .diary-screen {
       padding: 32px 16px 20px;
@@ -1392,11 +1459,29 @@
       font-size: 12px;
     }
 
+    .diary-label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
     .diary-label {
       font-size: 11px;
       color: var(--text-soft);
       letter-spacing: 0.08em;
       text-transform: uppercase;
+    }
+
+    .diary-label-badge {
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #fed7aa;
+      padding: 2px 6px 3px;
+      border-radius: 999px;
+      border: 1px solid rgba(249,115,22,0.85);
+      background: rgba(15,23,42,0.95);
     }
 
     .diary-input,
@@ -1444,6 +1529,71 @@
         0 0 0 4px rgba(15,23,42,1);
     }
 
+    /* 星評価UI */
+
+    .star-rating {
+      display: inline-flex;
+      gap: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .star-rating span {
+      color: #0f172a;
+      text-shadow: 0 0 0 rgba(0,0,0,0.2);
+    }
+
+    .star-rating span.star-active {
+      color: #facc15;
+      text-shadow: 0 0 3px rgba(250,204,21,0.6);
+    }
+
+    /* 数値選択用のボタングリッド */
+
+    .numeric-picker-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .numeric-display {
+      min-width: 70px;
+      padding: 4px 8px;
+      border-radius: 8px;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: rgba(15,23,42,0.95);
+      font-size: 12px;
+      color: var(--text-main);
+      text-align: center;
+    }
+
+    .numeric-digit-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .numeric-digit-btn {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 1px solid rgba(75,85,99,0.9);
+      background: rgba(15,23,42,0.95);
+      font-size: 10px;
+      color: var(--text-soft);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .numeric-digit-btn--active {
+      border-color: rgba(249,115,22,0.9);
+      color: #fed7aa;
+      background: radial-gradient(circle at 0 0, rgba(249,115,22,0.6) 0%, rgba(15,23,42,0.98) 60%);
+    }
+
     .diary-qr-preview {
       margin-top: 10px;
       display: flex;
@@ -1470,34 +1620,35 @@
       color: var(--text-soft);
     }
 
-   .diary-small-button {
-  padding: 7px 14px 8px;                 /* 少し大きく */
-  border-radius: 999px;
-  border: 1px solid rgba(249,115,22,0.85); /* オレンジで強調 */
-  background: radial-gradient(circle at 0 0, rgba(249,115,22,0.6) 0%, rgba(15,23,42,0.98) 55%);
-  font-size: 12px;                       /* 文字も少し大きく */
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #fed7aa;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  box-shadow:
-    0 0 0 1px rgba(15,23,42,0.9),
-    0 8px 18px rgba(15,23,42,0.9);
-  transition:
-    transform 0.15s var(--transition-standard),
-    box-shadow 0.15s var(--transition-standard),
-    background 0.2s var(--transition-standard);
-}
+    .diary-small-button {
+      padding: 7px 14px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(249,115,22,0.85);
+      background: radial-gradient(circle at 0 0, rgba(249,115,22,0.6) 0%, rgba(15,23,42,0.98) 55%);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fed7aa;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow:
+        0 0 0 1px rgba(15,23,42,0.9),
+        0 8px 18px rgba(15,23,42,0.9);
+      transition:
+        transform 0.15s var(--transition-standard),
+        box-shadow 0.15s var(--transition-standard),
+        background 0.2s var(--transition-standard);
+    }
 
-.diary-small-button:hover {
-  transform: translateY(-1px);
-  box-shadow:
-    0 0 0 1px rgba(249,115,22,0.9),
-    0 12px 26px rgba(15,23,42,1);
-}
+    .diary-small-button:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 0 0 1px rgba(249,115,22,0.9),
+        0 12px 26px rgba(15,23,42,1);
+    }
+
     .diary-upload {
       margin-top: 10px;
       font-size: 11px;
@@ -1509,59 +1660,34 @@
       font-size: 11px;
     }
 
+    /* HowTo card */
 
+    .diary-howto-card {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: radial-gradient(circle at 0 0, rgba(249,115,22,0.12) 0%, rgba(15,23,42,0.98) 60%);
+      box-shadow:
+        0 16px 40px rgba(15,23,42,0.9),
+        0 0 0 1px rgba(15,23,42,1);
+    }
 
+    .diary-howto-title {
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #fed7aa;
+      margin-bottom: 8px;
+    }
 
+    .diary-howto-body {
+      font-size: 11px;
+      color: var(--text-soft);
+      line-height: 1.9;
+      white-space: pre-line;
+    }
 
-
-
-
-
-
-
-
-
-.diary-howto-card {
-  margin-top: 18px;
-  padding: 14px 16px;
-  border-radius: 18px;
-  border: 1px solid rgba(55,65,81,0.9);
-  background: radial-gradient(circle at 0 0, rgba(249,115,22,0.12) 0%, rgba(15,23,42,0.98) 60%);
-  box-shadow:
-    0 16px 40px rgba(15,23,42,0.9),
-    0 0 0 1px rgba(15,23,42,1);
-}
-
-.diary-howto-title {
-  font-size: 11px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: #fed7aa;
-  margin-bottom: 8px;
-}
-
-.diary-howto-body {
-  font-size: 11px;
-  color: var(--text-soft);
-  line-height: 1.9;
-  white-space: pre-line;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     /* Calendar */
 
     .calendar-screen {
@@ -1682,7 +1808,7 @@
     }
 
     .calendar-day {
-      padding: 6px 0 8px;
+      padding: 6px 0 14px;
       border-radius: 12px;
       cursor: default;
       position: relative;
@@ -1700,12 +1826,25 @@
     .calendar-dot {
       position: absolute;
       left: 50%;
-      bottom: 4px;
+      bottom: 10px;
       transform: translateX(-50%);
       width: 8px;
       height: 8px;
       border-radius: 999px;
       border: 1px solid rgba(15,23,42,1);
+    }
+
+    .calendar-day-wine-label {
+      position: absolute;
+      left: 50%;
+      bottom: 0px;
+      transform: translateX(-50%);
+      font-size: 9px;
+      color: var(--text-weak);
+      white-space: nowrap;
+      max-width: 52px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .calendar-details {
@@ -1818,31 +1957,54 @@
       gap: 4px;
     }
 
-.graph-chip {
-  padding: 4px 10px 5px;
-  border-radius: 999px;
-  border: 1px solid rgba(148,163,184,0.9);
-  background: rgba(15,23,42,0.95);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-soft);
-  cursor: pointer;
-  transition:
-    background 0.15s var(--transition-standard),
-    color 0.15s var(--transition-standard),
-    border-color 0.15s var(--transition-standard),
-    transform 0.15s var(--transition-standard);
-}
+    .graph-chip {
+      padding: 4px 10px 5px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.9);
+      background: rgba(15,23,42,0.95);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      cursor: pointer;
+      transition:
+        background 0.15s var(--transition-standard),
+        color 0.15s var(--transition-standard),
+        border-color 0.15s var(--transition-standard),
+        transform 0.15s var(--transition-standard);
+    }
 
-.graph-chip--active {
-  border-color: rgba(249,115,22,0.95);
-  color: #fed7aa;
-  background: radial-gradient(circle at 0 0, rgba(249,115,22,0.6) 0%, rgba(15,23,42,0.98) 50%);
-  transform: translateY(-1px);
-}
+    .graph-chip--active {
+      border-color: rgba(249,115,22,0.95);
+      color: #fed7aa;
+      background: radial-gradient(circle at 0 0, rgba(249,115,22,0.6) 0%, rgba(15,23,42,0.98) 50%);
+      transform: translateY(-1px);
+    }
+
+    .graph-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 960px) {
+      .graph-layout {
+        grid-template-columns: 1fr;
+      }
+    }
 
     .graph-main-card {
+      border-radius: 20px;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(55,65,81,0.9);
+      box-shadow:
+        0 20px 50px rgba(15,23,42,0.95),
+        0 0 0 1px rgba(15,23,42,1);
+      padding: 14px 14px 16px;
+    }
+
+    .graph-side-card {
       border-radius: 20px;
       background: rgba(15,23,42,0.95);
       border: 1px solid rgba(55,65,81,0.9);
@@ -1960,6 +2122,46 @@
       white-space: pre-line;
     }
 
+    .wine-radar-title {
+      margin-top: 10px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    .wine-radar-wrap {
+      margin-top: 4px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .wine-radar-item {
+      flex: 0 0 120px;
+      border-radius: 10px;
+      border: 1px solid rgba(55,65,81,0.9);
+      padding: 4px;
+      background: rgba(15,23,42,0.96);
+    }
+
+    .wine-radar-name {
+      font-size: 10px;
+      color: var(--text-soft);
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .wine-radar-canvas {
+      width: 100%;
+      height: 90px;
+      display: block;
+    }
+
     .graph-back-btn {
       margin-top: 10px;
       display: inline-flex;
@@ -2007,6 +2209,18 @@
           <span></span><span></span><span></span>
           <span></span><span></span><span></span>
         </div>
+      </div>
+
+      <!-- Home Calendar Shortcut -->
+      <div class="home-calendar-shortcut" id="home-calendar-shortcut">
+        <div class="home-calendar-shortcut-title">
+          <div class="home-calendar-shortcut-icon"></div>
+          <span>CALENDAR</span>
+        </div>
+        <div class="home-calendar-shortcut-desc">
+読み込んだ日記QRから、すぐにカレンダー＆グラフを開きます。
+        </div>
+        <input type="file" id="home-calendar-file" accept="image/*" />
       </div>
     </div>
 
@@ -2090,55 +2304,34 @@ Basic
 同じノートにページを足す・カレンダーで眺めることができます。
             </div>
             <button class="diary-secondary-button" id="diary-append-button">
-              <span>Append</span>
+              <span>✎</span><span>Append</span>
             </button>
             <button class="diary-secondary-button" id="diary-view-button">
-              <span>View & Calendar</span>
+              <span>📅</span><span>View & Calendar</span>
             </button>
           </div>
         </div>
 
-
-
-<div class="diary-howto-card">
-  <div class="diary-howto-title">HOW TO USE</div>
-  <div class="diary-howto-body">
+        <!-- How To Use -->
+        <div class="diary-howto-card">
+          <div class="diary-howto-title">HOW TO USE</div>
+          <div class="diary-howto-body">
 【New Entry】
 ・その日の1杯を、「日付＋ざっくりしたメモ」だけでもOKです。
-・量（例: 180）、時間帯（例: 23）、気分/酔い/体調（1～5）を数字で入れると、
-　Graph画面であとから「飲み方のクセ」が見やすくなります。
+・量（例: 180）、ABV（例: 12.0）、時間帯（例: 23:30）は、数字ボタンで入力します。
+・気分 / 酔い / 体調、味 / 香り / 見た目の評価は、星を押すだけで1～5段階を記録できます。
 
 【From QR → Append】
 ・以前保存した日記QRを読み込み、「Append」で新しい1日だけを追加していきます。
 ・1つのQRが1冊のノートになり、日付順にどんどんページが増えていきます。
-・翌日体調をメモしておくと、自分に合う量や度数が見つけやすくなります。
+・翌日の体調も星で残しておくと、自分に合う量や度数が見つけやすくなります。
 
-【From QR → View & Graph】
-・QRを読み込んで「View & Calendar」で年と月ごとに眺められます。
+【From QR → View / Graph】
+・QRを読み込んで「View & Calendar」で、年と月ごとに記録を眺められます。
 ・Graphボタンからは「量」「時間帯」「気分・酔い・体調」の推移を線で確認できます。
-・ワイン一覧では、よく飲んでいる銘柄や、そのときの味・香りのメモを一覧で振り返れます。
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
+・ワイン一覧では、よく飲んでいる銘柄や、そのときの味・香り・見た目の印象をレーダーチャートで見返せます。
+          </div>
+        </div>
       </div>
     </div>
 
@@ -2175,13 +2368,35 @@ Basic
               <div class="diary-label">銘柄 / ブランド</div>
               <input id="diary-brand" class="diary-input" type="text" />
             </div>
+
+            <!-- 量（数値ボタン） -->
             <div class="diary-field">
-              <div class="diary-label">量</div>
-              <input id="diary-amount" class="diary-input" type="text" placeholder="例) 180 （ml）" />
+              <div class="diary-label-row">
+                <div class="diary-label">量</div>
+                <div class="diary-label-badge">Graph</div>
+              </div>
+              <div class="numeric-picker-row" data-field="amount">
+                <div class="numeric-display" id="amount-display">000 ml</div>
+                <div class="numeric-digit-group" data-target="amount-hundreds"></div>
+                <div class="numeric-digit-group" data-target="amount-tens"></div>
+                <div class="numeric-digit-group" data-target="amount-ones"></div>
+              </div>
+              <input id="diary-amount" type="hidden" />
             </div>
+
+            <!-- ABV（数値ボタン） -->
             <div class="diary-field">
-              <div class="diary-label">ABV%</div>
-              <input id="diary-abv" class="diary-input" type="text" placeholder="例) 12.0 （%）" />
+              <div class="diary-label-row">
+                <div class="diary-label">ABV%</div>
+                <div class="diary-label-badge">Graph</div>
+              </div>
+              <div class="numeric-picker-row" data-field="abv">
+                <div class="numeric-display" id="abv-display">00.0 %</div>
+                <div class="numeric-digit-group" data-target="abv-int-tens"></div>
+                <div class="numeric-digit-group" data-target="abv-int-ones"></div>
+                <div class="numeric-digit-group" data-target="abv-decimal"></div>
+              </div>
+              <input id="diary-abv" type="hidden" />
             </div>
           </div>
         </div>
@@ -2189,21 +2404,51 @@ Basic
         <div class="diary-card">
           <div class="diary-card-title">Tasting</div>
           <div class="diary-card-desc">
-味・香り・見た目、覚えておきたいことだけ。
+味・香り・見た目は星で評価。あとでワインごとのレーダーチャートになります。
           </div>
 
           <div class="diary-form-grid">
             <div class="diary-field">
-              <div class="diary-label">味の評価</div>
-              <input id="diary-taste" class="diary-input" type="text" placeholder="甘い / 辛い / 5段階など" />
+              <div class="diary-label-row">
+                <div class="diary-label">味の評価</div>
+                <div class="diary-label-badge">Radar</div>
+              </div>
+              <div class="star-rating" data-field="taste">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+              </div>
+              <input id="diary-taste" type="hidden" />
             </div>
             <div class="diary-field">
-              <div class="diary-label">香り</div>
-              <input id="diary-aroma" class="diary-input" type="text" placeholder="フルーティー / スモーキー…" />
+              <div class="diary-label-row">
+                <div class="diary-label">香り</div>
+                <div class="diary-label-badge">Radar</div>
+              </div>
+              <div class="star-rating" data-field="aroma">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+              </div>
+              <input id="diary-aroma" type="hidden" />
             </div>
             <div class="diary-field">
-              <div class="diary-label">色・見た目</div>
-              <input id="diary-color" class="diary-input" type="text" placeholder="透明 / 琥珀色…" />
+              <div class="diary-label-row">
+                <div class="diary-label">色・見た目</div>
+                <div class="diary-label-badge">Radar</div>
+              </div>
+              <div class="star-rating" data-field="color">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+              </div>
+              <input id="diary-color" type="hidden" />
             </div>
           </div>
 
@@ -2216,17 +2461,39 @@ Basic
         <div class="diary-card">
           <div class="diary-card-title">Condition</div>
           <div class="diary-card-desc">
-体と気分のメモ。未来の���分のために。
+体と気分のメモ。未来の自分のために。
           </div>
 
           <div class="diary-form-grid">
+            <!-- 時間帯 -->
             <div class="diary-field">
-              <div class="diary-label">時間帯</div>
-              <input id="diary-timezone" class="diary-input" type="text" placeholder="例) 23 （0～24時）" />
+              <div class="diary-label-row">
+                <div class="diary-label">時間帯</div>
+                <div class="diary-label-badge">Graph</div>
+              </div>
+              <div class="numeric-picker-row" data-field="time">
+                <div class="numeric-display" id="time-display">00:00</div>
+                <div class="numeric-digit-group" data-target="time-hour-tens"></div>
+                <div class="numeric-digit-group" data-target="time-hour-ones"></div>
+                <div class="numeric-digit-group" data-target="time-min-tens"></div>
+                <div class="numeric-digit-group" data-target="time-min-ones"></div>
+              </div>
+              <input id="diary-timezone" type="hidden" />
             </div>
+
             <div class="diary-field">
-              <div class="diary-label">気分</div>
-              <input id="diary-mood" class="diary-input" type="text" placeholder="例) 1～5 （1=良い～5=悪い）" />
+              <div class="diary-label-row">
+                <div class="diary-label">気分</div>
+                <div class="diary-label-badge">Graph</div>
+              </div>
+              <div class="star-rating" data-field="mood">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+              </div>
+              <input id="diary-mood" type="hidden" />
             </div>
             <div class="diary-field">
               <div class="diary-label">ペアリング</div>
@@ -2240,12 +2507,32 @@ Basic
 
           <div class="diary-form-grid" style="margin-top:8px;">
             <div class="diary-field">
-              <div class="diary-label">酔いの程度</div>
-              <input id="diary-drunken" class="diary-input" type="text" placeholder="例) 1～5 （1=酔ってない～5=とても酔ってる）" />
+              <div class="diary-label-row">
+                <div class="diary-label">酔いの程度</div>
+                <div class="diary-label-badge">Graph</div>
+              </div>
+              <div class="star-rating" data-field="drunken">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+              </div>
+              <input id="diary-drunken" type="hidden" />
             </div>
             <div class="diary-field">
-              <div class="diary-label">翌日の体調</div>
-              <input id="diary-nextday" class="diary-input" type="text" placeholder="例) 1～5 （1=とても良い～5=かなり悪い）" />
+              <div class="diary-label-row">
+                <div class="diary-label">翌日の体調</div>
+                <div class="diary-label-badge">Graph</div>
+              </div>
+              <div class="star-rating" data-field="nextday">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+              </div>
+              <input id="diary-nextday" type="hidden" />
             </div>
           </div>
 
@@ -2337,28 +2624,65 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
           </div>
 
           <div class="diary-form-grid" style="margin-top:8px;">
+            <!-- Append 版も星＆数値UIに（簡略版）：ここではテキストでも良いが揃えるためそのままhidden + 星でもOK -->
             <div class="diary-field">
-              <div class="diary-label">量</div>
+              <div class="diary-label-row">
+                <div class="diary-label">���</div>
+                <div class="diary-label-badge">Graph</div>
+              </div>
               <input id="diary-amount-append" class="diary-input" type="text" placeholder="例) 180" />
             </div>
             <div class="diary-field">
-              <div class="diary-label">ABV%</div>
+              <div class="diary-label-row">
+                <div class="diary-label">ABV%</div>
+                <div class="diary-label-badge">Graph</div>
+              </div>
               <input id="diary-abv-append" class="diary-input" type="text" placeholder="例) 12.0" />
             </div>
             <div class="diary-field">
-              <div class="diary-label">味の評価</div>
-              <input id="diary-taste-append" class="diary-input" type="text" placeholder="甘い / 辛い / 5段階など" />
+              <div class="diary-label-row">
+                <div class="diary-label">味の評価</div>
+                <div class="diary-label-badge">Radar</div>
+              </div>
+              <div class="star-rating" data-field="taste-append">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+              </div>
+              <input id="diary-taste-append" type="hidden" />
             </div>
             <div class="diary-field">
-              <div class="diary-label">香り</div>
-              <input id="diary-aroma-append" class="diary-input" type="text" placeholder="フルーティー / スモーキー…" />
+              <div class="diary-label-row">
+                <div class="diary-label">香り</div>
+                <div class="diary-label-badge">Radar</div>
+              </div>
+              <div class="star-rating" data-field="aroma-append">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+              </div>
+              <input id="diary-aroma-append" type="hidden" />
             </div>
           </div>
 
           <div class="diary-form-grid" style="margin-top:8px;">
             <div class="diary-field">
-              <div class="diary-label">色・見た目</div>
-              <input id="diary-color-append" class="diary-input" type="text" placeholder="透明 / 琥珀色…" />
+              <div class="diary-label-row">
+                <div class="diary-label">色・見た目</div>
+                <div class="diary-label-badge">Radar</div>
+              </div>
+              <div class="star-rating" data-field="color-append">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+              </div>
+              <input id="diary-color-append" type="hidden" />
             </div>
           </div>
 
@@ -2369,12 +2693,25 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
 
           <div class="diary-form-grid" style="margin-top:8px;">
             <div class="diary-field">
-              <div class="diary-label">時間帯</div>
-              <input id="diary-timezone-append" class="diary-input" type="text" placeholder="例) 23" />
+              <div class="diary-label-row">
+                <div class="diary-label">時間帯</div>
+                <div class="diary-label-badge">Graph</div>
+              </div>
+              <input id="diary-timezone-append" class="diary-input" type="text" placeholder="例) 23:00" />
             </div>
             <div class="diary-field">
-              <div class="diary-label">気分</div>
-              <input id="diary-mood-append" class="diary-input" type="text" placeholder="例) 1～5" />
+              <div class="diary-label-row">
+                <div class="diary-label">気分</div>
+                <div class="diary-label-badge">Graph</div>
+              </div>
+              <div class="star-rating" data-field="mood-append">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+              </div>
+              <input id="diary-mood-append" type="hidden" />
             </div>
             <div class="diary-field">
               <div class="diary-label">ペアリング</div>
@@ -2388,12 +2725,32 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
 
           <div class="diary-form-grid" style="margin-top:8px;">
             <div class="diary-field">
-              <div class="diary-label">酔いの程度</div>
-              <input id="diary-drunken-append" class="diary-input" type="text" placeholder="例) 1～5" />
+              <div class="diary-label-row">
+                <div class="diary-label">酔いの程度</div>
+                <div class="diary-label-badge">Graph</div>
+              </div>
+              <div class="star-rating" data-field="drunken-append">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+              </div>
+              <input id="diary-drunken-append" type="hidden" />
             </div>
             <div class="diary-field">
-              <div class="diary-label">翌日の体調</div>
-              <input id="diary-nextday-append" class="diary-input" type="text" placeholder="例) 1～5" />
+              <div class="diary-label-row">
+                <div class="diary-label">翌日の体調</div>
+                <div class="diary-label-badge">Graph</div>
+              </div>
+              <div class="star-rating" data-field="nextday-append">
+                <span data-value="1">★</span>
+                <span data-value="2">★</span>
+                <span data-value="3">★</span>
+                <span data-value="4">★</span>
+                <span data-value="5">★</span>
+              </div>
+              <input id="diary-nextday-append" type="hidden" />
             </div>
           </div>
 
@@ -2447,17 +2804,17 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
             <input type="file" id="diary-view-file" accept="image/*" />
           </div>
           <button class="diary-small-button" id="diary-view-read-button" style="margin-top:6px;">
-            読み取る
+            <span>📷</span><span>READ</span>
           </button>
           <div id="diary-view-status" style="margin-top:6px;font-size:11px;color:var(--text-soft);"></div>
         </div>
 
-        <!-- ここにGraphボタンを後でJSから差し込む -->
+        <!-- Graph ボタン（JSでここに差し込み） -->
 
-        <div class="diary-card" id="calendar-year-card" style="display:none;">
+        <div class="diary-card" id="calendar-year-card" style="display:none;margin-top:14px;">
           <div class="diary-card-title">2. 年を選ぶ</div>
           <div class="diary-card-desc">
-日記の中に登場する年だけ、少し明るくなっています。
+記録がある年だけ表示しています。
           </div>
 
           <div class="calendar-year-grid" id="calendar-year-grid"></div>
@@ -2514,48 +2871,53 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
           </div>
         </div>
 
-        <div class="graph-main-card">
-          <div class="graph-title">RANGE</div>
-          <div class="graph-controls">
-            <div class="graph-chip-group" id="graph-range-group">
-              <button class="graph-chip graph-chip--active" data-range="7">7日</button>
-              <button class="graph-chip" data-range="30">30日</button>
-              <button class="graph-chip" data-range="all">全部</button>
+        <div class="graph-layout">
+          <div class="graph-main-card">
+            <div class="graph-title">RANGE</div>
+            <div class="graph-controls">
+              <div class="graph-chip-group" id="graph-range-group">
+                <button class="graph-chip graph-chip--active" data-range="7">7日</button>
+                <button class="graph-chip" data-range="30">30日</button>
+                <button class="graph-chip" data-range="all">全部</button>
+              </div>
             </div>
-          </div>
 
-          <div class="graph-title" style="margin-top:6px;">METRIC</div>
-          <div class="graph-controls">
-            <div class="graph-chip-group" id="graph-metric-group">
-              <button class="graph-chip graph-chip--active" data-metric="amount">量 (②)</button>
-              <button class="graph-chip" data-metric="time">時間帯 (③)</button>
-              <button class="graph-chip" data-metric="mood">気分 (④)</button>
-              <button class="graph-chip" data-metric="drunken">酔い (⑤)</button>
-              <button class="graph-chip" data-metric="nextday">体調 (⑥)</button>
+            <div class="graph-title" style="margin-top:6px;">METRIC</div>
+            <div class="graph-controls">
+              <div class="graph-chip-group" id="graph-metric-group">
+                <button class="graph-chip graph-chip--active" data-metric="amount">量 (②)</button>
+                <button class="graph-chip" data-metric="time">時間帯 (③)</button>
+                <button class="graph-chip" data-metric="mood">気分 (④)</button>
+                <button class="graph-chip" data-metric="drunken">酔い (⑤)</button>
+                <button class="graph-chip" data-metric="nextday">体調 (⑥)</button>
+              </div>
             </div>
+
+            <div class="graph-subtitle">
+※ 量/時間帯/気分/酔い/体調は、入力欄の星や数字ボタンから記録された値を使って集計しています。
+            </div>
+
+            <div class="graph-canvas-wrap">
+              <canvas id="graph-canvas" width="600" height="260"></canvas>
+            </div>
+
+            <div class="graph-list" id="graph-list"></div>
           </div>
 
-          <div class="graph-subtitle">
-※ 量/時間帯/気分/酔い/体調は、入力欄の数字（例:「180」「23」「1～5」など）を使って集計しています。
-          </div>
+          <div class="graph-side-card">
+            <div class="graph-title">WINE RANKING</div>
+            <div class="graph-subtitle">
+飲んだ回数の多いワインと、味評価の高いワインをランキング表示します。
+            </div>
+            <div class="wine-ranking-list" id="wine-ranking-list"></div>
+            <button class="diary-small-button" id="wine-detail-button" style="margin-top:6px;">
+              ワイン一覧
+            </button>
+            <div class="wine-detail-list" id="wine-detail-list"></div>
 
-          <div class="graph-canvas-wrap">
-            <canvas id="graph-canvas" width="600" height="260"></canvas>
+            <div class="wine-radar-title">TASTING RADAR</div>
+            <div class="wine-radar-wrap" id="wine-radar-wrap"></div>
           </div>
-
-          <div class="graph-list" id="graph-list"></div>
-        </div>
-
-        <div class="wine-ranking-card">
-          <div class="graph-title">WINE RANKING</div>
-          <div class="graph-subtitle">
-飲んだ回数が多いワインを上位5つまで表示します（ブランド名で集計）。
-          </div>
-          <div class="wine-ranking-list" id="wine-ranking-list"></div>
-          <button class="diary-small-button" id="wine-detail-button" style="margin-top:6px;">
-            ワイン一覧
-          </button>
-          <div class="wine-detail-list" id="wine-detail-list"></div>
         </div>
 
         <button class="graph-back-btn" id="graph-back-button">← Diary View に戻る</button>
@@ -2603,7 +2965,7 @@ Tap QR to preview / Save to download the image.
   <script>
     const BASE_URL = "https://yumemiru28000.github.io/zzHBD1/index.html";
 
-  const wines = [
+    const wines = [
       {
         id: "wine1",
         bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine1.png",
@@ -2613,29 +2975,25 @@ Tap QR to preview / Save to download the image.
         q3_origin: "ズズにゃん島",
         q4_variety: "ズズにゃん島産ぶどう",
         q5_vintage: "2026",
-        q6_style: "Signature", // Rankに変えるので中身はそのまま
+        q6_style: "Signature",
         q7_alcohol: "12.5%",
-
         q8_world_phrase: "穏やかな波のような安寧",
         q9_world_line: "静けさと安らぎをあなたに",
-
         q10_message_lines: [
           "お誕生日おめでとうございます！",
           "素敵な1年になりますように✨",
           "そして、おいしいお酒に巡りあえますように🍷"
         ],
-
         q11_pairing: "なんでも",
         q12_storage: "あなたにとって大切な場所",
         q13_craft: "波の穏やかな海で海底熟成させたもの",
-
         display_en: "CALM OF BLUE",
         tagline: "ISLAND NIGHT SELECTION",
         openCount: 0
       },
       {
         id: "wine2",
-        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine2.png",
+        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine1.png",
         qrImage: "",
         q1_name: "Orseille Rose Wine",
         q2_producer: "星ノワイナリー",
@@ -2644,25 +3002,21 @@ Tap QR to preview / Save to download the image.
         q5_vintage: "1980",
         q6_style: "Signature",
         q7_alcohol: "12.0%",
-
         q8_world_phrase: "気分上々",
         q9_world_line: "楽しい時間を共に",
-
         q10_message_lines: [
           "お誕生日おめでとうございます！"
         ],
-
         q11_pairing: "イタリアン",
         q12_storage: "涼しくて暗いところ",
         q13_craft: "職人が丁寧に作りました",
-
         display_en: "ROSE MOMENT",
         tagline: "A PERFECT MATCH WITH ITALIAN CUISINE",
         openCount: 0
       },
       {
         id: "wine3",
-        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine3.png",
+        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine1.png",
         qrImage: "",
         q1_name: "蒼海の眠り",
         q2_producer: "瀬戸内・信長アマネ醸造所",
@@ -2671,10 +3025,8 @@ Tap QR to preview / Save to download the image.
         q5_vintage: "2020",
         q6_style: "Premium",
         q7_alcohol: "12.0%",
-
         q8_world_phrase: "荒立った心を鎮め、深海に抱かれているような深い安らぎと眠りをもたらす。",
         q9_world_line: "「波のゆらぎが育てた、深海のアートピース。」",
-
         q10_message_lines: [
           "まるで海底で熟成されたワインのように、",
           "時という波に揉まれることで、",
@@ -2685,18 +3037,16 @@ Tap QR to preview / Save to download the image.
           "そんな素敵な年の重ね方をされているかべるねふらんさんに、",
           "お誕生日おめでとう。"
         ],
-
         q11_pairing: "生牡蠣（レモン添え）、白身魚の昆布締め、伊勢海老のグリル。",
         q12_storage: "直射日光を避け、暗く静かな場所",
         q13_craft: "海底熟成",
-
         display_en: "SILENCE OF THE DEEP",
         tagline: "PAIRING WITH OCEAN DELICACIES",
         openCount: 0
       },
       {
         id: "wine4",
-        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine4.png",
+        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine1.png",
         qrImage: "",
         q1_name: "Nyadal",
         q2_producer: "せぴあわいなりー",
@@ -2705,25 +3055,21 @@ Tap QR to preview / Save to download the image.
         q5_vintage: "2025",
         q6_style: "Premium",
         q7_alcohol: "12.5%",
-
         q8_world_phrase: "あまえねこになる",
         q9_world_line: "ねこにおすすめ！",
-
         q10_message_lines: [
           "かべるねさんお誕生日おめでと～～～♡♡♡♡♡"
         ],
-
         q11_pairing: "ちーずとかけーき",
         q12_storage: "つめたいはこ！",
         q13_craft: "ねこたちがこおったぶどうをあっさくしました！",
-
         display_en: "NYADAL SWEET TIME",
         tagline: "A GIFT FOR CAT LOVERS",
         openCount: 0
       },
       {
         id: "wine5",
-        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine5.png",
+        bottleImage: "https://raw.githubusercontent.com/yumemiru28000/zzHBD1/main/wine1.png",
         qrImage: "",
         q1_name: "すっごく美味しいワイン",
         q2_producer: "NEKOmata Vineyard",
@@ -2732,26 +3078,21 @@ Tap QR to preview / Save to download the image.
         q5_vintage: "1900",
         q6_style: "Casual Sip",
         q7_alcohol: "12.0%",
-
         q8_world_phrase: "世界が美しく見える",
         q9_world_line: "あなたの星を見上げてください",
-
         q10_message_lines: [
           "🍇かべるねふらんさん！",
           "心からお誕生日おめでとうございます！",
           "これからもよろしくお願いします💕🎂✨"
         ],
-
         q11_pairing: "この世界の食べ物はすべて",
         q12_storage: "あなたの心の奥",
         q13_craft: "業界の秘密です！😆",
-
         display_en: "YOUR STAR MOMENT",
         tagline: "A CELEBRATION JUST FOR YOU",
         openCount: 0
       }
     ];
-
 
     let currentIndex = 2;
     let activeWineIndex = null;
@@ -2881,7 +3222,11 @@ Tap QR to preview / Save to download the image.
     const wineRankingList = document.getElementById("wine-ranking-list");
     const wineDetailButton = document.getElementById("wine-detail-button");
     const wineDetailList = document.getElementById("wine-detail-list");
+    const wineRadarWrap = document.getElementById("wine-radar-wrap");
     const graphBackButton = document.getElementById("graph-back-button");
+
+    const homeCalendarShortcut = document.getElementById("home-calendar-shortcut");
+    const homeCalendarFile = document.getElementById("home-calendar-file");
 
     const bgmVolume = document.getElementById("bgm-volume");
 
@@ -2912,7 +3257,7 @@ Tap QR to preview / Save to download the image.
       });
     }
 
-    /* ===== Home / WineXP ロジック ===== */
+    /* ===== Home / WineXP ロジック（既存を維持） ===== */
 
     function renderHomeBottles() {
       bottleStrip.innerHTML = "";
@@ -3404,6 +3749,195 @@ Tap QR to preview / Save to download the image.
     setupColorPicker(diaryColorPicker, "#f97316", c => diaryColorSelected = c);
     setupColorPicker(diaryColorPickerAppend, "#f97316", c => diaryColorSelectedAppend = c);
 
+    /* ===== 星評価 UI ===== */
+
+    function setupStarRatings() {
+      const containers = document.querySelectorAll(".star-rating");
+      containers.forEach(container => {
+        const field = container.getAttribute("data-field");
+        const stars = Array.from(container.querySelectorAll("span"));
+        const hiddenInput = document.getElementById(
+          field === "taste" ? "diary-taste" :
+          field === "aroma" ? "diary-aroma" :
+          field === "color" ? "diary-color" :
+          field === "mood" ? "diary-mood" :
+          field === "drunken" ? "diary-drunken" :
+          field === "nextday" ? "diary-nextday" :
+          field === "taste-append" ? "diary-taste-append" :
+          field === "aroma-append" ? "diary-aroma-append" :
+          field === "color-append" ? "diary-color-append" :
+          field === "mood-append" ? "diary-mood-append" :
+          field === "drunken-append" ? "diary-drunken-append" :
+          field === "nextday-append" ? "diary-nextday-append" :
+          null
+        );
+        if (!hiddenInput) return;
+
+        const setValue = v => {
+          hiddenInput.value = v ? String(v) : "";
+          stars.forEach(s => {
+            const sv = parseInt(s.getAttribute("data-value"), 10);
+            s.classList.toggle("star-active", sv <= v);
+          });
+        };
+
+        stars.forEach(star => {
+          star.addEventListener("click", () => {
+            const v = parseInt(star.getAttribute("data-value"), 10);
+            if (hiddenInput.value === String(v)) {
+              setValue(0);
+            } else {
+              setValue(v);
+            }
+          });
+        });
+      });
+    }
+
+    /* ===== 数値入力（量/ABV/時間） ===== */
+
+    function createDigitButtons(targetEl, digits) {
+      targetEl.innerHTML = "";
+      digits.forEach(d => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "numeric-digit-btn";
+        btn.textContent = d;
+        btn.dataset.value = d;
+        targetEl.appendChild(btn);
+      });
+    }
+
+    function setupNumericPickers() {
+      // 量: 000〜999
+      const amountHundredsEl = document.querySelector('[data-target="amount-hundreds"]');
+      const amountTensEl = document.querySelector('[data-target="amount-tens"]');
+      const amountOnesEl = document.querySelector('[data-target="amount-ones"]');
+      createDigitButtons(amountHundredsEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      createDigitButtons(amountTensEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      createDigitButtons(amountOnesEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      let amountHundreds = "0", amountTens = "0", amountOnes = "0";
+      const amountDisplay = document.getElementById("amount-display");
+
+      function updateAmount() {
+        const val = amountHundreds + amountTens + amountOnes;
+        diaryAmountInput.value = val;
+        amountDisplay.textContent = `${parseInt(val,10)} ml`;
+      }
+      amountHundredsEl.addEventListener("click", e => {
+        const btn = e.target.closest(".numeric-digit-btn");
+        if (!btn) return;
+        amountHundreds = btn.dataset.value;
+        Array.from(amountHundredsEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
+        updateAmount();
+      });
+      amountTensEl.addEventListener("click", e => {
+        const btn = e.target.closest(".numeric-digit-btn");
+        if (!btn) return;
+        amountTens = btn.dataset.value;
+        Array.from(amountTensEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
+        updateAmount();
+      });
+      amountOnesEl.addEventListener("click", e => {
+        const btn = e.target.closest(".numeric-digit-btn");
+        if (!btn) return;
+        amountOnes = btn.dataset.value;
+        Array.from(amountOnesEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
+        updateAmount();
+      });
+      updateAmount();
+
+      // ABV: 00.0
+      const abvIntTensEl = document.querySelector('[data-target="abv-int-tens"]');
+      const abvIntOnesEl = document.querySelector('[data-target="abv-int-ones"]');
+      const abvDecimalEl = document.querySelector('[data-target="abv-decimal"]');
+      createDigitButtons(abvIntTensEl, ["0","1","2","3","4"]);
+      createDigitButtons(abvIntOnesEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      createDigitButtons(abvDecimalEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      let abvIntTens = "0", abvIntOnes = "0", abvDecimal = "0";
+      const abvDisplay = document.getElementById("abv-display");
+
+      function updateAbv() {
+        const val = `${abvIntTens}${abvIntOnes}.${abvDecimal}`;
+        diaryAbvInput.value = val;
+        abvDisplay.textContent = `${val} %`;
+      }
+      abvIntTensEl.addEventListener("click", e => {
+        const btn = e.target.closest(".numeric-digit-btn");
+        if (!btn) return;
+        abvIntTens = btn.dataset.value;
+        Array.from(abvIntTensEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
+        updateAbv();
+      });
+      abvIntOnesEl.addEventListener("click", e => {
+        const btn = e.target.closest(".numeric-digit-btn");
+        if (!btn) return;
+        abvIntOnes = btn.dataset.value;
+        Array.from(abvIntOnesEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
+        updateAbv();
+      });
+      abvDecimalEl.addEventListener("click", e => {
+        const btn = e.target.closest(".numeric-digit-btn");
+        if (!btn) return;
+        abvDecimal = btn.dataset.value;
+        Array.from(abvDecimalEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
+        updateAbv();
+      });
+      updateAbv();
+
+      // 時間: HH:MM
+      const timeHourTensEl = document.querySelector('[data-target="time-hour-tens"]');
+      const timeHourOnesEl = document.querySelector('[data-target="time-hour-ones"]');
+      const timeMinTensEl = document.querySelector('[data-target="time-min-tens"]');
+      const timeMinOnesEl = document.querySelector('[data-target="time-min-ones"]');
+      createDigitButtons(timeHourTensEl, ["0","1","2"]);
+      createDigitButtons(timeHourOnesEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      createDigitButtons(timeMinTensEl, ["0","1","2","3","4","5"]);
+      createDigitButtons(timeMinOnesEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      let ht = "0", ho = "0", mt = "0", mo = "0";
+      const timeDisplay = document.getElementById("time-display");
+
+      function updateTime() {
+        let hour = parseInt(ht + ho,10);
+        if (hour > 23) hour = 23;
+        let min = parseInt(mt + mo,10);
+        if (min > 59) min = 59;
+        const hourStr = hour.toString().padStart(2,"0");
+        const minStr = min.toString().padStart(2,"0");
+        diaryTimezoneInput.value = `${hourStr}:${minStr}`;
+        timeDisplay.textContent = `${hourStr}:${minStr}`;
+      }
+      timeHourTensEl.addEventListener("click", e => {
+        const btn = e.target.closest(".numeric-digit-btn");
+        if (!btn) return;
+        ht = btn.dataset.value;
+        Array.from(timeHourTensEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
+        updateTime();
+      });
+      timeHourOnesEl.addEventListener("click", e => {
+        const btn = e.target.closest(".numeric-digit-btn");
+        if (!btn) return;
+        ho = btn.dataset.value;
+        Array.from(timeHourOnesEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
+        updateTime();
+      });
+      timeMinTensEl.addEventListener("click", e => {
+        const btn = e.target.closest(".numeric-digit-btn");
+        if (!btn) return;
+        mt = btn.dataset.value;
+        Array.from(timeMinTensEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
+        updateTime();
+      });
+      timeMinOnesEl.addEventListener("click", e => {
+        const btn = e.target.closest(".numeric-digit-btn");
+        if (!btn) return;
+        mo = btn.dataset.value;
+        Array.from(timeMinOnesEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
+        updateTime();
+      });
+      updateTime();
+    }
+
     /* ===== Diary Encode / Decode (UTF-8 -> Base64) ===== */
 
     function utf8ToBase64(str) {
@@ -3428,6 +3962,11 @@ Tap QR to preview / Save to download the image.
       const isAppend = prefix === "-append";
       const date = isAppend ? diaryDateAppendInput.value : diaryDateInput.value;
       if (!date) return null;
+
+      if (!isAppend) {
+        // New: 量・ABV・時間帯はhiddenに既に数値が入っている
+      }
+
       return {
         date,
         name: isAppend ? diaryNameAppendInput.value : diaryNameInput.value,
@@ -3619,13 +4158,24 @@ Tap QR to preview / Save to download the image.
             diaryViewStatus.textContent = "日記の記録が見つかりませんでした。";
             return;
           }
-          diaryViewStatus.textContent = "読み取り成功。年を選んでください。";
+          diaryViewStatus.textContent = "読み取り成功。Graph か年を選んでください。";
           calendarYearCard.style.display = "block";
           renderCalendarYearChoices();
         } catch (e) {
           diaryViewStatus.textContent = "QRの中身を解析できませんでした。";
         }
       });
+    });
+
+    // Home Calendar Shortcut -> View と同じ動作
+    homeCalendarFile.addEventListener("change", () => {
+      const file = homeCalendarFile.files[0];
+      if (!file) return;
+      hideAllScreensExcept(diaryViewScreen);
+      diaryViewScreen.classList.remove("screen--hidden");
+      diaryViewScreen.classList.add("screen--active");
+      diaryViewFile.files = homeCalendarFile.files;
+      diaryViewReadButton.click();
     });
 
     function renderCalendarYearChoices() {
@@ -3637,16 +4187,12 @@ Tap QR to preview / Save to download the image.
         if (!isNaN(y)) years.add(y);
       });
       const yearList = Array.from(years).sort((a,b) => a-b);
-      const allYears = [];
-      for (let y = 2020; y <= 2035; y++) allYears.push(y);
-      allYears.forEach(y => {
+      yearList.forEach(y => {
         const card = document.createElement("div");
         card.className = "year-card";
         card.textContent = y;
-        if (yearList.includes(y)) {
-          card.style.borderColor = "rgba(249,115,22,0.8)";
-          card.style.color = "#fed7aa";
-        }
+        card.style.borderColor = "rgba(249,115,22,0.8)";
+        card.style.color = "#fed7aa";
         card.addEventListener("click", () => openCalendarForYear(y));
         calendarYearGrid.appendChild(card);
       });
@@ -3709,6 +4255,13 @@ Tap QR to preview / Save to download the image.
           const colors = entries.map(e => e.dotColor || "#f97316");
           dot.style.background = colors[0];
           cell.appendChild(dot);
+
+          const label = document.createElement("div");
+          label.className = "calendar-day-wine-label";
+          const firstBrand = (entries[0].brand || entries[0].type || "").trim();
+          label.textContent = firstBrand || "";
+          cell.appendChild(label);
+
           cell.addEventListener("click", () => {
             showCalendarDetails(year, month, day, entries);
           });
@@ -3806,10 +4359,16 @@ Tap QR to preview / Save to download the image.
     }
 
     function parseTime0to24OrNull(value) {
-      const n = parseNumberOrNull(value);
-      if (n == null) return null;
-      if (n < 0 || n > 24) return null;
-      return n;
+      if (!value) return null;
+      const m = String(value).match(/(\d{1,2})[:：](\d{1,2})/);
+      if (!m) {
+        const n = parseNumberOrNull(value);
+        if (n != null && n >= 0 && n <= 24) return n;
+        return null;
+      }
+      const h = parseInt(m[1], 10);
+      if (h < 0 || h > 24) return null;
+      return h;
     }
 
     function getEntriesSortedByDateDesc() {
@@ -3888,7 +4447,7 @@ Tap QR to preview / Save to download the image.
       const paddingLeft = 40;
       const paddingRight = 10;
       const paddingTop = 20;
-      const paddingBottom = 30;
+      const paddingBottom = 40;
       const w = graphCanvas.width - paddingLeft - paddingRight;
       const h = graphCanvas.height - paddingTop - paddingBottom;
 
@@ -3949,10 +4508,10 @@ Tap QR to preview / Save to download the image.
       points.forEach((p, idx) => {
         const x = mapX(idx);
         const d = new Date(p.entry.date || "1970-01-01");
-        const label = `${d.getMonth()+1}/${d.getDate()}`;
-        if (points.length <= 10 || idx % Math.ceil(points.length / 10) === 0) {
-          graphCtx.fillText(label, x, paddingTop + h + 4);
-        }
+        const dateLabel = `${d.getMonth()+1}/${d.getDate()}`;
+        const brandLabel = (p.entry.brand || p.entry.type || "").trim();
+        const label = brandLabel ? `${dateLabel}\n${brandLabel}` : dateLabel;
+        graphCtx.fillText(label, x, paddingTop + h + 4);
       });
 
       graphList.innerHTML = "";
@@ -3962,7 +4521,8 @@ Tap QR to preview / Save to download the image.
         row.className = "graph-list-item";
         const left = document.createElement("div");
         left.className = "graph-list-date";
-        left.textContent = `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`;
+        const brand = (p.entry.brand || p.entry.type || "").trim();
+        left.textContent = `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()} ${brand ? ` – ${brand}` : ""}`;
         const right = document.createElement("div");
         right.className = "graph-list-value";
         right.textContent = `${p.value} (${getMetricLabel(graphMetric)})`;
@@ -3970,6 +4530,14 @@ Tap QR to preview / Save to download the image.
         row.appendChild(right);
         graphList.appendChild(row);
       });
+    }
+
+    function ratingFromText(text) {
+      if (!text) return null;
+      const n = parseFloat(String(text).replace(/[^\d.\-]/g,""));
+      if (isNaN(n)) return null;
+      if (n < 1 || n > 5) return null;
+      return n;
     }
 
     function buildWineRankingAndDetail() {
@@ -3985,12 +4553,17 @@ Tap QR to preview / Save to download the image.
             aroma: [],
             colorNote: [],
             food: [],
-            abv: []
+            abv: [],
+            tasteRatings: []
           });
         }
         const w = map.get(key);
         w.count++;
-        if (e.taste) w.taste.push(e.taste);
+        if (e.taste) {
+          w.taste.push(e.taste);
+          const r = ratingFromText(e.taste);
+          if (r != null) w.tasteRatings.push(r);
+        }
         if (e.aroma) w.aroma.push(e.aroma);
         if (e.colorNote) w.colorNote.push(e.colorNote);
         if (e.food) w.food.push(e.food);
@@ -3998,10 +4571,28 @@ Tap QR to preview / Save to download the image.
       });
 
       const list = Array.from(map.values());
-      list.sort((a, b) => b.count - a.count);
+
+      // 回数ランキング
+      const byCount = list.slice().sort((a, b) => b.count - a.count);
+
+      // 味評価ランキング（平均）
+      const byTaste = list.slice().filter(w => w.tasteRatings.length > 0);
+      byTaste.forEach(w => {
+        const sum = w.tasteRatings.reduce((s,v)=>s+v,0);
+        w.avgTaste = sum / w.tasteRatings.length;
+      });
+      byTaste.sort((a,b) => (b.avgTaste||0) - (a.avgTaste||0));
 
       wineRankingList.innerHTML = "";
-      list.slice(0, 5).forEach((w, i) => {
+
+      const section1Title = document.createElement("div");
+      section1Title.textContent = "回数ランキング TOP5";
+      section1Title.style.marginBottom = "4px";
+      section1Title.style.color = "#e5e7eb";
+      section1Title.style.fontSize = "11px";
+      wineRankingList.appendChild(section1Title);
+
+      byCount.slice(0,5).forEach((w, i) => {
         const row = document.createElement("div");
         row.className = "wine-ranking-row";
         const left = document.createElement("div");
@@ -4015,7 +4606,35 @@ Tap QR to preview / Save to download the image.
         wineRankingList.appendChild(row);
       });
 
+      const divider = document.createElement("div");
+      divider.style.margin = "6px 0 4px";
+      divider.style.borderTop = "1px solid rgba(55,65,81,0.8)";
+      wineRankingList.appendChild(divider);
+
+      const section2Title = document.createElement("div");
+      section2Title.textContent = "味評価ランキング TOP5";
+      section2Title.style.marginBottom = "4px";
+      section2Title.style.color = "#e5e7eb";
+      section2Title.style.fontSize = "11px";
+      wineRankingList.appendChild(section2Title);
+
+      byTaste.slice(0,5).forEach((w, i) => {
+        const row = document.createElement("div");
+        row.className = "wine-ranking-row";
+        const left = document.createElement("div");
+        left.className = "wine-ranking-name";
+        left.textContent = `${i+1}. ${w.name}`;
+        const right = document.createElement("div");
+        right.className = "wine-ranking-count";
+        right.textContent = `${w.avgTaste.toFixed(1)} / 5`;
+        row.appendChild(left);
+        row.appendChild(right);
+        wineRankingList.appendChild(row);
+      });
+
       wineDetailList.innerHTML = "";
+      wineRadarWrap.innerHTML = "";
+
       wineDetailButton.onclick = () => {
         wineDetailList.innerHTML = "";
         list.forEach(w => {
@@ -4037,13 +4656,86 @@ Tap QR to preview / Save to download the image.
           wineDetailList.appendChild(item);
         });
       };
+
+      // レーダーチャート描画
+      list.forEach(w => {
+        const ratingsT = w.tasteRatings;
+        const ratingsA = w.aroma.map(ratingFromText).filter(r=>r!=null);
+        const ratingsC = w.colorNote.map(ratingFromText).filter(r=>r!=null);
+        if (!ratingsT.length && !ratingsA.length && !ratingsC.length) return;
+
+        const avg = arr => arr.length ? arr.reduce((s,v)=>s+v,0)/arr.length : null;
+        const rT = avg(ratingsT) || 0;
+        const rA = avg(ratingsA) || 0;
+        const rC = avg(ratingsC) || 0;
+        if (!rT && !rA && !rC) return;
+
+        const item = document.createElement("div");
+        item.className = "wine-radar-item";
+        const title = document.createElement("div");
+        title.className = "wine-radar-name";
+        title.textContent = w.name;
+        const canvas = document.createElement("canvas");
+        canvas.width = 120;
+        canvas.height = 90;
+        canvas.className = "wine-radar-canvas";
+        item.appendChild(title);
+        item.appendChild(canvas);
+        wineRadarWrap.appendChild(item);
+
+        const ctx = canvas.getContext("2d");
+        const cx = canvas.width/2;
+        const cy = canvas.height/2 + 4;
+        const rMax = 32;
+
+        const axes = [
+          {angle: -Math.PI/2, value: rT}, // 上
+          {angle: (2*Math.PI/3)-Math.PI/2, value: rA}, // 左下
+          {angle: (4*Math.PI/3)-Math.PI/2, value: rC}  // 右下
+        ];
+
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.strokeStyle = "rgba(55,65,81,0.8)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        axes.forEach((a,idx) => {
+          const x = cx + rMax * Math.cos(a.angle);
+          const y = cy + rMax * Math.sin(a.angle);
+          if (idx===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+        });
+        ctx.closePath();
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(249,115,22,0.08)";
+        ctx.beginPath();
+        axes.forEach((a,idx) => {
+          const rr = (a.value/5) * rMax;
+          const x = cx + rr * Math.cos(a.angle);
+          const y = cy + rr * Math.sin(a.angle);
+          if (idx===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+        });
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.strokeStyle = "#f97316";
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        axes.forEach((a,idx) => {
+          const rr = (a.value/5) * rMax;
+          const x = cx + rr * Math.cos(a.angle);
+          const y = cy + rr * Math.sin(a.angle);
+          if (idx===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+        });
+        ctx.closePath();
+        ctx.stroke();
+      });
     }
 
-    // Graphボタンを View 画面の「年カード」の上に差し込む
+    // Graphボタン挿入
     const graphOpenButton = document.createElement("button");
     graphOpenButton.className = "diary-small-button";
     graphOpenButton.id = "graph-open-button";
-    graphOpenButton.textContent = "Graph";
+    graphOpenButton.innerHTML = "<span>📈</span><span>Graph</span>";
     diaryViewScreen.querySelector(".content-frame").insertBefore(
       graphOpenButton,
       calendarYearCard
@@ -4095,6 +4787,8 @@ Tap QR to preview / Save to download the image.
       updateNightEffects();
       setupBgm();
       openWineFromQueryIfNeeded();
+      setupStarRatings();
+      setupNumericPickers();
     }
 
     document.addEventListener("DOMContentLoaded", init);
