@@ -2347,7 +2347,7 @@ QRノートを読み込み、今日の飲酒データを保存・追加
 
         <div class="diary-card-row">
           <div class="diary-card">
-            <div class="diary-card-title">ＱＲノートを作る　　　　(～１日目)</div>
+            <div class="diary-card-title">ＱＲノートを作る　(～１日目)</div>
             <div class="diary-card-desc">
 FIRST STEP
 これから記録するＱＲノートを作成と一日目の記録
@@ -2358,7 +2358,7 @@ FIRST STEP
           </div>
 
           <div class="diary-card">
-            <div class="diary-card-title">QRノードを追記・閲覧する　　　（１日目～）</div>
+            <div class="diary-card-title">QRノードを追記・閲覧する（２日目～）</div>
             <div class="diary-card-desc">
 以前作成・保存したQRノート読み込み、
 新たな一日を作成・カレンダーやグラフで自分の飲酒を管理
@@ -2409,7 +2409,7 @@ FIRST STEP
         <div class="diary-card-row">
           <!-- 左カラム -->
           <div class="diary-card">
-            <div class="diary-card-title">1⃣一日のメモ</div>
+            <div class="diary-card-title">1⃣　１日のメモ</div>
             <div class="diary-card-desc">
 必須なのは日付だけ。あとは書ける範囲で。
             </div>
@@ -2708,16 +2708,16 @@ PNGとして保存、他機能で読み込めます。
     <div class="screen diary-screen screen--hidden" id="diary-append-screen">
       <div class="content-frame">
         <div class="diary-header">
-          <div class="diary-title">DIARY – APPEND</div>
+          <div class="diary-title">DIARY – ADD</div>
           <div class="diary-subtitle">
-既存のQRノートに、新しい1日を追加します。目標設定はノートごとに1つだけ保持されます。
+既存のQRノートに、新しい1日を追加します。
           </div>
         </div>
 
         <div class="diary-card">
           <div class="diary-card-title">1. QRを読み込む</div>
           <div class="diary-card-desc">
-以前保存した「日記QR」の画像を選んでください。
+以前保存した「QRノート」の画像を選んでください。
           </div>
           <div class="diary-upload">
             <input type="file" id="diary-append-file" accept="image/*" />
@@ -2728,9 +2728,9 @@ PNGとして保存、他機能で読み込めます。
         <div class="diary-card-row" id="diary-append-form-row" style="display:none;margin-top:10px;">
           <!-- 左カラム：1日分 -->
           <div class="diary-card">
-            <div class="diary-card-title">2. 新しい1日を追加</div>
+            <div class="diary-card-title">1⃣1⃣ 新しい1日を追加</div>
             <div class="diary-card-desc">
-読んだノートはそのまま、1件だけ新しいページを追加して新しいQRを作ります。
+ページを追加して新しいQRを作れます。
             </div>
 
             <div class="diary-form-grid">
@@ -2749,8 +2749,8 @@ PNGとして保存、他機能で読み込めます。
 
               <div class="diary-field">
                 <div class="diary-label-row">
-                  <div class="diary-label">量</div>
-                  <div class="diary-label-badge">Graph</div>
+                  <div class="diary-label">今日の飲酒量</div>
+                  <div class="diary-label-badge">グラフ</div>
                 </div>
                 <div class="numeric-picker-row" data-field="amount-append">
                   <div class="numeric-display" id="amount-append-display">0 ml</div>
@@ -2764,8 +2764,8 @@ PNGとして保存、他機能で読み込めます。
 
               <div class="diary-field">
                 <div class="diary-label-row">
-                  <div class="diary-label">ABV%</div>
-                  <div class="diary-label-badge">Graph</div>
+                  <div class="diary-label">度数</div>
+                  <div class="diary-label-badge">グラフ</div>
                 </div>
                 <div class="numeric-picker-row" data-field="abv-append">
                   <div class="numeric-display" id="abv-append-display">00.0 %</div>
@@ -2777,16 +2777,16 @@ PNGとして保存、他機能で読み込めます。
               </div>
             </div>
 
-            <div class="diary-card-title" style="margin-top:10px;">Tasting</div>
+            <div class="diary-card-title" style="margin-top:10px;">2⃣　Tasting</div>
             <div class="diary-card-desc">
-味・香り・見た目は星で評価。レ���ダーチャートに反映されます。
+味・香り・見た目は星で評価。ランキングやワインごとの評価が出ます
             </div>
 
             <div class="diary-form-grid">
               <div class="diary-field">
                 <div class="diary-label-row">
                   <div class="diary-label">味の評価</div>
-                  <div class="diary-label-badge">Radar</div>
+                  <div class="diary-label-badge">△グラフ</div>
                 </div>
                 <div class="star-rating" data-field="taste-append">
                   <span data-value="1">★</span>
@@ -2799,8 +2799,8 @@ PNGとして保存、他機能で読み込めます。
               </div>
               <div class="diary-field">
                 <div class="diary-label-row">
-                  <div class="diary-label">香り</div>
-                  <div class="diary-label-badge">Radar</div>
+                  <div class="diary-label">香りの評価</div>
+                  <div class="diary-label-badge">△グラフ</div>
                 </div>
                 <div class="star-rating" data-field="aroma-append">
                   <span data-value="1">★</span>
@@ -2813,8 +2813,8 @@ PNGとして保存、他機能で読み込めます。
               </div>
               <div class="diary-field">
                 <div class="diary-label-row">
-                  <div class="diary-label">色・見た目</div>
-                  <div class="diary-label-badge">Radar</div>
+                  <div class="diary-label">色・見た目の評価</div>
+                  <div class="diary-label-badge">△グラフ</div>
                 </div>
                 <div class="star-rating" data-field="color-append">
                   <span data-value="1">★</span>
@@ -2835,8 +2835,8 @@ PNGとして保存、他機能で読み込めます。
             <div class="diary-form-grid" style="margin-top:6px;">
               <div class="diary-field">
                 <div class="diary-label-row">
-                  <div class="diary-label">時間帯</div>
-                  <div class="diary-label-badge">Graph</div>
+                  <div class="diary-label">時間</div>
+                  <div class="diary-label-badge">グラフ</div>
                 </div>
                 <div class="numeric-picker-row" data-field="time-append">
                   <div class="numeric-display" id="time-append-display">00:00</div>
@@ -2850,7 +2850,7 @@ PNGとして保存、他機能で読み込めます。
               <div class="diary-field">
                 <div class="diary-label-row">
                   <div class="diary-label">気分</div>
-                  <div class="diary-label-badge">Graph</div>
+                  <div class="diary-label-badge">グラフ</div>
                 </div>
                 <div class="star-rating" data-field="mood-append">
                   <span data-value="1">★</span>
@@ -2875,7 +2875,7 @@ PNGとして保存、他機能で読み込めます。
               <div class="diary-field">
                 <div class="diary-label-row">
                   <div class="diary-label">酔いの程度</div>
-                  <div class="diary-label-badge">Graph</div>
+                  <div class="diary-label-badge">グラフ</div>
                 </div>
                 <div class="star-rating" data-field="drunken-append">
                   <span data-value="1">★</span>
@@ -2889,7 +2889,7 @@ PNGとして保存、他機能で読み込めます。
               <div class="diary-field">
                 <div class="diary-label-row">
                   <div class="diary-label">翌日の体調</div>
-                  <div class="diary-label-badge">Graph</div>
+                  <div class="diary-label-badge">グラフ</div>
                 </div>
                 <div class="star-rating" data-field="nextday-append">
                   <span data-value="1">★</span>
@@ -2916,17 +2916,16 @@ PNGとして保存、他機能で読み込めます。
 
           <!-- 右カラム：目標＆QR -->
           <div class="diary-card diary-card--goal">
-            <div class="diary-card-title">Goals</div>
+            <div class="diary-card-title">目標</div>
             <div class="diary-card-desc">
-読み込んだノートに保存されている目標があれば自動で反映されます。
 ここで編集すると、新しい目標として上書き保存されます。
             </div>
 
             <div class="diary-form-grid">
               <div class="diary-field">
                 <div class="diary-label-row">
-                  <div class="diary-label">目標適量</div>
-                  <div class="diary-label-badge">Target</div>
+                  <div class="diary-label">目標適量（１日あたり）</div>
+                  <div class="diary-label-badge">グラフ（ピンク線）</div>
                 </div>
                 <div class="numeric-picker-row" data-field="target-amount-append">
                   <div class="numeric-display" id="target-amount-append-display">0 ml</div>
@@ -2940,8 +2939,8 @@ PNGとして保存、他機能で読み込めます。
 
               <div class="diary-field">
                 <div class="diary-label-row">
-                  <div class="diary-label">目標時間帯</div>
-                  <div class="diary-label-badge">Target</div>
+                  <div class="diary-label">目標飲酒時刻</div>
+                  <div class="diary-label-badge">グラフ（ピンク線）</div>
                 </div>
                 <div class="numeric-picker-row" data-field="target-time-append">
                   <div class="numeric-display" id="target-time-append-display">00:00</div>
@@ -2956,8 +2955,8 @@ PNGとして保存、他機能で読み込めます。
 
               <div class="diary-field">
                 <div class="diary-label-row">
-                  <div class="diary-label">1週間の目標飲酒量 (g)</div>
-                  <div class="diary-label-badge">Weekly</div>
+                  <div class="diary-label">目標飲酒量（1週間） (g)</div>
+                  <div class="diary-label-badge">カレンダー</div>
                 </div>
                 <div class="numeric-picker-row" data-field="week-amount-append">
                   <div class="numeric-display" id="week-amount-append-display">0 g</div>
@@ -2970,8 +2969,8 @@ PNGとして保存、他機能で読み込めます。
 
               <div class="diary-field">
                 <div class="diary-label-row">
-                  <div class="diary-label">1週間に飲める日数</div>
-                  <div class="diary-label-badge">Weekly</div>
+                  <div class="diary-label">飲める日数（制限）（1週間中）</div>
+                  <div class="diary-label-badge">カレンダー</div>
                 </div>
                 <div class="numeric-picker-row">
                   <div class="numeric-display" id="week-days-append-display">0 日</div>
@@ -2983,11 +2982,11 @@ PNGとして保存、他機能で読み込めます。
 
             <div class="diary-card-title" style="margin-top:10px;">QR</div>
             <div class="diary-card-desc">
-元のノート＋新しい1日＋目標設定をまとめて、新しいQRとして保存します。
+元の読み込んだQRノートの画像に上書き保存してください
             </div>
 
             <button class="diary-primary-button" id="diary-append-generate-button">
-              <span>Generate New QR</span>
+              <span>保存する</span>
             </button>
 
             <div class="diary-qr-preview" id="diary-append-qr-preview" style="display:none;">
