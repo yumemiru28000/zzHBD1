@@ -1644,13 +1644,23 @@
         0 0 0 1px rgba(15,23,42,1);
     }
 
-    .diary-howto-title {
-      font-size: 11px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: #fed7aa;
-      margin-bottom: 8px;
-    }
+ /* 既存の .diary-howto-title の上書き用（または追加） */
+.diary-howto-title {
+  font-size: 16px;          /* 元より大きめに */
+  letter-spacing: 0.28em;   /* 見出しらしく広めに */
+  text-transform: uppercase;
+  color: #fed7aa;
+  margin-bottom: 10px;
+}
+
+/* 日本語の「使い方」など、漢字タイトルも太く・少し大きく */
+.diary-howto-title-ja {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #fed7aa;
+  margin-bottom: 8px;
+}
 
     .diary-howto-body {
       font-size: 11px;
@@ -2367,30 +2377,36 @@ FIRST STEP
               <span>✎</span><span>書き込む</span>
             </button>
             <button class="diary-secondary-button" id="diary-view-button">
-              <span>📅</span><span>QRノートを見る</span>
+              <span>📅</span><span>日記を見る</span>
             </button>
           </div>
         </div>
 
         <!-- How To -->
-        <div class="diary-howto-card">
-          <div class="diary-howto-title">使い方</div>
-          <div class="diary-howto-body">
-【New Entry】
-・その日の1杯を、「日付＋お酒の名前」だけでもOKです。
-・量（例: 180）、ABV（例: 12.0）、時間帯（例: 23:30）は、数字ボタンで入力します。
-・気分 / 酔い / 体調、味 / 香り / 見た目の評価は、星を押すだけで1～5段階を記録できます。
+ <div class="diary-howto-card">
+  <!-- ここを既存の .diary-howto-title から .diary-howto-title-ja に変えるだけでもOK -->
+  <div class="diary-howto-title-ja">使い方</div>
+  <div class="diary-howto-body">
+「できること」
 
-【From QR → Append】
-・以前保存した日記QRを読み込み、「Append」で新しい1日だけを追加していきます。
-・1つのQRが1冊のノートになり、日付順にどんどんページが増えていきます。
-・目標（適量 / 時間帯 / 1週間の飲酒量・飲める日数）は、読み込んだノートに1つだけ保存され、
-　Appendで書き換えると常に最新の目標に上書きされます。
+- **今日飲んだお酒の記録**  
+  日付・お酒の名前・量・度数・時間・気分・酔い・翌日の体調を、記録。
 
-【From QR → View / Graph】
-・QRを読み込んで「View & Calendar」で、年と月ごとに記録を眺められます。
-・Graphボタンからは「量」「時間帯」「気分・酔い・体調」「目標とのズレ」を線や棒で確認できます。
-・ワイン一覧では、よく飲んでいる銘柄や、そのときの味・香り・見た目の印象をレーダーチャートで見返せます。
+- **自分だけの「目標」とセットで管理**  
+  1日の目安量、飲み始める時間、1週間の総量・飲める日数を決めておくと、  
+  その目標と実際の飲み方を、カレンダーとグラフで比べて見られます。
+
+- **週ごとの「飲みすぎ / セーフ」がひと目で分かる**  
+  1週間でどれくらい飲んだか、  
+  「あと何g飲める」「○gオーバー」まで自動で計算して表示されます。
+
+- **体調との関係が見えてくる**  
+  量・時間・酔い方と、翌日の体調を一緒にグラフ化。  
+  「このくらいまでなら、次の日もしんどくない」が、自分の感覚で分かってきます。
+
+- **好きなお酒の「傾向」がわかる**  
+  よく飲んでいる銘柄、味の評価が高いお酒がランキング化されて、  
+  「自分の好き」がハッキリしてきます
           </div>
         </div>
       </div>
