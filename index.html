@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>ワインセラー Diary + Graph</title>
+  <title>ZZワインセラー</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- QRコード生成ライブラリ（QRious） -->
   <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
@@ -2239,7 +2239,7 @@
             </div>
             <button class="diary-button" id="diary-button">
               <span class="diary-button-icon"></span>
-              <span>DIARY</span>
+              <span>お酒日記</span>
             </button>
           </div>
 
@@ -2263,10 +2263,10 @@
         <div class="home-calendar-shortcut" id="home-calendar-shortcut">
           <div class="home-calendar-shortcut-title">
             <div class="home-calendar-shortcut-icon"></div>
-            <span>CALENDAR</span>
+            <span>カレンダー</span>
           </div>
           <div class="home-calendar-shortcut-desc">
-読み込んだ日記QRから、すぐにカレンダー＆グラフを開きます。
+読み込んだQRノートから、カレンダー&グラフを閲覧可
           </div>
           <input type="file" id="home-calendar-file" accept="image/*" />
         </div>
@@ -2274,10 +2274,10 @@
         <div class="home-append-shortcut" id="home-append-shortcut">
           <div class="home-append-shortcut-title">
             <div class="home-append-shortcut-icon"></div>
-            <span>APPEND</span>
+            <span>記録する</span>
           </div>
           <div class="home-append-shortcut-desc">
-QRノートを読み込み、そのまま追記モードで開きます。
+QRノートを読み込み、今日の飲酒データを保存・追加
           </div>
           <input type="file" id="home-append-file" accept="image/*" />
         </div>
@@ -2341,33 +2341,33 @@ QRノートを読み込み、そのまま追記モードで開きます。
         <div class="diary-header">
           <div class="diary-title">DIARY</div>
           <div class="diary-subtitle">
-島の夜と、あなたのお酒の記憶を一緒に並べるノート。
+あなたのお酒の記憶を一枚のノートに、　【管理・ランキング・友達にシェア】
           </div>
         </div>
 
         <div class="diary-card-row">
           <div class="diary-card">
-            <div class="diary-card-title">New Entry</div>
+            <div class="diary-card-title">ＱＲノートを作る(初めての方)</div>
             <div class="diary-card-desc">
-Basic
-必須なのは日付だけ。あとは書ける範囲で。
+FIRST STEP
+これから記録するＱＲノートを作成と一日目の記録
             </div>
             <button class="diary-primary-button" id="diary-new-entry-button">
-              <span>New Diary</span>
+              <span>作成する</span>
             </button>
           </div>
 
           <div class="diary-card">
             <div class="diary-card-title">From QR</div>
             <div class="diary-card-desc">
-以前保存した日記QR画像を読み込み、
-同じノートにページを足す・カレンダーで眺めることができます。
+以前作成・保存したQRノート読み込み、
+新たな一日を作成・カレンダーやグラフで自分の飲酒を管理
             </div>
             <button class="diary-secondary-button" id="diary-append-button">
-              <span>✎</span><span>Append</span>
+              <span>✎</span><span>書き込む</span>
             </button>
             <button class="diary-secondary-button" id="diary-view-button">
-              <span>📅</span><span>View & Calendar</span>
+              <span>📅</span><span>グラフとカレンダー</span>
             </button>
           </div>
         </div>
