@@ -4921,23 +4921,25 @@ Tap QR to preview / Save to download the image.
         nameTitle.textContent = entry.name || entry.brand || "(記録)";
         card.appendChild(nameTitle);
 
-        const rows = [
-          ["お酒の名前", entry.name],
-          ["銘柄 / ブランド", entry.brand],
-          ["量", entry.amount],
-          ["ABV%", entry.abv],
-          ["味の評価", starsFromValue(entry.taste)],
-          ["香り", starsFromValue(entry.aroma)],
-          ["色・見た目", starsFromValue(entry.colorNote)],
-          ["総合コメント", entry.comment],
-          ["時間帯", entry.timezone],
-          ["気分", starsFromValue(entry.mood)],
-          ["ペアリング", entry.food],
-          ["場所", entry.place],
-          ["酔いの程度", starsFromValue(entry.drunken)],
-          ["翌日の体調", starsFromValue(entry.nextday)],
-          ["カレンダーの色", entry.dotColor]
-        ];
+    // 修正版：showCalendarDetails 内の rows 定義部分だけ差し替え
+const rows = [
+  ["お酒の名前", entry.name],
+  ["銘柄 / ブランド", entry.brand],
+  ["量", entry.amount],
+  ["ABV%", entry.abv],
+  // ここから「星」系はすべて starsFromValue() を通す
+  ["味の評価", starsFromValue(entry.taste)],
+  ["香り", starsFromValue(entry.aroma)],
+  ["色・見た目", starsFromValue(entry.colorNote)],
+  ["総合コメント", entry.comment],
+  ["時間帯", entry.timezone],
+  ["気分", starsFromValue(entry.mood)],
+  ["ペアリング", entry.food],
+  ["場所", entry.place],
+  ["酔いの程度", starsFromValue(entry.drunken)],
+  ["翌日の体調", starsFromValue(entry.nextday)],
+  ["カレンダーの色", entry.dotColor]
+];
 
         rows.forEach(([label, value]) => {
           if (!value) return;
