@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -23,6 +24,9 @@
       --transition-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
       --bottle-breath-duration: 10s;
       --diary-accent: #f97316;
+      --line-amount: #f97316;
+      --line-condition: #22c55e;
+      --line-target: #ec4899;
     }
 
     * {
@@ -411,12 +415,19 @@
 
     .pager-dots { display:none; }
 
-    /* Home Calendar Shortcut */
+    /* Home Calendar Shortcuts */
 
-    .home-calendar-shortcut {
+    .home-shortcut-container {
       position: absolute;
       left: 18px;
       bottom: 72px;
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
+
+    .home-calendar-shortcut,
+    .home-append-shortcut {
       width: 140px;
       padding: 10px 10px 12px;
       border-radius: 14px;
@@ -434,7 +445,12 @@
       opacity: 0.9;
     }
 
-    .home-calendar-shortcut-title {
+    .home-append-shortcut {
+      background: radial-gradient(circle at 0 0, rgba(249,115,22,0.18) 0%, rgba(15,23,42,0.96) 48%);
+    }
+
+    .home-calendar-shortcut-title,
+    .home-append-shortcut-title {
       display: flex;
       align-items: center;
       gap: 6px;
@@ -444,7 +460,12 @@
       color: #bfdbfe;
     }
 
-    .home-calendar-shortcut-icon {
+    .home-append-shortcut-title {
+      color: #fed7aa;
+    }
+
+    .home-calendar-shortcut-icon,
+    .home-append-shortcut-icon {
       width: 18px;
       height: 18px;
       border-radius: 4px;
@@ -468,13 +489,37 @@
       border: 1px solid rgba(148,163,184,0.8);
     }
 
-    .home-calendar-shortcut-desc {
+    .home-append-shortcut-icon::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 3px;
+      width: 10px;
+      height: 12px;
+      border-radius: 2px;
+      border: 1px solid rgba(251,191,36,0.9);
+    }
+    .home-append-shortcut-icon::after {
+      content: "";
+      position: absolute;
+      right: 3px;
+      bottom: 3px;
+      width: 8px;
+      height: 2px;
+      border-radius: 1px;
+      background: rgba(251,191,36,0.9);
+      transform: rotate(-35deg);
+    }
+
+    .home-calendar-shortcut-desc,
+    .home-append-shortcut-desc {
       font-size: 10px;
       color: var(--text-soft);
       line-height: 1.6;
     }
 
-    .home-calendar-shortcut input {
+    .home-calendar-shortcut input,
+    .home-append-shortcut input {
       margin-top: 4px;
       font-size: 10px;
       width: 100%;
@@ -673,7 +718,7 @@
       text-align: right;
     }
 
-    /* ===== WineXP (省略せず既存通り) ===== */
+    /* ===== WineXP ===== */
 
     .winexp-screen {
       padding: 32px 16px 20px;
@@ -683,13 +728,11 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
-
     @media (min-width: 768px) {
       .winexp-screen {
         padding: 40px 36px 24px;
       }
     }
-
     .winexp-bg-layer {
       position: fixed;
       inset: 0;
@@ -704,7 +747,6 @@
         filter 0.65s var(--transition-soft),
         background 0.65s var(--transition-soft);
     }
-
     .night-stars {
       position: fixed;
       inset: 0;
@@ -719,17 +761,14 @@
       background-size: 260px 260px;
       mix-blend-mode: screen;
     }
-
     .night-stars--visible {
       opacity: 0.6;
       animation: starDrift 18s linear infinite alternate;
     }
-
     @keyframes starDrift {
       from { transform: translate3d(0, 0, 0); }
       to   { transform: translate3d(-10px, -12px, 0); }
     }
-
     .winexp-header-space {
       min-height: 32vh;
       display: grid;
@@ -738,13 +777,11 @@
       padding-top: 16px;
       align-items: center;
     }
-
     @media (max-width: 768px) {
       .winexp-header-space {
         grid-template-columns: 1fr;
       }
     }
-
     .winexp-label {
       font-size: 11px;
       letter-spacing: 0.35em;
@@ -752,7 +789,6 @@
       color: var(--text-weak);
       margin-bottom: 14px;
     }
-
     .winexp-title-jp {
       font-size: 28px;
       letter-spacing: 0.08em;
@@ -762,18 +798,15 @@
       animation: winexpTitleIn 1.6s ease-out forwards;
       animation-delay: 0.9s;
     }
-
     @keyframes winexpTitleIn {
       from { opacity: 0; transform: scale(1.02) translateY(4px); }
       to   { opacity: 1; transform: scale(1) translateY(0); }
     }
-
     .winexp-title-row {
       display: flex;
       align-items: center;
       gap: 6px;
     }
-
     .title-paw {
       display: inline-flex;
       align-items: center;
@@ -792,14 +825,12 @@
         transform 0.2s var(--transition-standard),
         box-shadow 0.2s var(--transition-standard);
     }
-
     .title-paw:hover {
       transform: translateY(-1px) scale(1.05);
       box-shadow:
         0 0 0 1px rgba(251,191,36,0.9),
         0 10px 24px rgba(15,23,42,1);
     }
-
     .winexp-title-en {
       font-size: 12px;
       letter-spacing: 0.25em;
@@ -810,12 +841,10 @@
       animation: winexpSubtitleIn 1.4s var(--transition-standard) forwards;
       animation-delay: 1.3s;
     }
-
     @keyframes winexpSubtitleIn {
       from { opacity: 0; transform: translateY(5px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     .wine-title-bubble {
       display: inline-flex;
       align-items: center;
@@ -838,7 +867,6 @@
       animation: wineBubbleIn 1.4s var(--transition-standard) forwards;
       animation-delay: 1.9s;
     }
-
     .wine-title-bubble::before {
       content: "";
       position: absolute;
@@ -851,12 +879,10 @@
       border-top: 1px solid rgba(55,65,81,0.9);
       transform: rotate(45deg);
     }
-
     @keyframes wineBubbleIn {
       from { opacity: 0; transform: translateY(8px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     .winexp-bottle-hero {
       justify-self: center;
       align-self: center;
@@ -871,19 +897,16 @@
       animation: heroBottleIn 1.4s var(--transition-soft) forwards;
       animation-delay: 0.9s;
     }
-
     @keyframes heroBottleIn {
       from { opacity: 0; transform: translateY(16px) scale(0.95); }
       to   { opacity: 1; transform: translateY(0) scale(1); }
     }
-
     .winexp-bottle-hero img {
       width: 100%;
       height: auto;
       object-fit: contain;
       filter: drop-shadow(0 22px 40px rgba(15,23,42,0.9));
     }
-
     .winexp-bottle-hero-shadow {
       position: absolute;
       left: 50%;
@@ -898,17 +921,14 @@
       );
       filter: blur(10px);
     }
-
     .winexp-screen--locked-interaction {
       pointer-events: none;
     }
-
     .winexp-section {
       margin-top: 36px;
       position: relative;
       overflow: hidden;
     }
-
     .info-block {
       margin-bottom: 18px;
       opacity: 0;
@@ -917,12 +937,10 @@
         opacity 0.6s var(--transition-standard),
         transform 0.6s var(--transition-standard);
     }
-
     .info-block--visible {
       opacity: 1;
       transform: translateY(0);
     }
-
     .info-label {
       font-size: 11px;
       letter-spacing: 0.18em;
@@ -930,13 +948,11 @@
       color: var(--text-weak);
       margin-bottom: 6px;
     }
-
     .info-value {
       font-size: 15px;
       letter-spacing: 0.06em;
       color: var(--text-main);
     }
-
     .world-section {
       margin-top: 44px;
       padding: 32px 18px 30px;
@@ -949,7 +965,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .world-section::before {
       content: "";
       position: absolute;
@@ -961,11 +976,7 @@
       opacity: 0;
       transition: opacity 0.6s var(--transition-standard);
     }
-
-    .world-section--active::before {
-      opacity: 1;
-    }
-
+    .world-section--active::before { opacity: 1; }
     .world-meta-label {
       display: inline-flex;
       align-items: center;
@@ -980,11 +991,7 @@
       color: var(--text-soft);
       margin-bottom: 10px;
     }
-
-    .world-block {
-      margin-bottom: 18px;
-    }
-
+    .world-block { margin-bottom: 18px; }
     .world-line-primary,
     .world-line-secondary {
       text-align: center;
@@ -997,26 +1004,14 @@
         opacity 0.9s var(--transition-soft),
         transform 0.9s var(--transition-soft);
     }
-
-    .world-line-primary {
-      margin-bottom: 18px;
-    }
-
-    .world-line-secondary {
-      font-size: 14px;
-      color: var(--text-soft);
-    }
-
+    .world-line-primary { margin-bottom: 18px; }
+    .world-line-secondary { font-size: 14px; color: var(--text-soft); }
     .world-line-primary--visible,
     .world-line-secondary--visible {
       opacity: 1;
       transform: translateY(0);
     }
-
-    .message-section {
-      margin-top: 44px;
-    }
-
+    .message-section { margin-top: 44px; }
     .message-wax {
       width: 72px;
       height: 72px;
@@ -1043,19 +1038,16 @@
         transform 1.6s var(--transition-soft),
         box-shadow 0.6s var(--transition-standard);
     }
-
     .message-wax--visible {
       opacity: 1;
       transform: scale(1) translateY(0);
     }
-
     .message-wax:hover {
       box-shadow:
         0 0 0 1px rgba(96,165,250,0.9),
         0 20px 40px rgba(15,23,42,1),
         0 0 32px rgba(96,165,250,0.7);
     }
-
     .message-card {
       max-width: 520px;
       margin: 0 auto;
@@ -1081,7 +1073,6 @@
         margin-top 1.2s var(--transition-soft);
       position: relative;
     }
-
     .message-card::before {
       content: "";
       position: absolute;
@@ -1090,7 +1081,6 @@
       background: linear-gradient(to right, rgba(55,65,81,0.7), rgba(31,41,55,0.1));
       opacity: 0.7;
     }
-
     .message-card--open {
       transform: scaleY(1);
       max-height: 520px;
@@ -1099,7 +1089,6 @@
       padding-bottom: 24px;
       margin-top: 6px;
     }
-
     .message-header-label {
       font-size: 10px;
       letter-spacing: 0.18em;
@@ -1107,11 +1096,7 @@
       color: var(--text-weak);
       margin-bottom: 10px;
     }
-
-    .message-body {
-      padding-top: 8px;
-    }
-
+    .message-body { padding-top: 8px; }
     .message-line {
       font-size: 14px;
       color: var(--text-main);
@@ -1119,11 +1104,7 @@
       opacity: 0;
       transform: translateY(4px);
     }
-
-    .message-line + .message-line {
-      margin-top: 4px;
-    }
-
+    .message-line + .message-line { margin-top: 4px; }
     .message-line--visible {
       opacity: 1;
       transform: translateY(0);
@@ -1131,16 +1112,11 @@
         opacity 0.4s var(--transition-standard),
         transform 0.4s var(--transition-standard);
     }
-
     .accordion-list {
       margin-top: 44px;
       border-top: 1px solid rgba(55,65,81,0.7);
     }
-
-    .accordion-item {
-      border-bottom: 1px solid rgba(55,65,81,0.7);
-    }
-
+    .accordion-item { border-bottom: 1px solid rgba(55,65,81,0.7); }
     .accordion-header {
       display: flex;
       align-items: center;
@@ -1149,24 +1125,18 @@
       cursor: pointer;
       gap: 12px;
     }
-
     .accordion-label-wrap {
       display: flex;
       align-items: center;
       gap: 8px;
     }
-
-    .accordion-icon {
-      font-size: 16px;
-    }
-
+    .accordion-icon { font-size: 16px; }
     .accordion-title {
       font-size: 14px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--text-soft);
     }
-
     .accordion-arrow {
       width: 18px;
       height: 18px;
@@ -1182,13 +1152,11 @@
         background 0.3s var(--transition-standard),
         color 0.3s var(--transition-standard);
     }
-
     .accordion-item--open .accordion-arrow {
       transform: rotate(90deg);
       background: rgba(31,41,55,0.9);
       color: var(--text-main);
     }
-
     .accordion-body {
       max-height: 0;
       overflow: hidden;
@@ -1197,12 +1165,10 @@
         max-height 0.4s var(--transition-standard),
         padding-bottom 0.4s var(--transition-standard);
     }
-
     .accordion-item--open .accordion-body {
       padding-bottom: 12px;
       max-height: 260px;
     }
-
     .accordion-text {
       font-size: 13px;
       color: var(--text-main);
@@ -1233,18 +1199,15 @@
         background 0.25s var(--transition-standard),
         border-color 0.25s var(--transition-standard);
     }
-
     .home-button--visible {
       opacity: 1;
       pointer-events: auto;
     }
-
     .home-button:hover {
       background: rgba(31,41,55,0.98);
       border-color: rgba(148,163,184,0.95);
       transform: translateY(-50%) scale(1.04);
     }
-
     .home-button-icon {
       position: relative;
       width: 16px;
@@ -1298,12 +1261,10 @@
         0 10px 30px rgba(15,23,42,0.9);
       z-index: 19;
     }
-
     .audio-label {
       letter-spacing: 0.18em;
       text-transform: uppercase;
     }
-
     .audio-icon {
       width: 16px;
       height: 16px;
@@ -1315,7 +1276,6 @@
       font-size: 10px;
       color: #e5e7eb;
     }
-
     .audio-slider {
       appearance: none;
       width: 90px;
@@ -1325,7 +1285,6 @@
       outline: none;
       cursor: pointer;
     }
-
     .audio-slider::-webkit-slider-thumb {
       appearance: none;
       width: 12px;
@@ -1344,7 +1303,7 @@
       border: 1px solid rgba(191,219,254,0.9);
     }
 
-    /* ===== Diary / Calendar / Graph UI ===== */
+    /* ===== Diary / Calendar / Graph 共通 ===== */
 
     .diary-screen {
       padding: 32px 16px 20px;
@@ -1387,8 +1346,7 @@
 
     .diary-card {
       flex: 1 1 260px;
-      min-width: 240px;
-      max-width: 380px;
+      min-width: 260px;
       border-radius: 20px;
       background: rgba(15,23,42,0.9);
       border: 1px solid rgba(55,65,81,0.9);
@@ -1539,12 +1497,16 @@
     }
 
     .star-rating span {
-      color: #0f172a;
-      text-shadow: 0 0 0 rgba(0,0,0,0.2);
+      color: transparent;
+      -webkit-text-stroke: 1px #ffffff;
+      text-stroke: 1px #ffffff;
+      text-shadow: 0 0 1px rgba(0,0,0,0.6);
     }
 
     .star-rating span.star-active {
       color: #facc15;
+      -webkit-text-stroke: 0;
+      text-stroke: 0;
       text-shadow: 0 0 3px rgba(250,204,21,0.6);
     }
 
@@ -1698,7 +1660,6 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
-
     @media (min-width: 768px) {
       .calendar-screen {
         padding: 40px 36px 24px;
@@ -1895,7 +1856,7 @@
     }
 
     .calendar-entry-label {
-      flex: 0 0 92px;
+      flex: 0 0 96px;
       color: var(--text-soft);
       text-align: right;
       white-space: nowrap;
@@ -2066,17 +2027,6 @@
       text-align: right;
     }
 
-    .wine-ranking-card {
-      border-radius: 20px;
-      background: rgba(15,23,42,0.95);
-      border: 1px solid rgba(55,65,81,0.9);
-      box-shadow:
-        0 20px 50px rgba(15,23,42,0.95),
-        0 0 0 1px rgba(15,23,42,1);
-      padding: 14px 14px 16px;
-      margin-top: 6px;
-    }
-
     .wine-ranking-list {
       font-size: 11px;
       color: var(--text-soft);
@@ -2103,7 +2053,7 @@
       margin-top: 8px;
       font-size: 11px;
       color: var(--text-soft);
-      max-height: 180px;
+      max-height: 160px;
       overflow-y: auto;
       border-top: 1px solid rgba(55,65,81,0.7);
       padding-top: 4px;
@@ -2162,6 +2112,14 @@
       display: block;
     }
 
+    .wine-radar-labels {
+      font-size: 9px;
+      color: var(--text-weak);
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1px;
+    }
+
     .graph-back-btn {
       margin-top: 10px;
       display: inline-flex;
@@ -2211,16 +2169,29 @@
         </div>
       </div>
 
-      <!-- Home Calendar Shortcut -->
-      <div class="home-calendar-shortcut" id="home-calendar-shortcut">
-        <div class="home-calendar-shortcut-title">
-          <div class="home-calendar-shortcut-icon"></div>
-          <span>CALENDAR</span>
-        </div>
-        <div class="home-calendar-shortcut-desc">
+      <!-- Home Shortcuts -->
+      <div class="home-shortcut-container">
+        <div class="home-calendar-shortcut" id="home-calendar-shortcut">
+          <div class="home-calendar-shortcut-title">
+            <div class="home-calendar-shortcut-icon"></div>
+            <span>CALENDAR</span>
+          </div>
+          <div class="home-calendar-shortcut-desc">
 読み込んだ日記QRから、すぐにカレンダー＆グラフを開きます。
+          </div>
+          <input type="file" id="home-calendar-file" accept="image/*" />
         </div>
-        <input type="file" id="home-calendar-file" accept="image/*" />
+
+        <div class="home-append-shortcut" id="home-append-shortcut">
+          <div class="home-append-shortcut-title">
+            <div class="home-append-shortcut-icon"></div>
+            <span>APPEND</span>
+          </div>
+          <div class="home-append-shortcut-desc">
+QRノートを読み込み、そのまま追記モードで開きます。
+          </div>
+          <input type="file" id="home-append-file" accept="image/*" />
+        </div>
       </div>
     </div>
 
@@ -2312,23 +2283,24 @@ Basic
           </div>
         </div>
 
-        <!-- How To Use -->
+        <!-- How To -->
         <div class="diary-howto-card">
           <div class="diary-howto-title">HOW TO USE</div>
           <div class="diary-howto-body">
 【New Entry】
-・その日の1杯を、「日付＋ざっくりしたメモ」だけでもOKです。
+・その日の1杯を、「日付＋お酒の名前」だけでもOKです。
 ・量（例: 180）、ABV（例: 12.0）、時間帯（例: 23:30）は、数字ボタンで入力します。
 ・気分 / 酔い / 体調、味 / 香り / 見た目の評価は、星を押すだけで1～5段階を記録できます。
 
 【From QR → Append】
 ・以前保存した日記QRを読み込み、「Append」で新しい1日だけを追加していきます。
 ・1つのQRが1冊のノートになり、日付順にどんどんページが増えていきます。
-・翌日の体調も星で残しておくと、自分に合う量や度数が見つけやすくなります。
+・目標（適量 / 時間帯 / 1週間の飲酒量・飲める日数）は、読み込んだノートに1つだけ保存され、
+　Appendで書き換えると常に最新の目標に上書きされます。
 
 【From QR → View / Graph】
 ・QRを読み込んで「View & Calendar」で、年と月ごとに記録を眺められます。
-・Graphボタンからは「量」「時間帯」「気分・酔い・体調」の推移を線で確認できます。
+・Graphボタンからは「量」「時間帯」「気分・酔い・体調」「目標とのズレ」を線で確認できます。
 ・ワイン一覧では、よく飲んでいる銘柄や、そのときの味・香り・見た目の印象をレーダーチャートで見返せます。
           </div>
         </div>
@@ -2345,227 +2317,290 @@ Basic
           </div>
         </div>
 
-        <div class="diary-card">
-          <div class="diary-card-title">Basic</div>
-          <div class="diary-card-desc">
+        <div class="diary-card-row">
+          <!-- 左カラム：基本 & テイスティング & コンディション -->
+          <div class="diary-card">
+            <div class="diary-card-title">Basic</div>
+            <div class="diary-card-desc">
 必須なのは日付だけ。あとは書ける範囲で。
-          </div>
-
-          <div class="diary-form-grid">
-            <div class="diary-field">
-              <div class="diary-label">日付*</div>
-              <input id="diary-date" class="diary-input" type="date" />
-            </div>
-            <div class="diary-field">
-              <div class="diary-label">名前</div>
-              <input id="diary-name" class="diary-input" type="text" placeholder="誰が飲んだか" />
-            </div>
-            <div class="diary-field">
-              <div class="diary-label">お酒の種類</div>
-              <input id="diary-type" class="diary-input" type="text" placeholder="日本酒 / ワイン / ウイスキー…" />
-            </div>
-            <div class="diary-field">
-              <div class="diary-label">銘柄 / ブランド</div>
-              <input id="diary-brand" class="diary-input" type="text" />
             </div>
 
-            <!-- 量（数値ボタン） -->
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">量</div>
-                <div class="diary-label-badge">Graph</div>
+            <div class="diary-form-grid">
+              <div class="diary-field">
+                <div class="diary-label">日付*</div>
+                <input id="diary-date" class="diary-input" type="date" />
               </div>
-              <div class="numeric-picker-row" data-field="amount">
-                <div class="numeric-display" id="amount-display">000 ml</div>
-                <div class="numeric-digit-group" data-target="amount-hundreds"></div>
-                <div class="numeric-digit-group" data-target="amount-tens"></div>
-                <div class="numeric-digit-group" data-target="amount-ones"></div>
+              <div class="diary-field">
+                <div class="diary-label">お酒の名前</div>
+                <input id="diary-name" class="diary-input" type="text" placeholder="例）○○ワイン / △△ウイスキー" />
               </div>
-              <input id="diary-amount" type="hidden" />
+              <div class="diary-field">
+                <div class="diary-label">銘柄 / ブランド</div>
+                <input id="diary-brand" class="diary-input" type="text" placeholder="生産者やブランド名" />
+              </div>
+
+              <!-- 量 -->
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">量</div>
+                  <div class="diary-label-badge">Graph</div>
+                </div>
+                <div class="numeric-picker-row" data-field="amount">
+                  <div class="numeric-display" id="amount-display">0 ml</div>
+                  <div class="numeric-digit-group" data-target="amount-hundreds"></div>
+                  <div class="numeric-digit-group" data-target="amount-tens"></div>
+                  <div class="numeric-digit-group" data-target="amount-ones"></div>
+                </div>
+                <input id="diary-amount" type="hidden" />
+              </div>
+
+              <!-- ABV -->
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">ABV%</div>
+                  <div class="diary-label-badge">Graph</div>
+                </div>
+                <div class="numeric-picker-row" data-field="abv">
+                  <div class="numeric-display" id="abv-display">00.0 %</div>
+                  <div class="numeric-digit-group" data-target="abv-int-tens"></div>
+                  <div class="numeric-digit-group" data-target="abv-int-ones"></div>
+                  <div class="numeric-digit-group" data-target="abv-decimal"></div>
+                </div>
+                <input id="diary-abv" type="hidden" />
+              </div>
             </div>
 
-            <!-- ABV（数値ボタン） -->
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">ABV%</div>
-                <div class="diary-label-badge">Graph</div>
-              </div>
-              <div class="numeric-picker-row" data-field="abv">
-                <div class="numeric-display" id="abv-display">00.0 %</div>
-                <div class="numeric-digit-group" data-target="abv-int-tens"></div>
-                <div class="numeric-digit-group" data-target="abv-int-ones"></div>
-                <div class="numeric-digit-group" data-target="abv-decimal"></div>
-              </div>
-              <input id="diary-abv" type="hidden" />
-            </div>
-          </div>
-        </div>
-
-        <div class="diary-card">
-          <div class="diary-card-title">Tasting</div>
-          <div class="diary-card-desc">
+            <div class="diary-card-title" style="margin-top:14px;">Tasting</div>
+            <div class="diary-card-desc">
 味・香り・見た目は星で評価。あとでワインごとのレーダーチャートになります。
-          </div>
-
-          <div class="diary-form-grid">
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">味の評価</div>
-                <div class="diary-label-badge">Radar</div>
-              </div>
-              <div class="star-rating" data-field="taste">
-                <span data-value="1">★</span>
-                <span data-value="2">★</span>
-                <span data-value="3">★</span>
-                <span data-value="4">★</span>
-                <span data-value="5">★</span>
-              </div>
-              <input id="diary-taste" type="hidden" />
             </div>
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">香り</div>
-                <div class="diary-label-badge">Radar</div>
-              </div>
-              <div class="star-rating" data-field="aroma">
-                <span data-value="1">★</span>
-                <span data-value="2">★</span>
-                <span data-value="3">★</span>
-                <span data-value="4">★</span>
-                <span data-value="5">★</span>
-              </div>
-              <input id="diary-aroma" type="hidden" />
-            </div>
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">色・見た目</div>
-                <div class="diary-label-badge">Radar</div>
-              </div>
-              <div class="star-rating" data-field="color">
-                <span data-value="1">★</span>
-                <span data-value="2">★</span>
-                <span data-value="3">★</span>
-                <span data-value="4">★</span>
-                <span data-value="5">★</span>
-              </div>
-              <input id="diary-color" type="hidden" />
-            </div>
-          </div>
 
-          <div class="diary-field" style="margin-top:10px;">
-            <div class="diary-label">総合コメント</div>
-            <textarea id="diary-comment" class="diary-textarea" placeholder="自由にメモ"></textarea>
-          </div>
-        </div>
+            <div class="diary-form-grid">
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">味の評価</div>
+                  <div class="diary-label-badge">Radar</div>
+                </div>
+                <div class="star-rating" data-field="taste">
+                  <span data-value="1">★</span>
+                  <span data-value="2">★</span>
+                  <span data-value="3">★</span>
+                  <span data-value="4">★</span>
+                  <span data-value="5">★</span>
+                </div>
+                <input id="diary-taste" type="hidden" />
+              </div>
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">香り</div>
+                  <div class="diary-label-badge">Radar</div>
+                </div>
+                <div class="star-rating" data-field="aroma">
+                  <span data-value="1">★</span>
+                  <span data-value="2">★</span>
+                  <span data-value="3">★</span>
+                  <span data-value="4">★</span>
+                  <span data-value="5">★</span>
+                </div>
+                <input id="diary-aroma" type="hidden" />
+              </div>
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">色・見た目</div>
+                  <div class="diary-label-badge">Radar</div>
+                </div>
+                <div class="star-rating" data-field="color">
+                  <span data-value="1">★</span>
+                  <span data-value="2">★</span>
+                  <span data-value="3">★</span>
+                  <span data-value="4">★</span>
+                  <span data-value="5">★</span>
+                </div>
+                <input id="diary-color" type="hidden" />
+              </div>
+            </div>
 
-        <div class="diary-card">
-          <div class="diary-card-title">Condition</div>
-          <div class="diary-card-desc">
+            <div class="diary-field" style="margin-top:10px;">
+              <div class="diary-label">総合コメント</div>
+              <textarea id="diary-comment" class="diary-textarea" placeholder="自由にメモ"></textarea>
+            </div>
+
+            <div class="diary-card-title" style="margin-top:14px;">Condition</div>
+            <div class="diary-card-desc">
 体と気分のメモ。未来の自分のために。
+            </div>
+
+            <div class="diary-form-grid">
+              <!-- 時間帯 -->
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">時間帯</div>
+                  <div class="diary-label-badge">Graph</div>
+                </div>
+                <div class="numeric-picker-row" data-field="time">
+                  <div class="numeric-display" id="time-display">00:00</div>
+                  <div class="numeric-digit-group" data-target="time-hour-tens"></div>
+                  <div class="numeric-digit-group" data-target="time-hour-ones"></div>
+                  <div class="numeric-digit-group" data-target="time-min-tens"></div>
+                  <div class="numeric-digit-group" data-target="time-min-ones"></div>
+                </div>
+                <input id="diary-timezone" type="hidden" />
+              </div>
+
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">気分</div>
+                  <div class="diary-label-badge">Graph</div>
+                </div>
+                <div class="star-rating" data-field="mood">
+                  <span data-value="1">★</span>
+                  <span data-value="2">★</span>
+                  <span data-value="3">★</span>
+                  <span data-value="4">★</span>
+                  <span data-value="5">★</span>
+                </div>
+                <input id="diary-mood" type="hidden" />
+              </div>
+              <div class="diary-field">
+                <div class="diary-label">ペアリング</div>
+                <input id="diary-food" class="diary-input" type="text" placeholder="チーズ / 刺身 / ピザ…" />
+              </div>
+              <div class="diary-field">
+                <div class="diary-label">場所</div>
+                <input id="diary-place" class="diary-input" type="text" placeholder="自宅 / バー / 外食…" />
+              </div>
+            </div>
+
+            <div class="diary-form-grid" style="margin-top:8px;">
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">酔いの程度</div>
+                  <div class="diary-label-badge">Graph</div>
+                </div>
+                <div class="star-rating" data-field="drunken">
+                  <span data-value="1">★</span>
+                  <span data-value="2">★</span>
+                  <span data-value="3">★</span>
+                  <span data-value="4">★</span>
+                  <span data-value="5">★</span>
+                </div>
+                <input id="diary-drunken" type="hidden" />
+              </div>
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">翌日の体調</div>
+                  <div class="diary-label-badge">Graph</div>
+                </div>
+                <div class="star-rating" data-field="nextday">
+                  <span data-value="1">★</span>
+                  <span data-value="2">★</span>
+                  <span data-value="3">★</span>
+                  <span data-value="4">★</span>
+                  <span data-value="5">★</span>
+                </div>
+                <input id="diary-nextday" type="hidden" />
+              </div>
+            </div>
+
+            <div class="diary-row">
+              <div class="diary-label">カレンダーの色</div>
+              <div class="color-dot-picker" id="diary-color-picker">
+                <div class="color-dot-option" data-color="#f97316" style="background:#f97316;"></div>
+                <div class="color-dot-option" data-color="#22c55e" style="background:#22c55e;"></div>
+                <div class="color-dot-option" data-color="#3b82f6" style="background:#3b82f6;"></div>
+                <div class="color-dot-option" data-color="#eab308" style="background:#eab308;"></div>
+                <div class="color-dot-option" data-color="#ec4899" style="background:#ec4899;"></div>
+              </div>
+            </div>
           </div>
 
-          <div class="diary-form-grid">
-            <!-- 時間帯 -->
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">時間帯</div>
-                <div class="diary-label-badge">Graph</div>
-              </div>
-              <div class="numeric-picker-row" data-field="time">
-                <div class="numeric-display" id="time-display">00:00</div>
-                <div class="numeric-digit-group" data-target="time-hour-tens"></div>
-                <div class="numeric-digit-group" data-target="time-hour-ones"></div>
-                <div class="numeric-digit-group" data-target="time-min-tens"></div>
-                <div class="numeric-digit-group" data-target="time-min-ones"></div>
-              </div>
-              <input id="diary-timezone" type="hidden" />
+          <!-- 右カラム：目標＆QR -->
+          <div class="diary-card">
+            <div class="diary-card-title">Goals</div>
+            <div class="diary-card-desc">
+このノート全体の「適量」と「目標時間帯」「1週間の目標」を決めておく欄。
+Append で開いたときは、ここに前回の目標が自動で読み込まれます。
             </div>
 
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">気分</div>
-                <div class="diary-label-badge">Graph</div>
+            <div class="diary-form-grid">
+              <!-- 目標適量 -->
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">目標適量</div>
+                  <div class="diary-label-badge">Target</div>
+                </div>
+                <div class="numeric-picker-row" data-field="target-amount">
+                  <div class="numeric-display" id="target-amount-display">0 ml</div>
+                  <div class="numeric-digit-group" data-target="target-amount-hundreds"></div>
+                  <div class="numeric-digit-group" data-target="target-amount-tens"></div>
+                  <div class="numeric-digit-group" data-target="target-amount-ones"></div>
+                </div>
+                <input id="diary-target-amount" type="hidden" />
               </div>
-              <div class="star-rating" data-field="mood">
-                <span data-value="1">★</span>
-                <span data-value="2">★</span>
-                <span data-value="3">★</span>
-                <span data-value="4">★</span>
-                <span data-value="5">★</span>
-              </div>
-              <input id="diary-mood" type="hidden" />
-            </div>
-            <div class="diary-field">
-              <div class="diary-label">ペアリング</div>
-              <input id="diary-food" class="diary-input" type="text" placeholder="チーズ / 刺身 / ピザ…" />
-            </div>
-            <div class="diary-field">
-              <div class="diary-label">場所</div>
-              <input id="diary-place" class="diary-input" type="text" placeholder="自宅 / バー / 外食…" />
-            </div>
-          </div>
 
-          <div class="diary-form-grid" style="margin-top:8px;">
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">酔いの程度</div>
-                <div class="diary-label-badge">Graph</div>
+              <!-- 目標時間帯 -->
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">目標時間帯</div>
+                  <div class="diary-label-badge">Target</div>
+                </div>
+                <div class="numeric-picker-row" data-field="target-time">
+                  <div class="numeric-display" id="target-time-display">00:00</div>
+                  <div class="numeric-digit-group" data-target="target-time-hour-tens"></div>
+                  <div class="numeric-digit-group" data-target="target-time-hour-ones"></div>
+                  <div class="numeric-digit-group" data-target="target-time-min-tens"></div>
+                  <div class="numeric-digit-group" data-target="target-time-min-ones"></div>
+                </div>
+                <input id="diary-target-time" type="hidden" />
               </div>
-              <div class="star-rating" data-field="drunken">
-                <span data-value="1">★</span>
-                <span data-value="2">★</span>
-                <span data-value="3">★</span>
-                <span data-value="4">★</span>
-                <span data-value="5">★</span>
+
+              <!-- 1週間飲酒量目標 -->
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">1週間の目標飲酒量 (g)</div>
+                  <div class="diary-label-badge">Weekly</div>
+                </div>
+                <div class="numeric-picker-row" data-field="week-amount">
+                  <div class="numeric-display" id="week-amount-display">0 g</div>
+                  <div class="numeric-digit-group" data-target="week-amount-hundreds"></div>
+                  <div class="numeric-digit-group" data-target="week-amount-tens"></div>
+                  <div class="numeric-digit-group" data-target="week-amount-ones"></div>
+                </div>
+                <input id="diary-week-amount" type="hidden" />
               </div>
-              <input id="diary-drunken" type="hidden" />
-            </div>
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">翌日の体調</div>
-                <div class="diary-label-badge">Graph</div>
+
+              <!-- 1週間の飲める日数 -->
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">1週間に飲める日数</div>
+                  <div class="diary-label-badge">Weekly</div>
+                </div>
+                <div class="numeric-picker-row">
+                  <div class="numeric-display" id="week-days-display">0 日</div>
+                  <div class="numeric-digit-group" id="week-days-buttons"></div>
+                </div>
+                <input id="diary-week-days" type="hidden" />
               </div>
-              <div class="star-rating" data-field="nextday">
-                <span data-value="1">★</span>
-                <span data-value="2">★</span>
-                <span data-value="3">★</span>
-                <span data-value="4">★</span>
-                <span data-value="5">★</span>
+            </div>
+
+            <div class="diary-card-title" style="margin-top:14px;">QR</div>
+            <div class="diary-card-desc">
+この日記1ページぶん＋目標設定を1枚のQRとして保存します。
+            </div>
+
+            <button class="diary-primary-button" id="diary-generate-qr-button">
+              <span>Generate QR</span>
+            </button>
+
+            <div class="diary-qr-preview" id="diary-qr-preview" style="display:none;">
+              <div class="diary-qr-canvas-wrap">
+                <canvas id="diary-qr-canvas" width="512" height="512"></canvas>
               </div>
-              <input id="diary-nextday" type="hidden" />
-            </div>
-          </div>
-
-          <div class="diary-row">
-            <div class="diary-label">カレンダーの色</div>
-            <div class="color-dot-picker" id="diary-color-picker">
-              <div class="color-dot-option" data-color="#f97316" style="background:#f97316;"></div>
-              <div class="color-dot-option" data-color="#22c55e" style="background:#22c55e;"></div>
-              <div class="color-dot-option" data-color="#3b82f6" style="background:#3b82f6;"></div>
-              <div class="color-dot-option" data-color="#eab308" style="background:#eab308;"></div>
-              <div class="color-dot-option" data-color="#ec4899" style="background:#ec4899;"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="diary-card">
-          <div class="diary-card-title">QR</div>
-          <div class="diary-card-desc">
-この日記1ページぶんを1枚のQRとして保存します。
-          </div>
-
-          <button class="diary-primary-button" id="diary-generate-qr-button">
-            <span>Generate QR</span>
-          </button>
-
-          <div class="diary-qr-preview" id="diary-qr-preview" style="display:none;">
-            <div class="diary-qr-canvas-wrap">
-              <canvas id="diary-qr-canvas" width="512" height="512"></canvas>
-            </div>
-            <div class="diary-qr-actions">
-              <button class="diary-small-button" id="diary-qr-save-button">Save PNG</button>
-              <div style="font-size:11px;color:var(--text-weak);">
+              <div class="diary-qr-actions">
+                <button class="diary-small-button" id="diary-qr-save-button">Save PNG</button>
+                <div style="font-size:11px;color:var(--text-weak);">
 PNGとして保存し、後日「Append」や「View」で読み込めます。
+                </div>
               </div>
             </div>
           </div>
@@ -2577,13 +2612,13 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
       </div>
     </div>
 
-    <!-- Diary Append -->
+    <!-- Diary Append（Newと同じUI＋読み込みで目標を反映） -->
     <div class="screen diary-screen screen--hidden" id="diary-append-screen">
       <div class="content-frame">
         <div class="diary-header">
           <div class="diary-title">DIARY – APPEND</div>
           <div class="diary-subtitle">
-既存のQRノートに、新しい1日を追加します。
+既存のQRノートに、新しい1日を追加します。目標設定はノートごとに1つだけ保持されます。
           </div>
         </div>
 
@@ -2598,183 +2633,275 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
           <div id="diary-append-status" style="margin-top:6px;font-size:11px;color:var(--text-soft);"></div>
         </div>
 
-        <div class="diary-card" id="diary-append-form-card" style="display:none;">
-          <div class="diary-card-title">2. 新しい1日を追加</div>
-          <div class="diary-card-desc">
+        <div class="diary-card-row" id="diary-append-form-row" style="display:none;margin-top:10px;">
+          <!-- 左カラム：1日分（Newと同じUI） -->
+          <div class="diary-card">
+            <div class="diary-card-title">2. 新しい1日を追加</div>
+            <div class="diary-card-desc">
 読んだノートはそのまま、1件だけ新しいページを追加して新しいQRを作ります。
+            </div>
+
+            <div class="diary-form-grid">
+              <div class="diary-field">
+                <div class="diary-label">日付*</div>
+                <input id="diary-date-append" class="diary-input" type="date" />
+              </div>
+              <div class="diary-field">
+                <div class="diary-label">お酒の名前</div>
+                <input id="diary-name-append" class="diary-input" type="text" placeholder="例）○○ワイン / △△ウイスキー" />
+              </div>
+              <div class="diary-field">
+                <div class="diary-label">銘柄 / ブランド</div>
+                <input id="diary-brand-append" class="diary-input" type="text" placeholder="生産者やブランド名" />
+              </div>
+
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">量</div>
+                  <div class="diary-label-badge">Graph</div>
+                </div>
+                <div class="numeric-picker-row" data-field="amount-append">
+                  <div class="numeric-display" id="amount-append-display">0 ml</div>
+                  <div class="numeric-digit-group" data-target="amount-append-hundreds"></div>
+                  <div class="numeric-digit-group" data-target="amount-append-tens"></div>
+                  <div class="numeric-digit-group" data-target="amount-append-ones"></div>
+                </div>
+                <input id="diary-amount-append" type="hidden" />
+              </div>
+
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">ABV%</div>
+                  <div class="diary-label-badge">Graph</div>
+                </div>
+                <div class="numeric-picker-row" data-field="abv-append">
+                  <div class="numeric-display" id="abv-append-display">00.0 %</div>
+                  <div class="numeric-digit-group" data-target="abv-append-int-tens"></div>
+                  <div class="numeric-digit-group" data-target="abv-append-int-ones"></div>
+                  <div class="numeric-digit-group" data-target="abv-append-decimal"></div>
+                </div>
+                <input id="diary-abv-append" type="hidden" />
+              </div>
+            </div>
+
+            <div class="diary-card-title" style="margin-top:14px;">Tasting</div>
+            <div class="diary-card-desc">
+味・香り・見た目は星で評価。レーダーチャートに反映されます。
+            </div>
+
+            <div class="diary-form-grid">
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">味の評価</div>
+                  <div class="diary-label-badge">Radar</div>
+                </div>
+                <div class="star-rating" data-field="taste-append">
+                  <span data-value="1">★</span>
+                  <span data-value="2">★</span>
+                  <span data-value="3">★</span>
+                  <span data-value="4">★</span>
+                  <span data-value="5">★</span>
+                </div>
+                <input id="diary-taste-append" type="hidden" />
+              </div>
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">香り</div>
+                  <div class="diary-label-badge">Radar</div>
+                </div>
+                <div class="star-rating" data-field="aroma-append">
+                  <span data-value="1">★</span>
+                  <span data-value="2">★</span>
+                  <span data-value="3">★</span>
+                  <span data-value="4">★</span>
+                  <span data-value="5">★</span>
+                </div>
+                <input id="diary-aroma-append" type="hidden" />
+              </div>
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">色・見た目</div>
+                  <div class="diary-label-badge">Radar</div>
+                </div>
+                <div class="star-rating" data-field="color-append">
+                  <span data-value="1">★</span>
+                  <span data-value="2">★</span>
+                  <span data-value="3">★</span>
+                  <span data-value="4">★</span>
+                  <span data-value="5">★</span>
+                </div>
+                <input id="diary-color-append" type="hidden" />
+              </div>
+            </div>
+
+            <div class="diary-field" style="margin-top:8px;">
+              <div class="diary-label">総合コメント</div>
+              <textarea id="diary-comment-append" class="diary-textarea" placeholder="自由にメモ"></textarea>
+            </div>
+
+            <div class="diary-form-grid" style="margin-top:8px;">
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">時間帯</div>
+                  <div class="diary-label-badge">Graph</div>
+                </div>
+                <div class="numeric-picker-row" data-field="time-append">
+                  <div class="numeric-display" id="time-append-display">00:00</div>
+                  <div class="numeric-digit-group" data-target="time-append-hour-tens"></div>
+                  <div class="numeric-digit-group" data-target="time-append-hour-ones"></div>
+                  <div class="numeric-digit-group" data-target="time-append-min-tens"></div>
+                  <div class="numeric-digit-group" data-target="time-append-min-ones"></div>
+                </div>
+                <input id="diary-timezone-append" type="hidden" />
+              </div>
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">気分</div>
+                  <div class="diary-label-badge">Graph</div>
+                </div>
+                <div class="star-rating" data-field="mood-append">
+                  <span data-value="1">★</span>
+                  <span data-value="2">★</span>
+                  <span data-value="3">★</span>
+                  <span data-value="4">★</span>
+                  <span data-value="5">★</span>
+                </div>
+                <input id="diary-mood-append" type="hidden" />
+              </div>
+              <div class="diary-field">
+                <div class="diary-label">ペアリング</div>
+                <input id="diary-food-append" class="diary-input" type="text" placeholder="チーズ / 刺身 / ピザ…" />
+              </div>
+              <div class="diary-field">
+                <div class="diary-label">場所</div>
+                <input id="diary-place-append" class="diary-input" type="text" placeholder="自宅 / バー / 外食…" />
+              </div>
+            </div>
+
+            <div class="diary-form-grid" style="margin-top:8px;">
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">酔いの程度</div>
+                  <div class="diary-label-badge">Graph</div>
+                </div>
+                <div class="star-rating" data-field="drunken-append">
+                  <span data-value="1">★</span>
+                  <span data-value="2">★</span>
+                  <span data-value="3">★</span>
+                  <span data-value="4">★</span>
+                  <span data-value="5">★</span>
+                </div>
+                <input id="diary-drunken-append" type="hidden" />
+              </div>
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">翌日の体調</div>
+                  <div class="diary-label-badge">Graph</div>
+                </div>
+                <div class="star-rating" data-field="nextday-append">
+                  <span data-value="1">★</span>
+                  <span data-value="2">★</span>
+                  <span data-value="3">★</span>
+                  <span data-value="4">★</span>
+                  <span data-value="5">★</span>
+                </div>
+                <input id="diary-nextday-append" type="hidden" />
+              </div>
+            </div>
+
+            <div class="diary-row" style="margin-top:8px;">
+              <div class="diary-label">カレンダーの色</div>
+              <div class="color-dot-picker" id="diary-color-picker-append">
+                <div class="color-dot-option" data-color="#f97316" style="background:#f97316;"></div>
+                <div class="color-dot-option" data-color="#22c55e" style="background:#22c55e;"></div>
+                <div class="color-dot-option" data-color="#3b82f6" style="background:#3b82f6;"></div>
+                <div class="color-dot-option" data-color="#eab308" style="background:#eab308;"></div>
+                <div class="color-dot-option" data-color="#ec4899" style="background:#ec4899;"></div>
+              </div>
+            </div>
           </div>
 
-          <div class="diary-form-grid">
-            <div class="diary-field">
-              <div class="diary-label">日付*</div>
-              <input id="diary-date-append" class="diary-input" type="date" />
+          <!-- 右カラム：目標＆QR（Newと同じUI＋読み込み値） -->
+          <div class="diary-card">
+            <div class="diary-card-title">Goals</div>
+            <div class="diary-card-desc">
+読み込んだノートに保存されている目標があれば自動で反映されます。
+ここで編集すると、新しい目標として上書き保存されます。
             </div>
-            <div class="diary-field">
-              <div class="diary-label">名前</div>
-              <input id="diary-name-append" class="diary-input" type="text" placeholder="誰が飲んだか" />
-            </div>
-            <div class="diary-field">
-              <div class="diary-label">お酒の種類</div>
-              <input id="diary-type-append" class="diary-input" type="text" placeholder="日本酒 / ワイン / ウイスキー…" />
-            </div>
-            <div class="diary-field">
-              <div class="diary-label">銘柄 / ブランド</div>
-              <input id="diary-brand-append" class="diary-input" type="text" />
-            </div>
-          </div>
 
-          <div class="diary-form-grid" style="margin-top:8px;">
-            <!-- Append 版も星＆数値UIに（簡略版）：ここではテキストでも良いが揃えるためそのままhidden + 星でもOK -->
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">���</div>
-                <div class="diary-label-badge">Graph</div>
+            <div class="diary-form-grid">
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">目標適量</div>
+                  <div class="diary-label-badge">Target</div>
+                </div>
+                <div class="numeric-picker-row" data-field="target-amount-append">
+                  <div class="numeric-display" id="target-amount-append-display">0 ml</div>
+                  <div class="numeric-digit-group" data-target="target-amount-append-hundreds"></div>
+                  <div class="numeric-digit-group" data-target="target-amount-append-tens"></div>
+                  <div class="numeric-digit-group" data-target="target-amount-append-ones"></div>
+                </div>
+                <input id="diary-target-amount-append" type="hidden" />
               </div>
-              <input id="diary-amount-append" class="diary-input" type="text" placeholder="例) 180" />
-            </div>
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">ABV%</div>
-                <div class="diary-label-badge">Graph</div>
-              </div>
-              <input id="diary-abv-append" class="diary-input" type="text" placeholder="例) 12.0" />
-            </div>
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">味の評価</div>
-                <div class="diary-label-badge">Radar</div>
-              </div>
-              <div class="star-rating" data-field="taste-append">
-                <span data-value="1">★</span>
-                <span data-value="2">★</span>
-                <span data-value="3">★</span>
-                <span data-value="4">★</span>
-                <span data-value="5">★</span>
-              </div>
-              <input id="diary-taste-append" type="hidden" />
-            </div>
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">香り</div>
-                <div class="diary-label-badge">Radar</div>
-              </div>
-              <div class="star-rating" data-field="aroma-append">
-                <span data-value="1">★</span>
-                <span data-value="2">★</span>
-                <span data-value="3">★</span>
-                <span data-value="4">★</span>
-                <span data-value="5">★</span>
-              </div>
-              <input id="diary-aroma-append" type="hidden" />
-            </div>
-          </div>
 
-          <div class="diary-form-grid" style="margin-top:8px;">
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">色・見た目</div>
-                <div class="diary-label-badge">Radar</div>
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">目標時間帯</div>
+                  <div class="diary-label-badge">Target</div>
+                </div>
+                <div class="numeric-picker-row" data-field="target-time-append">
+                  <div class="numeric-display" id="target-time-append-display">00:00</div>
+                  <div class="numeric-digit-group" data-target="target-time-append-hour-tens"></div>
+                  <div class="numeric-digit-group" data-target="target-time-append-hour-ones"></div>
+                  <div class="numeric-digit-group" data-target="target-time-append-min-tens"></div>
+                  <div class="numeric-digit-group" data-target="target-time-append-min-ones"></div>
+                </div>
+                <input id="diary-target-time-append" type="hidden" />
               </div>
-              <div class="star-rating" data-field="color-append">
-                <span data-value="1">★</span>
-                <span data-value="2">★</span>
-                <span data-value="3">★</span>
-                <span data-value="4">★</span>
-                <span data-value="5">★</span>
-              </div>
-              <input id="diary-color-append" type="hidden" />
-            </div>
-          </div>
 
-          <div class="diary-field" style="margin-top:8px;">
-            <div class="diary-label">総合コメント</div>
-            <textarea id="diary-comment-append" class="diary-textarea" placeholder="自由にメモ"></textarea>
-          </div>
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">1週間の目標飲酒量 (g)</div>
+                  <div class="diary-label-badge">Weekly</div>
+                </div>
+                <div class="numeric-picker-row" data-field="week-amount-append">
+                  <div class="numeric-display" id="week-amount-append-display">0 g</div>
+                  <div class="numeric-digit-group" data-target="week-amount-append-hundreds"></div>
+                  <div class="numeric-digit-group" data-target="week-amount-append-tens"></div>
+                  <div class="numeric-digit-group" data-target="week-amount-append-ones"></div>
+                </div>
+                <input id="diary-week-amount-append" type="hidden" />
+              </div>
 
-          <div class="diary-form-grid" style="margin-top:8px;">
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">時間帯</div>
-                <div class="diary-label-badge">Graph</div>
+              <div class="diary-field">
+                <div class="diary-label-row">
+                  <div class="diary-label">1週間に飲める日数</div>
+                  <div class="diary-label-badge">Weekly</div>
+                </div>
+                <div class="numeric-picker-row">
+                  <div class="numeric-display" id="week-days-append-display">0 日</div>
+                  <div class="numeric-digit-group" id="week-days-append-buttons"></div>
+                </div>
+                <input id="diary-week-days-append" type="hidden" />
               </div>
-              <input id="diary-timezone-append" class="diary-input" type="text" placeholder="例) 23:00" />
             </div>
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">気分</div>
-                <div class="diary-label-badge">Graph</div>
-              </div>
-              <div class="star-rating" data-field="mood-append">
-                <span data-value="1">★</span>
-                <span data-value="2">★</span>
-                <span data-value="3">★</span>
-                <span data-value="4">★</span>
-                <span data-value="5">★</span>
-              </div>
-              <input id="diary-mood-append" type="hidden" />
-            </div>
-            <div class="diary-field">
-              <div class="diary-label">ペアリング</div>
-              <input id="diary-food-append" class="diary-input" type="text" placeholder="チーズ / 刺身 / ピザ…" />
-            </div>
-            <div class="diary-field">
-              <div class="diary-label">場所</div>
-              <input id="diary-place-append" class="diary-input" type="text" placeholder="自宅 / バー / 外食…" />
-            </div>
-          </div>
 
-          <div class="diary-form-grid" style="margin-top:8px;">
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">酔いの程度</div>
-                <div class="diary-label-badge">Graph</div>
-              </div>
-              <div class="star-rating" data-field="drunken-append">
-                <span data-value="1">★</span>
-                <span data-value="2">★</span>
-                <span data-value="3">★</span>
-                <span data-value="4">★</span>
-                <span data-value="5">★</span>
-              </div>
-              <input id="diary-drunken-append" type="hidden" />
+            <div class="diary-card-title" style="margin-top:14px;">QR</div>
+            <div class="diary-card-desc">
+元のノート＋新しい1日＋目標設定をまとめて、新しいQRとして保存します。
             </div>
-            <div class="diary-field">
-              <div class="diary-label-row">
-                <div class="diary-label">翌日の体調</div>
-                <div class="diary-label-badge">Graph</div>
-              </div>
-              <div class="star-rating" data-field="nextday-append">
-                <span data-value="1">★</span>
-                <span data-value="2">★</span>
-                <span data-value="3">★</span>
-                <span data-value="4">★</span>
-                <span data-value="5">★</span>
-              </div>
-              <input id="diary-nextday-append" type="hidden" />
-            </div>
-          </div>
 
-          <div class="diary-row" style="margin-top:8px;">
-            <div class="diary-label">カレンダーの色</div>
-            <div class="color-dot-picker" id="diary-color-picker-append">
-              <div class="color-dot-option" data-color="#f97316" style="background:#f97316;"></div>
-              <div class="color-dot-option" data-color="#22c55e" style="background:#22c55e;"></div>
-              <div class="color-dot-option" data-color="#3b82f6" style="background:#3b82f6;"></div>
-              <div class="color-dot-option" data-color="#eab308" style="background:#eab308;"></div>
-              <div class="color-dot-option" data-color="#ec4899" style="background:#ec4899;"></div>
-            </div>
-          </div>
+            <button class="diary-primary-button" id="diary-append-generate-button">
+              <span>Generate New QR</span>
+            </button>
 
-          <button class="diary-primary-button" id="diary-append-generate-button">
-            <span>Generate New QR</span>
-          </button>
-
-          <div class="diary-qr-preview" id="diary-append-qr-preview" style="display:none;">
-            <div class="diary-qr-canvas-wrap">
-              <canvas id="diary-append-qr-canvas" width="512" height="512"></canvas>
-            </div>
-            <div class="diary-qr-actions">
-              <button class="diary-small-button" id="diary-append-qr-save-button">Save PNG</button>
+            <div class="diary-qr-preview" id="diary-append-qr-preview" style="display:none;">
+              <div class="diary-qr-canvas-wrap">
+                <canvas id="diary-append-qr-canvas" width="512" height="512"></canvas>
+              </div>
+              <div class="diary-qr-actions">
+                <button class="diary-small-button" id="diary-append-qr-save-button">Save PNG</button>
+              </div>
             </div>
           </div>
         </div>
@@ -2809,7 +2936,7 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
           <div id="diary-view-status" style="margin-top:6px;font-size:11px;color:var(--text-soft);"></div>
         </div>
 
-        <!-- Graph ボタン（JSでここに差し込み） -->
+        <!-- Graphボタン（JSでここに挿入） -->
 
         <div class="diary-card" id="calendar-year-card" style="display:none;margin-top:14px;">
           <div class="diary-card-title">2. 年を選ぶ</div>
@@ -2867,7 +2994,7 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
         <div class="diary-header">
           <div class="diary-title">DIARY – GRAPH</div>
           <div class="diary-subtitle">
-読み込んだ日記データを、量・時間・気分などでざっくり可視化します。
+読み込んだ日記データを、量・時間・気分・体調・目標とのズレでざっくり可視化します。
           </div>
         </div>
 
@@ -2890,11 +3017,13 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
                 <button class="graph-chip" data-metric="mood">気分 (④)</button>
                 <button class="graph-chip" data-metric="drunken">酔い (⑤)</button>
                 <button class="graph-chip" data-metric="nextday">体調 (⑥)</button>
+                <button class="graph-chip" data-metric="amount+nextday">量＋体調</button>
               </div>
             </div>
 
             <div class="graph-subtitle">
 ※ 量/時間帯/気分/酔い/体調は、入力欄の星や数字ボタンから記録された値を使って集計しています。
+　量＋体調では、量がオレンジ、体調が緑、目標値がピンクで表示されます。
             </div>
 
             <div class="graph-canvas-wrap">
@@ -3142,13 +3271,15 @@ Tap QR to preview / Save to download the image.
     const seWine1 = document.getElementById("se-wine1");
     const nyaAudio = document.getElementById("nya-audio");
 
-    // Diary DOM
+    const homeCalendarFile = document.getElementById("home-calendar-file");
+    const homeAppendFile = document.getElementById("home-append-file");
+
+    // Diary DOM (New)
     const diaryNewBackButton = document.getElementById("diary-new-back-button");
     const diaryAppendBackButton = document.getElementById("diary-append-back-button");
 
     const diaryDateInput = document.getElementById("diary-date");
     const diaryNameInput = document.getElementById("diary-name");
-    const diaryTypeInput = document.getElementById("diary-type");
     const diaryBrandInput = document.getElementById("diary-brand");
     const diaryAmountInput = document.getElementById("diary-amount");
     const diaryAbvInput = document.getElementById("diary-abv");
@@ -3164,17 +3295,23 @@ Tap QR to preview / Save to download the image.
     const diaryNextdayInput = document.getElementById("diary-nextday");
     const diaryColorPicker = document.getElementById("diary-color-picker");
 
+    const diaryTargetAmountInput = document.getElementById("diary-target-amount");
+    const diaryTargetTimeInput = document.getElementById("diary-target-time");
+    const diaryWeekAmountInput = document.getElementById("diary-week-amount");
+    const diaryWeekDaysInput = document.getElementById("diary-week-days");
+
     const diaryGenerateQrButton = document.getElementById("diary-generate-qr-button");
     const diaryQrPreview = document.getElementById("diary-qr-preview");
     const diaryQrCanvas = document.getElementById("diary-qr-canvas");
     const diaryQrSaveButton = document.getElementById("diary-qr-save-button");
 
+    // Diary DOM (Append)
     const diaryAppendFile = document.getElementById("diary-append-file");
     const diaryAppendStatus = document.getElementById("diary-append-status");
-    const diaryAppendFormCard = document.getElementById("diary-append-form-card");
+    const diaryAppendFormRow = document.getElementById("diary-append-form-row");
+
     const diaryDateAppendInput = document.getElementById("diary-date-append");
     const diaryNameAppendInput = document.getElementById("diary-name-append");
-    const diaryTypeAppendInput = document.getElementById("diary-type-append");
     const diaryBrandAppendInput = document.getElementById("diary-brand-append");
     const diaryAmountAppendInput = document.getElementById("diary-amount-append");
     const diaryAbvAppendInput = document.getElementById("diary-abv-append");
@@ -3189,6 +3326,12 @@ Tap QR to preview / Save to download the image.
     const diaryDrunkenAppendInput = document.getElementById("diary-drunken-append");
     const diaryNextdayAppendInput = document.getElementById("diary-nextday-append");
     const diaryColorPickerAppend = document.getElementById("diary-color-picker-append");
+
+    const diaryTargetAmountAppendInput = document.getElementById("diary-target-amount-append");
+    const diaryTargetTimeAppendInput = document.getElementById("diary-target-time-append");
+    const diaryWeekAmountAppendInput = document.getElementById("diary-week-amount-append");
+    const diaryWeekDaysAppendInput = document.getElementById("diary-week-days-append");
+
     const diaryAppendGenerateButton = document.getElementById("diary-append-generate-button");
     const diaryAppendQrPreview = document.getElementById("diary-append-qr-preview");
     const diaryAppendQrCanvas = document.getElementById("diary-append-qr-canvas");
@@ -3225,20 +3368,26 @@ Tap QR to preview / Save to download the image.
     const wineRadarWrap = document.getElementById("wine-radar-wrap");
     const graphBackButton = document.getElementById("graph-back-button");
 
-    const homeCalendarShortcut = document.getElementById("home-calendar-shortcut");
-    const homeCalendarFile = document.getElementById("home-calendar-file");
-
     const bgmVolume = document.getElementById("bgm-volume");
 
     let diaryColorSelected = "#f97316";
     let diaryColorSelectedAppend = "#f97316";
     let loadedDiaryEntries = [];
+    let loadedDiaryMeta = {
+      targetAmount: null,
+      targetTime: null,
+      weekAmount: null,
+      weekDays: null
+    };
     let loadedDiaryStruct = null;
     let calendarCurrentYear = null;
     let calendarCurrentMonth = null;
     let graphRange = "7";
     let graphMetric = "amount";
     let originalAppendFileName = "diary_updated.png";
+
+    const homeCalendarShortcut = document.getElementById("home-calendar-shortcut");
+    const homeAppendShortcut = document.getElementById("home-append-shortcut");
 
     function hideAllScreensExcept(screen) {
       [
@@ -3257,7 +3406,7 @@ Tap QR to preview / Save to download the image.
       });
     }
 
-    /* ===== Home / WineXP ロジック（既存を維持） ===== */
+    /* ===== Home / Wine画面ロジック（前半） ===== */
 
     function renderHomeBottles() {
       bottleStrip.innerHTML = "";
@@ -3695,7 +3844,7 @@ Tap QR to preview / Save to download the image.
       hideAllScreensExcept(diaryAppendScreen);
       diaryAppendScreen.classList.remove("screen--hidden");
       diaryAppendScreen.classList.add("screen--active");
-      diaryAppendFormCard.style.display = "none";
+      diaryAppendFormRow.style.display = "none";
       diaryAppendQrPreview.style.display = "none";
       diaryAppendStatus.textContent = "";
       diaryAppendFile.value = "";
@@ -3756,21 +3905,21 @@ Tap QR to preview / Save to download the image.
       containers.forEach(container => {
         const field = container.getAttribute("data-field");
         const stars = Array.from(container.querySelectorAll("span"));
-        const hiddenInput = document.getElementById(
-          field === "taste" ? "diary-taste" :
-          field === "aroma" ? "diary-aroma" :
-          field === "color" ? "diary-color" :
-          field === "mood" ? "diary-mood" :
-          field === "drunken" ? "diary-drunken" :
-          field === "nextday" ? "diary-nextday" :
-          field === "taste-append" ? "diary-taste-append" :
-          field === "aroma-append" ? "diary-aroma-append" :
-          field === "color-append" ? "diary-color-append" :
-          field === "mood-append" ? "diary-mood-append" :
-          field === "drunken-append" ? "diary-drunken-append" :
-          field === "nextday-append" ? "diary-nextday-append" :
-          null
-        );
+        const idMap = {
+          taste: "diary-taste",
+          aroma: "diary-aroma",
+          color: "diary-color",
+          mood: "diary-mood",
+          drunken: "diary-drunken",
+          nextday: "diary-nextday",
+          "taste-append": "diary-taste-append",
+          "aroma-append": "diary-aroma-append",
+          "color-append": "diary-color-append",
+          "mood-append": "diary-mood-append",
+          "drunken-append": "diary-drunken-append",
+          "nextday-append": "diary-nextday-append"
+        };
+        const hiddenInput = document.getElementById(idMap[field]);
         if (!hiddenInput) return;
 
         const setValue = v => {
@@ -3794,7 +3943,7 @@ Tap QR to preview / Save to download the image.
       });
     }
 
-    /* ===== 数値入力（量/ABV/時間） ===== */
+    /* ===== 数値入力（共通） ===== */
 
     function createDigitButtons(targetEl, digits) {
       targetEl.innerHTML = "";
@@ -3808,137 +3957,267 @@ Tap QR to preview / Save to download the image.
       });
     }
 
-    function setupNumericPickers() {
-      // 量: 000〜999
-      const amountHundredsEl = document.querySelector('[data-target="amount-hundreds"]');
-      const amountTensEl = document.querySelector('[data-target="amount-tens"]');
-      const amountOnesEl = document.querySelector('[data-target="amount-ones"]');
-      createDigitButtons(amountHundredsEl, ["0","1","2","3","4","5","6","7","8","9"]);
-      createDigitButtons(amountTensEl, ["0","1","2","3","4","5","6","7","8","9"]);
-      createDigitButtons(amountOnesEl, ["0","1","2","3","4","5","6","7","8","9"]);
-      let amountHundreds = "0", amountTens = "0", amountOnes = "0";
-      const amountDisplay = document.getElementById("amount-display");
+    function setupAmountPicker(prefix, displayId, hiddenId, hundredsTarget, tensTarget, onesTarget) {
+      const hundredsEl = document.querySelector(`[data-target="${hundredsTarget}"]`);
+      const tensEl = document.querySelector(`[data-target="${tensTarget}"]`);
+      const onesEl = document.querySelector(`[data-target="${onesTarget}"]`);
+      if (!hundredsEl || !tensEl || !onesEl) return;
+      createDigitButtons(hundredsEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      createDigitButtons(tensEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      createDigitButtons(onesEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      let h = "0", t = "0", o = "0";
+      const display = document.getElementById(displayId);
+      const hidden = document.getElementById(hiddenId);
 
-      function updateAmount() {
-        const val = amountHundreds + amountTens + amountOnes;
-        diaryAmountInput.value = val;
-        amountDisplay.textContent = `${parseInt(val,10)} ml`;
+      function update() {
+        const val = h + t + o;
+        const n = parseInt(val,10) || 0;
+        hidden.value = String(n);
+        display.textContent = `${n} ml`;
       }
-      amountHundredsEl.addEventListener("click", e => {
-        const btn = e.target.closest(".numeric-digit-btn");
-        if (!btn) return;
-        amountHundreds = btn.dataset.value;
-        Array.from(amountHundredsEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
-        updateAmount();
-      });
-      amountTensEl.addEventListener("click", e => {
-        const btn = e.target.closest(".numeric-digit-btn");
-        if (!btn) return;
-        amountTens = btn.dataset.value;
-        Array.from(amountTensEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
-        updateAmount();
-      });
-      amountOnesEl.addEventListener("click", e => {
-        const btn = e.target.closest(".numeric-digit-btn");
-        if (!btn) return;
-        amountOnes = btn.dataset.value;
-        Array.from(amountOnesEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
-        updateAmount();
-      });
-      updateAmount();
 
-      // ABV: 00.0
-      const abvIntTensEl = document.querySelector('[data-target="abv-int-tens"]');
-      const abvIntOnesEl = document.querySelector('[data-target="abv-int-ones"]');
-      const abvDecimalEl = document.querySelector('[data-target="abv-decimal"]');
-      createDigitButtons(abvIntTensEl, ["0","1","2","3","4"]);
-      createDigitButtons(abvIntOnesEl, ["0","1","2","3","4","5","6","7","8","9"]);
-      createDigitButtons(abvDecimalEl, ["0","1","2","3","4","5","6","7","8","9"]);
-      let abvIntTens = "0", abvIntOnes = "0", abvDecimal = "0";
-      const abvDisplay = document.getElementById("abv-display");
+      const bind = (el, setter) => {
+        el.addEventListener("click", e => {
+          const btn = e.target.closest(".numeric-digit-btn");
+          if (!btn) return;
+          setter(btn.dataset.value);
+          Array.from(el.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
+          update();
+        });
+      };
+      bind(hundredsEl, v => h = v);
+      bind(tensEl, v => t = v);
+      bind(onesEl, v => o = v);
+      update();
 
-      function updateAbv() {
-        const val = `${abvIntTens}${abvIntOnes}.${abvDecimal}`;
-        diaryAbvInput.value = val;
-        abvDisplay.textContent = `${val} %`;
+      return {
+        setValue(n) {
+          n = Math.max(0, Math.min(999, n|0));
+          const s = String(n).padStart(3,"0");
+          h = s[0]; t = s[1]; o = s[2];
+          Array.from(hundredsEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b.dataset.value===h));
+          Array.from(tensEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b.dataset.value===t));
+          Array.from(onesEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b.dataset.value===o));
+          update();
+        }
+      };
+    }
+
+    function setupAbvPicker(prefix, displayId, hiddenId, tTarget, oTarget, dTarget) {
+      const tEl = document.querySelector(`[data-target="${tTarget}"]`);
+      const oEl = document.querySelector(`[data-target="${oTarget}"]`);
+      const dEl = document.querySelector(`[data-target="${dTarget}"]`);
+      if (!tEl || !oEl || !dEl) return;
+      createDigitButtons(tEl, ["0","1","2","3","4"]);
+      createDigitButtons(oEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      createDigitButtons(dEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      let it = "0", io = "0", dec = "0";
+      const display = document.getElementById(displayId);
+      const hidden = document.getElementById(hiddenId);
+
+      function update() {
+        const val = `${it}${io}.${dec}`;
+        hidden.value = val;
+        display.textContent = `${val} %`;
       }
-      abvIntTensEl.addEventListener("click", e => {
-        const btn = e.target.closest(".numeric-digit-btn");
-        if (!btn) return;
-        abvIntTens = btn.dataset.value;
-        Array.from(abvIntTensEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
-        updateAbv();
-      });
-      abvIntOnesEl.addEventListener("click", e => {
-        const btn = e.target.closest(".numeric-digit-btn");
-        if (!btn) return;
-        abvIntOnes = btn.dataset.value;
-        Array.from(abvIntOnesEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
-        updateAbv();
-      });
-      abvDecimalEl.addEventListener("click", e => {
-        const btn = e.target.closest(".numeric-digit-btn");
-        if (!btn) return;
-        abvDecimal = btn.dataset.value;
-        Array.from(abvDecimalEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
-        updateAbv();
-      });
-      updateAbv();
 
-      // 時間: HH:MM
-      const timeHourTensEl = document.querySelector('[data-target="time-hour-tens"]');
-      const timeHourOnesEl = document.querySelector('[data-target="time-hour-ones"]');
-      const timeMinTensEl = document.querySelector('[data-target="time-min-tens"]');
-      const timeMinOnesEl = document.querySelector('[data-target="time-min-ones"]');
-      createDigitButtons(timeHourTensEl, ["0","1","2"]);
-      createDigitButtons(timeHourOnesEl, ["0","1","2","3","4","5","6","7","8","9"]);
-      createDigitButtons(timeMinTensEl, ["0","1","2","3","4","5"]);
-      createDigitButtons(timeMinOnesEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      const bind = (el, setter) => {
+        el.addEventListener("click", e => {
+          const btn = e.target.closest(".numeric-digit-btn");
+          if (!btn) return;
+          setter(btn.dataset.value);
+          Array.from(el.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
+          update();
+        });
+      };
+      bind(tEl, v => it = v);
+      bind(oEl, v => io = v);
+      bind(dEl, v => dec = v);
+      update();
+
+      return {
+        setValue(v) {
+          const n = parseFloat(v);
+          if (isNaN(n)) return;
+          const s = n.toFixed(1).padStart(4,"0"); // "xx.x"
+          it = s[0]; io = s[1]; dec = s[3];
+          Array.from(tEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b.dataset.value===it));
+          Array.from(oEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b.dataset.value===io));
+          Array.from(dEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b.dataset.value===dec));
+          update();
+        }
+      };
+    }
+
+    function setupTimePicker(prefix, displayId, hiddenId, htTarget, hoTarget, mtTarget, moTarget) {
+      const htEl = document.querySelector(`[data-target="${htTarget}"]`);
+      const hoEl = document.querySelector(`[data-target="${hoTarget}"]`);
+      const mtEl = document.querySelector(`[data-target="${mtTarget}"]`);
+      const moEl = document.querySelector(`[data-target="${moTarget}"]`);
+      if (!htEl || !hoEl || !mtEl || !moEl) return;
+      createDigitButtons(htEl, ["0","1","2"]);
+      createDigitButtons(hoEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      createDigitButtons(mtEl, ["0","1","2","3","4","5"]);
+      createDigitButtons(moEl, ["0","1","2","3","4","5","6","7","8","9"]);
       let ht = "0", ho = "0", mt = "0", mo = "0";
-      const timeDisplay = document.getElementById("time-display");
+      const display = document.getElementById(displayId);
+      const hidden = document.getElementById(hiddenId);
 
-      function updateTime() {
+      function update() {
         let hour = parseInt(ht + ho,10);
         if (hour > 23) hour = 23;
         let min = parseInt(mt + mo,10);
         if (min > 59) min = 59;
-        const hourStr = hour.toString().padStart(2,"0");
-        const minStr = min.toString().padStart(2,"0");
-        diaryTimezoneInput.value = `${hourStr}:${minStr}`;
-        timeDisplay.textContent = `${hourStr}:${minStr}`;
+        const hs = hour.toString().padStart(2,"0");
+        const ms = min.toString().padStart(2,"0");
+        hidden.value = `${hs}:${ms}`;
+        display.textContent = `${hs}:${ms}`;
       }
-      timeHourTensEl.addEventListener("click", e => {
-        const btn = e.target.closest(".numeric-digit-btn");
-        if (!btn) return;
-        ht = btn.dataset.value;
-        Array.from(timeHourTensEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
-        updateTime();
-      });
-      timeHourOnesEl.addEventListener("click", e => {
-        const btn = e.target.closest(".numeric-digit-btn");
-        if (!btn) return;
-        ho = btn.dataset.value;
-        Array.from(timeHourOnesEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
-        updateTime();
-      });
-      timeMinTensEl.addEventListener("click", e => {
-        const btn = e.target.closest(".numeric-digit-btn");
-        if (!btn) return;
-        mt = btn.dataset.value;
-        Array.from(timeMinTensEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
-        updateTime();
-      });
-      timeMinOnesEl.addEventListener("click", e => {
-        const btn = e.target.closest(".numeric-digit-btn");
-        if (!btn) return;
-        mo = btn.dataset.value;
-        Array.from(timeMinOnesEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
-        updateTime();
-      });
-      updateTime();
+
+      const bind = (el, setter) => {
+        el.addEventListener("click", e => {
+          const btn = e.target.closest(".numeric-digit-btn");
+          if (!btn) return;
+          setter(btn.dataset.value);
+          Array.from(el.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
+          update();
+        });
+      };
+      bind(htEl, v => ht = v);
+      bind(hoEl, v => ho = v);
+      bind(mtEl, v => mt = v);
+      bind(moEl, v => mo = v);
+      update();
+
+      return {
+        setValue(str) {
+          if (!str) return;
+          const m = String(str).match(/(\d{1,2})[:：](\d{1,2})/);
+          if (!m) return;
+          let h = Math.max(0, Math.min(23, parseInt(m[1],10)));
+          let mn = Math.max(0, Math.min(59, parseInt(m[2],10)));
+          const hs = h.toString().padStart(2,"0");
+          const ms = mn.toString().padStart(2,"0");
+          ht = hs[0]; ho = hs[1];
+          mt = ms[0]; mo = ms[1];
+          Array.from(htEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b.dataset.value===ht));
+          Array.from(hoEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b.dataset.value===ho));
+          Array.from(mtEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b.dataset.value===mt));
+          Array.from(moEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b.dataset.value===mo));
+          update();
+        }
+      };
     }
 
-    /* ===== Diary Encode / Decode (UTF-8 -> Base64) ===== */
+    function setupWeekAmountPicker(displayId, hiddenId, hTarget, tTarget, oTarget) {
+      const hEl = document.querySelector(`[data-target="${hTarget}"]`);
+      const tEl = document.querySelector(`[data-target="${tTarget}"]`);
+      const oEl = document.querySelector(`[data-target="${oTarget}"]`);
+      if (!hEl || !tEl || !oEl) return;
+      createDigitButtons(hEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      createDigitButtons(tEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      createDigitButtons(oEl, ["0","1","2","3","4","5","6","7","8","9"]);
+      let h = "0", t = "0", o = "0";
+      const display = document.getElementById(displayId);
+      const hidden = document.getElementById(hiddenId);
+
+      function update() {
+        const val = h + t + o;
+        const n = parseInt(val,10) || 0;
+        hidden.value = String(n);
+        display.textContent = `${n} g`;
+      }
+
+      const bind = (el, setter) => {
+        el.addEventListener("click", e => {
+          const btn = e.target.closest(".numeric-digit-btn");
+          if (!btn) return;
+          setter(btn.dataset.value);
+          Array.from(el.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b === btn));
+          update();
+        });
+      };
+      bind(hEl, v => h = v);
+      bind(tEl, v => t = v);
+      bind(oEl, v => o = v);
+      update();
+
+      return {
+        setValue(n) {
+          n = Math.max(0, Math.min(999, n|0));
+          const s = String(n).padStart(3,"0");
+          h = s[0]; t = s[1]; o = s[2];
+          Array.from(hEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b.dataset.value===h));
+          Array.from(tEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b.dataset.value===t));
+          Array.from(oEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b.dataset.value===o));
+          update();
+        }
+      };
+    }
+
+    function setupWeekDaysPicker(displayId, hiddenId, containerId) {
+      const container = document.getElementById(containerId);
+      const display = document.getElementById(displayId);
+      const hidden = document.getElementById(hiddenId);
+      if (!container) return;
+      container.innerHTML = "";
+      for (let i=0;i<=7;i++) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "numeric-digit-btn";
+        btn.textContent = String(i);
+        btn.dataset.value = String(i);
+        container.appendChild(btn);
+      }
+      let val = 0;
+      function update() {
+        hidden.value = String(val);
+        display.textContent = `${val} 日`;
+      }
+      container.addEventListener("click", e => {
+        const btn = e.target.closest(".numeric-digit-btn");
+        if (!btn) return;
+        val = parseInt(btn.dataset.value,10);
+        Array.from(container.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b===btn));
+        update();
+      });
+      update();
+      return {
+        setValue(n) {
+          n = Math.max(0, Math.min(7, n|0));
+          val = n;
+          Array.from(container.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", parseInt(b.dataset.value,10)===n));
+          update();
+        }
+      };
+    }
+
+    let amountPicker, abvPicker, timePicker;
+    let targetAmountPicker, targetTimePicker, weekAmountPicker, weekDaysPicker;
+    let amountAppendPicker, abvAppendPicker, timeAppendPicker;
+    let targetAmountAppendPicker, targetTimeAppendPicker, weekAmountAppendPicker, weekDaysAppendPicker;
+
+    function setupNumericPickers() {
+      amountPicker = setupAmountPicker("", "amount-display", "diary-amount", "amount-hundreds", "amount-tens", "amount-ones");
+      abvPicker = setupAbvPicker("", "abv-display", "diary-abv", "abv-int-tens", "abv-int-ones", "abv-decimal");
+      timePicker = setupTimePicker("", "time-display", "diary-timezone", "time-hour-tens", "time-hour-ones", "time-min-tens", "time-min-ones");
+
+      targetAmountPicker = setupAmountPicker("target", "target-amount-display", "diary-target-amount", "target-amount-hundreds", "target-amount-tens", "target-amount-ones");
+      targetTimePicker = setupTimePicker("target", "target-time-display", "diary-target-time", "target-time-hour-tens", "target-time-hour-ones", "target-time-min-tens", "target-time-min-ones");
+      weekAmountPicker = setupWeekAmountPicker("week-amount-display", "diary-week-amount", "week-amount-hundreds", "week-amount-tens", "week-amount-ones");
+      weekDaysPicker = setupWeekDaysPicker("week-days-display", "diary-week-days", "week-days-buttons");
+
+      amountAppendPicker = setupAmountPicker("append", "amount-append-display", "diary-amount-append", "amount-append-hundreds", "amount-append-tens", "amount-append-ones");
+      abvAppendPicker = setupAbvPicker("append", "abv-append-display", "diary-abv-append", "abv-append-int-tens", "abv-append-int-ones", "abv-append-decimal");
+      timeAppendPicker = setupTimePicker("append", "time-append-display", "diary-timezone-append", "time-append-hour-tens", "time-append-hour-ones", "time-append-min-tens", "time-append-min-ones");
+
+      targetAmountAppendPicker = setupAmountPicker("target-append", "target-amount-append-display", "diary-target-amount-append", "target-amount-append-hundreds", "target-amount-append-tens", "target-amount-append-ones");
+      targetTimeAppendPicker = setupTimePicker("target-append", "target-time-append-display", "diary-target-time-append", "target-time-append-hour-tens", "target-time-append-hour-ones", "target-time-append-min-tens", "target-time-append-min-ones");
+      weekAmountAppendPicker = setupWeekAmountPicker("week-amount-append-display", "diary-week-amount-append", "week-amount-append-hundreds", "week-amount-append-tens", "week-amount-append-ones");
+      weekDaysAppendPicker = setupWeekDaysPicker("week-days-append-display", "diary-week-days-append", "week-days-append-buttons");
+    }
+
+    /* ===== UTF-8 Base64 Diary Encode/Decode ===== */
 
     function utf8ToBase64(str) {
       const encoder = new TextEncoder();
@@ -3963,14 +4242,9 @@ Tap QR to preview / Save to download the image.
       const date = isAppend ? diaryDateAppendInput.value : diaryDateInput.value;
       if (!date) return null;
 
-      if (!isAppend) {
-        // New: 量・ABV・時間帯はhiddenに既に数値が入っている
-      }
-
       return {
         date,
         name: isAppend ? diaryNameAppendInput.value : diaryNameInput.value,
-        type: isAppend ? diaryTypeAppendInput.value : diaryTypeInput.value,
         brand: isAppend ? diaryBrandAppendInput.value : diaryBrandInput.value,
         amount: isAppend ? diaryAmountAppendInput.value : diaryAmountInput.value,
         abv: isAppend ? diaryAbvAppendInput.value : diaryAbvInput.value,
@@ -3988,8 +4262,30 @@ Tap QR to preview / Save to download the image.
       };
     }
 
-    function buildDiaryStruct(entries) {
-      return { type: "diary", version: 1, entries };
+    function readGoalsFromInputs(isAppend = false) {
+      if (isAppend) {
+        return {
+          targetAmount: diaryTargetAmountAppendInput.value || null,
+          targetTime: diaryTargetTimeAppendInput.value || null,
+          weekAmount: diaryWeekAmountAppendInput.value || null,
+          weekDays: diaryWeekDaysAppendInput.value || null
+        };
+      }
+      return {
+        targetAmount: diaryTargetAmountInput.value || null,
+        targetTime: diaryTargetTimeInput.value || null,
+        weekAmount: diaryWeekAmountInput.value || null,
+        weekDays: diaryWeekDaysInput.value || null
+      };
+    }
+
+    function buildDiaryStruct(entries, goals) {
+      return {
+        type: "diary",
+        version: 2,
+        goals: goals || null,
+        entries
+      };
     }
 
     function encodeDiaryToQR(canvas, struct) {
@@ -4031,7 +4327,8 @@ Tap QR to preview / Save to download the image.
         alert("日付は必須です。");
         return;
       }
-      const struct = buildDiaryStruct([entry]);
+      const goals = readGoalsFromInputs(false);
+      const struct = buildDiaryStruct([entry], goals);
       encodeDiaryToQR(diaryQrCanvas, struct);
       diaryQrPreview.style.display = "none";
 
@@ -4084,7 +4381,7 @@ Tap QR to preview / Save to download the image.
       if (!file) return;
       originalAppendFileName = file.name || "diary_updated.png";
       diaryAppendStatus.textContent = "読み取り中…";
-      diaryAppendFormCard.style.display = "none";
+      diaryAppendFormRow.style.display = "none";
       diaryAppendQrPreview.style.display = "none";
       readQrImageFile(file, (err, data) => {
         if (err) {
@@ -4094,8 +4391,30 @@ Tap QR to preview / Save to download the image.
         try {
           const parsedDiary = tryParseDiaryFromQrString(data);
           loadedDiaryStruct = parsedDiary;
-          diaryAppendStatus.textContent = "ノートを読み込みました。新しい1日を追加できます。";
-          diaryAppendFormCard.style.display = "block";
+          loadedDiaryEntries = parsedDiary.entries || [];
+          loadedDiaryMeta = parsedDiary.goals || {
+            targetAmount: null,
+            targetTime: null,
+            weekAmount: null,
+            weekDays: null
+          };
+
+          diaryAppendStatus.textContent = "ノートを読み込みました。新しい1日と目標を編集できます。";
+          diaryAppendFormRow.style.display = "flex";
+
+          // 目標をAppend側UIに反映
+          if (loadedDiaryMeta.targetAmount && targetAmountAppendPicker) {
+            targetAmountAppendPicker.setValue(parseInt(loadedDiaryMeta.targetAmount,10) || 0);
+          }
+          if (loadedDiaryMeta.targetTime && targetTimeAppendPicker) {
+            targetTimeAppendPicker.setValue(loadedDiaryMeta.targetTime);
+          }
+          if (loadedDiaryMeta.weekAmount && weekAmountAppendPicker) {
+            weekAmountAppendPicker.setValue(parseInt(loadedDiaryMeta.weekAmount,10) || 0);
+          }
+          if (loadedDiaryMeta.weekDays && weekDaysAppendPicker) {
+            weekDaysAppendPicker.setValue(parseInt(loadedDiaryMeta.weekDays,10) || 0);
+          }
         } catch (e) {
           diaryAppendStatus.textContent = "QRの中身を解析できませんでした。";
         }
@@ -4112,10 +4431,11 @@ Tap QR to preview / Save to download the image.
         alert("日付は必須です。");
         return;
       }
-      diaryAppendQrPreview.style.display = "none";
       const newEntries = loadedDiaryStruct.entries.concat(entry);
-      const struct = buildDiaryStruct(newEntries);
+      const goalsAppend = readGoalsFromInputs(true); // 最新目標で上書き
+      const struct = buildDiaryStruct(newEntries, goalsAppend);
       encodeDiaryToQR(diaryAppendQrCanvas, struct);
+      diaryAppendQrPreview.style.display = "none";
 
       const dataUrl = diaryAppendQrCanvas.toDataURL("image/png");
       const a = document.createElement("a");
@@ -4153,7 +4473,14 @@ Tap QR to preview / Save to download the image.
         }
         try {
           const parsedDiary = tryParseDiaryFromQrString(data);
+          loadedDiaryStruct = parsedDiary;
           loadedDiaryEntries = parsedDiary.entries || [];
+          loadedDiaryMeta = parsedDiary.goals || {
+            targetAmount: null,
+            targetTime: null,
+            weekAmount: null,
+            weekDays: null
+          };
           if (!loadedDiaryEntries.length) {
             diaryViewStatus.textContent = "日記の記録が見つかりませんでした。";
             return;
@@ -4167,7 +4494,7 @@ Tap QR to preview / Save to download the image.
       });
     });
 
-    // Home Calendar Shortcut -> View と同じ動作
+    // Home shortcuts
     homeCalendarFile.addEventListener("change", () => {
       const file = homeCalendarFile.files[0];
       if (!file) return;
@@ -4176,6 +4503,16 @@ Tap QR to preview / Save to download the image.
       diaryViewScreen.classList.add("screen--active");
       diaryViewFile.files = homeCalendarFile.files;
       diaryViewReadButton.click();
+    });
+
+    homeAppendFile.addEventListener("change", () => {
+      const file = homeAppendFile.files[0];
+      if (!file) return;
+      hideAllScreensExcept(diaryAppendScreen);
+      diaryAppendScreen.classList.remove("screen--hidden");
+      diaryAppendScreen.classList.add("screen--active");
+      diaryAppendFile.files = homeAppendFile.files;
+      diaryAppendFile.dispatchEvent(new Event("change"));
     });
 
     function renderCalendarYearChoices() {
@@ -4258,7 +4595,7 @@ Tap QR to preview / Save to download the image.
 
           const label = document.createElement("div");
           label.className = "calendar-day-wine-label";
-          const firstBrand = (entries[0].brand || entries[0].type || "").trim();
+          const firstBrand = (entries[0].brand || entries[0].name || "").trim();
           label.textContent = firstBrand || "";
           cell.appendChild(label);
 
@@ -4282,12 +4619,11 @@ Tap QR to preview / Save to download the image.
 
         const nameTitle = document.createElement("div");
         nameTitle.className = "calendar-entry-name";
-        nameTitle.textContent = entry.brand || entry.type || "(記録)";
+        nameTitle.textContent = entry.name || entry.brand || "(記録)";
         card.appendChild(nameTitle);
 
         const rows = [
-          ["名前", entry.name],
-          ["お酒の種類", entry.type],
+          ["お酒の名前", entry.name],
           ["銘柄 / ブランド", entry.brand],
           ["量", entry.amount],
           ["ABV%", entry.abv],
@@ -4371,12 +4707,12 @@ Tap QR to preview / Save to download the image.
       return h;
     }
 
-    function getEntriesSortedByDateDesc() {
+    function getEntriesSortedByDateAsc() {
       const arr = (loadedDiaryEntries || []).slice();
       arr.sort((a, b) => {
         const da = new Date(a.date || "1970-01-01");
         const db = new Date(b.date || "1970-01-01");
-        return db - da;
+        return da - db;
       });
       return arr;
     }
@@ -4384,7 +4720,9 @@ Tap QR to preview / Save to download the image.
     function applyRange(entries) {
       if (graphRange === "all") return entries;
       const limit = graphRange === "7" ? 7 : 30;
-      return entries.slice(0, limit);
+      // 最新 limit 件を取りたいが、entriesは古い→新しいなので後ろから切り出す
+      if (entries.length <= limit) return entries;
+      return entries.slice(entries.length - limit);
     }
 
     function getMetricLabel(metric) {
@@ -4394,6 +4732,7 @@ Tap QR to preview / Save to download the image.
         case "mood": return "気分（1～5）";
         case "drunken": return "酔い（1～5）";
         case "nextday": return "体調（1～5）";
+        case "amount+nextday": return "量＋体調";
         default: return "";
       }
     }
@@ -4401,6 +4740,7 @@ Tap QR to preview / Save to download the image.
     function extractMetricValue(entry, metric) {
       switch (metric) {
         case "amount":
+        case "amount+nextday":
           return parseNumberOrNull(entry.amount);
         case "time":
           return parseTime0to24OrNull(entry.timezone);
@@ -4414,13 +4754,23 @@ Tap QR to preview / Save to download the image.
       return null;
     }
 
+    function parseTargetAmount() {
+      if (!loadedDiaryMeta || !loadedDiaryMeta.targetAmount) return null;
+      return parseNumberOrNull(loadedDiaryMeta.targetAmount);
+    }
+
+    function parseTargetTime() {
+      if (!loadedDiaryMeta || !loadedDiaryMeta.targetTime) return null;
+      return parseTime0to24OrNull(loadedDiaryMeta.targetTime);
+    }
+
     function drawGraph() {
       graphCtx.clearRect(0, 0, graphCanvas.width, graphCanvas.height);
-      const all = getEntriesSortedByDateDesc();
-      const entries = applyRange(all);
+      const allAsc = getEntriesSortedByDateAsc();
+      const entries = applyRange(allAsc);
       const points = [];
       entries.forEach((e, idx) => {
-        const val = extractMetricValue(e, graphMetric);
+        const val = extractMetricValue(e, graphMetric === "amount+nextday" ? "amount" : graphMetric);
         if (val != null) {
           points.push({ entry: e, index: idx, value: val });
         }
@@ -4433,10 +4783,25 @@ Tap QR to preview / Save to download the image.
         return;
       }
 
+      let secPoints = [];
+      let targetValue = null;
+      if (graphMetric === "amount+nextday") {
+        secPoints = [];
+        entries.forEach((e, idx) => {
+          const val = extractMetricValue(e, "nextday");
+          if (val != null) secPoints.push({ entry: e, index: idx, value: val });
+        });
+        targetValue = parseTargetAmount();
+      } else if (graphMetric === "amount") {
+        targetValue = parseTargetAmount();
+      } else if (graphMetric === "time") {
+        targetValue = parseTargetTime();
+      }
+
       let minY, maxY;
       if (graphMetric === "time") {
         minY = 0; maxY = 24;
-      } else if (["mood","drunken","nextday"].includes(graphMetric)) {
+      } else if (["mood","drunken","nextday"].includes(graphMetric) || graphMetric === "amount+nextday") {
         minY = 1; maxY = 5;
       } else {
         const vs = points.map(p => p.value);
@@ -4471,7 +4836,8 @@ Tap QR to preview / Save to download the image.
       graphCtx.lineTo(paddingLeft + w, paddingTop + h);
       graphCtx.stroke();
 
-      graphCtx.strokeStyle = "#f97316";
+      // 量・単独指標 or 量ライン
+      graphCtx.strokeStyle = graphMetric === "amount+nextday" ? varLineAmount() : varLineAmount();
       graphCtx.lineWidth = 2;
       graphCtx.beginPath();
       points.forEach((p, idx) => {
@@ -4491,6 +4857,43 @@ Tap QR to preview / Save to download the image.
         graphCtx.fill();
       });
 
+      // 体調 or 他指標ライン
+      if (graphMetric === "amount+nextday") {
+        if (secPoints.length) {
+          graphCtx.strokeStyle = varLineCondition();
+          graphCtx.lineWidth = 2;
+          graphCtx.beginPath();
+          secPoints.forEach((p, idx) => {
+            const x = mapX(idx);
+            const y = mapY(p.value);
+            if (idx === 0) graphCtx.moveTo(x, y);
+            else graphCtx.lineTo(x, y);
+          });
+          graphCtx.stroke();
+          graphCtx.fillStyle = "#bbf7d0";
+          secPoints.forEach((p, idx) => {
+            const x = mapX(idx);
+            const y = mapY(p.value);
+            graphCtx.beginPath();
+            graphCtx.arc(x, y, 3, 0, Math.PI * 2);
+            graphCtx.fill();
+          });
+        }
+      }
+
+      // 目標ライン（ピンク）
+      if (targetValue != null) {
+        graphCtx.strokeStyle = varLineTarget();
+        graphCtx.setLineDash([4,4]);
+        graphCtx.lineWidth = 1.5;
+        graphCtx.beginPath();
+        const y = mapY(targetValue);
+        graphCtx.moveTo(paddingLeft, y);
+        graphCtx.lineTo(paddingLeft + w, y);
+        graphCtx.stroke();
+        graphCtx.setLineDash([]);
+      }
+
       graphCtx.fillStyle = "#9ca3af";
       graphCtx.font = "10px system-ui";
       graphCtx.textAlign = "right";
@@ -4509,7 +4912,7 @@ Tap QR to preview / Save to download the image.
         const x = mapX(idx);
         const d = new Date(p.entry.date || "1970-01-01");
         const dateLabel = `${d.getMonth()+1}/${d.getDate()}`;
-        const brandLabel = (p.entry.brand || p.entry.type || "").trim();
+        const brandLabel = (p.entry.name || p.entry.brand || "").trim();
         const label = brandLabel ? `${dateLabel}\n${brandLabel}` : dateLabel;
         graphCtx.fillText(label, x, paddingTop + h + 4);
       });
@@ -4521,7 +4924,7 @@ Tap QR to preview / Save to download the image.
         row.className = "graph-list-item";
         const left = document.createElement("div");
         left.className = "graph-list-date";
-        const brand = (p.entry.brand || p.entry.type || "").trim();
+        const brand = (p.entry.name || p.entry.brand || "").trim();
         left.textContent = `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()} ${brand ? ` – ${brand}` : ""}`;
         const right = document.createElement("div");
         right.className = "graph-list-value";
@@ -4531,6 +4934,10 @@ Tap QR to preview / Save to download the image.
         graphList.appendChild(row);
       });
     }
+
+    function varLineAmount() { return getComputedStyle(document.documentElement).getPropertyValue("--line-amount") || "#f97316"; }
+    function varLineCondition() { return getComputedStyle(document.documentElement).getPropertyValue("--line-condition") || "#22c55e"; }
+    function varLineTarget() { return getComputedStyle(document.documentElement).getPropertyValue("--line-target") || "#ec4899"; }
 
     function ratingFromText(text) {
       if (!text) return null;
@@ -4543,7 +4950,7 @@ Tap QR to preview / Save to download the image.
     function buildWineRankingAndDetail() {
       const map = new Map();
       (loadedDiaryEntries || []).forEach(e => {
-        const key = (e.brand || e.type || "").trim();
+        const key = (e.name || e.brand || "").trim();
         if (!key) return;
         if (!map.has(key)) {
           map.set(key, {
@@ -4554,7 +4961,9 @@ Tap QR to preview / Save to download the image.
             colorNote: [],
             food: [],
             abv: [],
-            tasteRatings: []
+            tasteRatings: [],
+            aromaRatings: [],
+            colorRatings: []
           });
         }
         const w = map.get(key);
@@ -4564,22 +4973,29 @@ Tap QR to preview / Save to download the image.
           const r = ratingFromText(e.taste);
           if (r != null) w.tasteRatings.push(r);
         }
-        if (e.aroma) w.aroma.push(e.aroma);
-        if (e.colorNote) w.colorNote.push(e.colorNote);
+        if (e.aroma) {
+          w.aroma.push(e.aroma);
+          const r = ratingFromText(e.aroma);
+          if (r != null) w.aromaRatings.push(r);
+        }
+        if (e.colorNote) {
+          w.colorNote.push(e.colorNote);
+          const r = ratingFromText(e.colorNote);
+          if (r != null) w.colorRatings.push(r);
+        }
         if (e.food) w.food.push(e.food);
         if (e.abv) w.abv.push(e.abv);
       });
 
       const list = Array.from(map.values());
 
-      // 回数ランキング
       const byCount = list.slice().sort((a, b) => b.count - a.count);
 
-      // 味評価ランキング（平均）
+      const avg = arr => arr.length ? arr.reduce((s,v)=>s+v,0)/arr.length : null;
+
       const byTaste = list.slice().filter(w => w.tasteRatings.length > 0);
       byTaste.forEach(w => {
-        const sum = w.tasteRatings.reduce((s,v)=>s+v,0);
-        w.avgTaste = sum / w.tasteRatings.length;
+        w.avgTaste = avg(w.tasteRatings);
       });
       byTaste.sort((a,b) => (b.avgTaste||0) - (a.avgTaste||0));
 
@@ -4657,17 +5073,10 @@ Tap QR to preview / Save to download the image.
         });
       };
 
-      // レーダーチャート描画
       list.forEach(w => {
-        const ratingsT = w.tasteRatings;
-        const ratingsA = w.aroma.map(ratingFromText).filter(r=>r!=null);
-        const ratingsC = w.colorNote.map(ratingFromText).filter(r=>r!=null);
-        if (!ratingsT.length && !ratingsA.length && !ratingsC.length) return;
-
-        const avg = arr => arr.length ? arr.reduce((s,v)=>s+v,0)/arr.length : null;
-        const rT = avg(ratingsT) || 0;
-        const rA = avg(ratingsA) || 0;
-        const rC = avg(ratingsC) || 0;
+        const rT = avg(w.tasteRatings) || 0;
+        const rA = avg(w.aromaRatings) || 0;
+        const rC = avg(w.colorRatings) || 0;
         if (!rT && !rA && !rC) return;
 
         const item = document.createElement("div");
@@ -4679,8 +5088,12 @@ Tap QR to preview / Save to download the image.
         canvas.width = 120;
         canvas.height = 90;
         canvas.className = "wine-radar-canvas";
+        const labelRow = document.createElement("div");
+        labelRow.className = "wine-radar-labels";
+        labelRow.innerHTML = "<span>味</span><span>香り</span><span>見た目</span>";
         item.appendChild(title);
         item.appendChild(canvas);
+        item.appendChild(labelRow);
         wineRadarWrap.appendChild(item);
 
         const ctx = canvas.getContext("2d");
@@ -4689,9 +5102,9 @@ Tap QR to preview / Save to download the image.
         const rMax = 32;
 
         const axes = [
-          {angle: -Math.PI/2, value: rT}, // 上
-          {angle: (2*Math.PI/3)-Math.PI/2, value: rA}, // 左下
-          {angle: (4*Math.PI/3)-Math.PI/2, value: rC}  // 右下
+          {angle: -Math.PI/2, value: rT},
+          {angle: (2*Math.PI/3)-Math.PI/2, value: rA},
+          {angle: (4*Math.PI/3)-Math.PI/2, value: rC}
         ];
 
         ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -4781,7 +5194,7 @@ Tap QR to preview / Save to download the image.
 
     /* ===== init ===== */
 
-    function init() {
+    function initMain() {
       renderHomeBottles();
       renderOverlayBottles();
       updateNightEffects();
@@ -4791,7 +5204,7 @@ Tap QR to preview / Save to download the image.
       setupNumericPickers();
     }
 
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("DOMContentLoaded", initMain);
   </script>
 </body>
 </html>
