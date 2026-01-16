@@ -4964,16 +4964,18 @@ const rows = [
       });
     }
 
-    function starsFromValue(v) {
-      const n = parseRating1to5OrNull(v);
-      if (n == null || n <= 0) return "";
-      let s = "";
-      for (let i=1;i<=5;i++) {
-        s += i<=n ? "★" : "☆";
-      }
-      return `<span style="color:#facc15;">${s}</span>`;
-    }
-
+ function starsFromValue(v) {
+  if (!v) return "";
+  // もし v に <span> などのタグが入っていても、中のテキストだけ取り出す
+  const textOnly = String(v).replace(/<[^>]+>/g, "");
+  const n = parseRating1to5OrNull(textOnly);
+  if (n == null || n <= 0) return "";
+  let s = "";
+  for (let i = 1; i <= 5; i++) {
+    s += i <= n ? "★" : "☆";
+  }
+  return `<span style="color:#facc15;">${s}</span>`;
+}
     calendarPrevMonthButton.addEventListener("click", () => {
       if (calendarCurrentMonth == null) return;
       calendarCurrentMonth--;
@@ -5456,7 +5458,7 @@ const rows = [
     const graphOpenButton = document.createElement("button");
     graphOpenButton.className = "diary-small-button";
     graphOpenButton.id = "graph-open-button";
-    graphOpenButton.innerHTML = "<span>📈</span><span>Graph</span>";
+    graphOpenButton.innerHTML = "<span>2.</span><span>グラフ</span>";
     diaryViewScreen.querySelector(".content-frame").insertBefore(
       graphOpenButton,
       calendarYearCard
