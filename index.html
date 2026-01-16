@@ -1302,7 +1302,7 @@
       border: 1px solid rgba(191,219,254,0.9);
     }
 
-    /* ===== Diary / Calendar / Graph 共通 ===== */
+    /* ===== Diary 共通 ===== */
 
     .diary-screen {
       padding: 32px 16px 20px;
@@ -1355,6 +1355,11 @@
       padding: 16px 16px 18px;
     }
 
+    .diary-card--goal {
+      background: radial-gradient(circle at 0 0, rgba(249,115,22,0.14) 0%, rgba(15,23,42,0.96) 55%);
+      border-color: rgba(249,115,22,0.8);
+    }
+
     .diary-card-title {
       font-size: 12px;
       letter-spacing: 0.2em;
@@ -1405,14 +1410,14 @@
     .diary-form-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px 16px;
-      margin-top: 10px;
+      gap: 10px 12px;
+      margin-top: 8px;
     }
 
     .diary-field {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 3px;
       font-size: 12px;
     }
 
@@ -1435,7 +1440,7 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: #fed7aa;
-      padding: 2px 6px 3px;
+      padding: 1px 6px 2px;
       border-radius: 999px;
       border: 1px solid rgba(249,115,22,0.85);
       background: rgba(15,23,42,0.95);
@@ -1443,25 +1448,25 @@
 
     .diary-input,
     .diary-textarea {
-      border-radius: 10px;
+      border-radius: 8px;
       border: 1px solid rgba(55,65,81,0.9);
       background: rgba(15,23,42,0.95);
       color: var(--text-main);
-      padding: 6px 9px;
+      padding: 5px 8px;
       font-size: 12px;
       outline: none;
     }
 
     .diary-textarea {
-      min-height: 72px;
+      min-height: 60px;
       resize: vertical;
     }
 
     .diary-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
+      gap: 8px;
+      margin-top: 8px;
       align-items: center;
     }
 
@@ -1472,8 +1477,8 @@
     }
 
     .color-dot-option {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       border-radius: 999px;
       border: 1px solid rgba(15,23,42,1);
       cursor: pointer;
@@ -1490,7 +1495,7 @@
 
     .star-rating {
       display: inline-flex;
-      gap: 4px;
+      gap: 3px;
       font-size: 16px;
       cursor: pointer;
     }
@@ -1509,22 +1514,22 @@
       text-shadow: 0 0 3px rgba(250,204,21,0.6);
     }
 
-    /* 数値選択用のボタングリッド */
+    /* 数値選択用のボタングリッド（コンパクト） */
 
     .numeric-picker-row {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       align-items: center;
       flex-wrap: wrap;
     }
 
     .numeric-display {
-      min-width: 70px;
-      padding: 4px 8px;
+      min-width: 60px;
+      padding: 3px 6px;
       border-radius: 8px;
       border: 1px solid rgba(55,65,81,0.9);
       background: rgba(15,23,42,0.95);
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-main);
       text-align: center;
     }
@@ -1532,13 +1537,13 @@
     .numeric-digit-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 4px;
+      gap: 2px;
     }
 
     .numeric-digit-btn {
-      width: 20px;
-      height: 20px;
-      border-radius: 6px;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
       border: 1px solid rgba(75,85,99,0.9);
       background: rgba(15,23,42,0.95);
       font-size: 10px;
@@ -1553,6 +1558,11 @@
       border-color: rgba(249,115,22,0.9);
       color: #fed7aa;
       background: radial-gradient(circle at 0 0, rgba(249,115,22,0.6) 0%, rgba(15,23,42,0.98) 60%);
+    }
+
+    .numeric-caption {
+      font-size: 9px;
+      color: var(--text-weak);
     }
 
     .diary-qr-preview {
@@ -1582,12 +1592,12 @@
     }
 
     .diary-small-button {
-      padding: 7px 14px 8px;
+      padding: 5px 10px 6px;
       border-radius: 999px;
       border: 1px solid rgba(249,115,22,0.85);
       background: radial-gradient(circle at 0 0, rgba(249,115,22,0.6) 0%, rgba(15,23,42,0.98) 55%);
-      font-size: 12px;
-      letter-spacing: 0.12em;
+      font-size: 11px;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: #fed7aa;
       cursor: pointer;
@@ -1691,7 +1701,7 @@
     .calendar-month-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
       gap: 10px;
       margin-top: 8px;
       margin-bottom: 8px;
@@ -1702,6 +1712,13 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--text-soft);
+    }
+
+    .calendar-month-meta {
+      font-size: 10px;
+      color: var(--text-soft);
+      text-align: right;
+      white-space: pre-line;
     }
 
     .calendar-month-nav {
@@ -1728,6 +1745,7 @@
       grid-template-columns: 2fr 1.4fr;
       gap: 16px;
       margin-top: 4px;
+      align-items: flex-start;
     }
 
     @media (max-width: 768px) {
@@ -1743,7 +1761,37 @@
       box-shadow:
         0 20px 50px rgba(15,23,42,1),
         0 0 0 1px rgba(15,23,42,1);
-      padding: 10px 10px 12px;
+      padding: 8px 10px 10px;
+      position: relative;
+    }
+
+    .calendar-week-meta {
+      position: absolute;
+      left: -72px;
+      top: 38px;
+      bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 9px;
+      color: var(--text-soft);
+      pointer-events: none;
+    }
+
+    .calendar-week-meta-row {
+      height: calc((100% - 20px) / 6);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 4px;
+      white-space: nowrap;
+    }
+
+    .calendar-week-meta-row span {
+      background: rgba(15,23,42,0.9);
+      border-radius: 999px;
+      padding: 1px 4px;
+      border: 1px solid rgba(55,65,81,0.9);
     }
 
     .calendar-weekdays {
@@ -1752,7 +1800,7 @@
       font-size: 11px;
       color: var(--text-soft);
       text-align: center;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .calendar-weekdays div {
@@ -1768,7 +1816,7 @@
     }
 
     .calendar-day {
-      padding: 6px 0 14px;
+      padding: 4px 0 14px;
       border-radius: 12px;
       cursor: default;
       position: relative;
@@ -1781,6 +1829,8 @@
 
     .calendar-day--has-entry {
       cursor: pointer;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(55,65,81,1);
     }
 
     .calendar-dot {
@@ -1870,7 +1920,9 @@
     .calendar-footer-nav {
       margin-top: 10px;
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .calendar-back-btn {
@@ -1903,11 +1955,20 @@
       }
     }
 
+    .graph-header-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+
     .graph-controls {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 8px;
+      gap: 6px;
+      margin-bottom: 6px;
       align-items: center;
     }
 
@@ -1918,11 +1979,11 @@
     }
 
     .graph-chip {
-      padding: 4px 10px 5px;
+      padding: 3px 9px 4px;
       border-radius: 999px;
       border: 1px solid rgba(148,163,184,0.9);
       background: rgba(15,23,42,0.95);
-      font-size: 11px;
+      font-size: 10px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text-soft);
@@ -1943,7 +2004,7 @@
 
     .graph-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
       gap: 16px;
       align-items: flex-start;
     }
@@ -1961,7 +2022,7 @@
       box-shadow:
         0 20px 50px rgba(15,23,42,0.95),
         0 0 0 1px rgba(15,23,42,1);
-      padding: 14px 14px 16px;
+      padding: 12px 12px 14px;
     }
 
     .graph-side-card {
@@ -1971,7 +2032,7 @@
       box-shadow:
         0 20px 50px rgba(15,23,42,0.95),
         0 0 0 1px rgba(15,23,42,1);
-      padding: 14px 14px 16px;
+      padding: 12px 12px 14px;
     }
 
     .graph-title {
@@ -1979,13 +2040,34 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--text-soft);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .graph-subtitle {
       font-size: 11px;
       color: var(--text-weak);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+    }
+
+    .graph-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 10px;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+    }
+
+    .graph-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .graph-legend-color {
+      width: 10px;
+      height: 2px;
+      border-radius: 999px;
     }
 
     .graph-canvas-wrap {
@@ -1998,16 +2080,16 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .graph-list {
-      max-height: 180px;
+      max-height: 160px;
       overflow-y: auto;
       font-size: 11px;
       color: var(--text-soft);
       border-top: 1px solid rgba(55,65,81,0.7);
-      padding-top: 6px;
+      padding-top: 4px;
     }
 
     .graph-list-item {
@@ -2032,6 +2114,14 @@
       margin-top: 4px;
     }
 
+    .wine-ranking-section-title {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #fed7aa;
+      margin: 2px 0 4px;
+    }
+
     .wine-ranking-row {
       display: flex;
       justify-content: space-between;
@@ -2049,10 +2139,10 @@
     }
 
     .wine-detail-list {
-      margin-top: 8px;
+      margin-top: 6px;
       font-size: 11px;
       color: var(--text-soft);
-      max-height: 160px;
+      max-height: 140px;
       overflow-y: auto;
       border-top: 1px solid rgba(55,65,81,0.7);
       padding-top: 4px;
@@ -2072,7 +2162,7 @@
     }
 
     .wine-radar-title {
-      margin-top: 10px;
+      margin-top: 8px;
       font-size: 11px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -2083,13 +2173,13 @@
       margin-top: 4px;
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
       max-height: 220px;
       overflow-y: auto;
     }
 
     .wine-radar-item {
-      flex: 0 0 120px;
+      flex: 0 0 118px;
       border-radius: 10px;
       border: 1px solid rgba(55,65,81,0.9);
       padding: 4px;
@@ -2299,7 +2389,7 @@ Basic
 
 【From QR → View / Graph】
 ・QRを読み込んで「View & Calendar」で、年と月ごとに記録を眺められます。
-・Graphボタンからは「量」「時間帯」「気分・酔い・体調」「目標とのズレ」を線で確認できます。
+・Graphボタンからは「量」「時間帯」「気分・酔い・体調」「目標とのズレ」を線や棒で確認できます。
 ・ワイン一覧では、よく飲んでいる銘柄や、そのときの味・香り・見た目の印象をレーダーチャートで見返せます。
           </div>
         </div>
@@ -2317,7 +2407,7 @@ Basic
         </div>
 
         <div class="diary-card-row">
-          <!-- 左カラム：基本 & テイスティング & コンディション -->
+          <!-- 左カラム -->
           <div class="diary-card">
             <div class="diary-card-title">Basic</div>
             <div class="diary-card-desc">
@@ -2349,6 +2439,7 @@ Basic
                   <div class="numeric-digit-group" data-target="amount-hundreds"></div>
                   <div class="numeric-digit-group" data-target="amount-tens"></div>
                   <div class="numeric-digit-group" data-target="amount-ones"></div>
+                  <span class="numeric-caption">ml</span>
                 </div>
                 <input id="diary-amount" type="hidden" />
               </div>
@@ -2369,7 +2460,7 @@ Basic
               </div>
             </div>
 
-            <div class="diary-card-title" style="margin-top:14px;">Tasting</div>
+            <div class="diary-card-title" style="margin-top:10px;">Tasting</div>
             <div class="diary-card-desc">
 味・香り・見た目は星で評価。あとでワインごとのレーダーチャートになります。
             </div>
@@ -2419,12 +2510,12 @@ Basic
               </div>
             </div>
 
-            <div class="diary-field" style="margin-top:10px;">
+            <div class="diary-field" style="margin-top:8px;">
               <div class="diary-label">総合コメント</div>
               <textarea id="diary-comment" class="diary-textarea" placeholder="自由にメモ"></textarea>
             </div>
 
-            <div class="diary-card-title" style="margin-top:14px;">Condition</div>
+            <div class="diary-card-title" style="margin-top:10px;">Condition</div>
             <div class="diary-card-desc">
 体と気分のメモ。未来の自分のために。
             </div>
@@ -2470,7 +2561,7 @@ Basic
               </div>
             </div>
 
-            <div class="diary-form-grid" style="margin-top:8px;">
+            <div class="diary-form-grid" style="margin-top:6px;">
               <div class="diary-field">
                 <div class="diary-label-row">
                   <div class="diary-label">酔いの程度</div>
@@ -2514,7 +2605,7 @@ Basic
           </div>
 
           <!-- 右カラム：目標＆QR -->
-          <div class="diary-card">
+          <div class="diary-card diary-card--goal">
             <div class="diary-card-title">Goals</div>
             <div class="diary-card-desc">
 このノート全体の「適量」と「目標時間帯」「1週間の目標」を決めておく欄。
@@ -2533,6 +2624,7 @@ Append で開いたときは、ここに前回の目標が自動で読み込ま�
                   <div class="numeric-digit-group" data-target="target-amount-hundreds"></div>
                   <div class="numeric-digit-group" data-target="target-amount-tens"></div>
                   <div class="numeric-digit-group" data-target="target-amount-ones"></div>
+                  <span class="numeric-caption">1日の目安</span>
                 </div>
                 <input id="diary-target-amount" type="hidden" />
               </div>
@@ -2549,6 +2641,7 @@ Append で開いたときは、ここに前回の目標が自動で読み込ま�
                   <div class="numeric-digit-group" data-target="target-time-hour-ones"></div>
                   <div class="numeric-digit-group" data-target="target-time-min-tens"></div>
                   <div class="numeric-digit-group" data-target="target-time-min-ones"></div>
+                  <span class="numeric-caption">飲み始めの目安</span>
                 </div>
                 <input id="diary-target-time" type="hidden" />
               </div>
@@ -2582,7 +2675,7 @@ Append で開いたときは、ここに前回の目標が自動で読み込ま�
               </div>
             </div>
 
-            <div class="diary-card-title" style="margin-top:14px;">QR</div>
+            <div class="diary-card-title" style="margin-top:10px;">QR</div>
             <div class="diary-card-desc">
 この日記1ページぶん＋目標設定を1枚のQRとして保存します。
             </div>
@@ -2611,7 +2704,7 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
       </div>
     </div>
 
-    <!-- Diary Append（Newと同じUI＋読み込みで目標を反映） -->
+    <!-- Diary Append -->
     <div class="screen diary-screen screen--hidden" id="diary-append-screen">
       <div class="content-frame">
         <div class="diary-header">
@@ -2633,7 +2726,7 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
         </div>
 
         <div class="diary-card-row" id="diary-append-form-row" style="display:none;margin-top:10px;">
-          <!-- 左カラム：1日分（Newと同じUI） -->
+          <!-- 左カラム：1日分 -->
           <div class="diary-card">
             <div class="diary-card-title">2. 新しい1日を追加</div>
             <div class="diary-card-desc">
@@ -2664,6 +2757,7 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
                   <div class="numeric-digit-group" data-target="amount-append-hundreds"></div>
                   <div class="numeric-digit-group" data-target="amount-append-tens"></div>
                   <div class="numeric-digit-group" data-target="amount-append-ones"></div>
+                  <span class="numeric-caption">ml</span>
                 </div>
                 <input id="diary-amount-append" type="hidden" />
               </div>
@@ -2683,9 +2777,9 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
               </div>
             </div>
 
-            <div class="diary-card-title" style="margin-top:14px;">Tasting</div>
+            <div class="diary-card-title" style="margin-top:10px;">Tasting</div>
             <div class="diary-card-desc">
-味・香り・見た目は星で評価。レーダーチャートに反映されます。
+味・香り・見た目は星で評価。レ���ダーチャートに反映されます。
             </div>
 
             <div class="diary-form-grid">
@@ -2733,12 +2827,12 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
               </div>
             </div>
 
-            <div class="diary-field" style="margin-top:8px;">
+            <div class="diary-field" style="margin-top:6px;">
               <div class="diary-label">総合コメント</div>
               <textarea id="diary-comment-append" class="diary-textarea" placeholder="自由にメモ"></textarea>
             </div>
 
-            <div class="diary-form-grid" style="margin-top:8px;">
+            <div class="diary-form-grid" style="margin-top:6px;">
               <div class="diary-field">
                 <div class="diary-label-row">
                   <div class="diary-label">時間帯</div>
@@ -2777,7 +2871,7 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
               </div>
             </div>
 
-            <div class="diary-form-grid" style="margin-top:8px;">
+            <div class="diary-form-grid" style="margin-top:6px;">
               <div class="diary-field">
                 <div class="diary-label-row">
                   <div class="diary-label">酔いの程度</div>
@@ -2808,7 +2902,7 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
               </div>
             </div>
 
-            <div class="diary-row" style="margin-top:8px;">
+            <div class="diary-row" style="margin-top:6px;">
               <div class="diary-label">カレンダーの色</div>
               <div class="color-dot-picker" id="diary-color-picker-append">
                 <div class="color-dot-option" data-color="#f97316" style="background:#f97316;"></div>
@@ -2820,8 +2914,8 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
             </div>
           </div>
 
-          <!-- 右カラム：目標＆QR（Newと同じUI＋読み込み値） -->
-          <div class="diary-card">
+          <!-- 右カラム：目標＆QR -->
+          <div class="diary-card diary-card--goal">
             <div class="diary-card-title">Goals</div>
             <div class="diary-card-desc">
 読み込んだノートに保存されている目標があれば自動で反映されます。
@@ -2839,6 +2933,7 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
                   <div class="numeric-digit-group" data-target="target-amount-append-hundreds"></div>
                   <div class="numeric-digit-group" data-target="target-amount-append-tens"></div>
                   <div class="numeric-digit-group" data-target="target-amount-append-ones"></div>
+                  <span class="numeric-caption">1日の目安</span>
                 </div>
                 <input id="diary-target-amount-append" type="hidden" />
               </div>
@@ -2854,6 +2949,7 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
                   <div class="numeric-digit-group" data-target="target-time-append-hour-ones"></div>
                   <div class="numeric-digit-group" data-target="target-time-append-min-tens"></div>
                   <div class="numeric-digit-group" data-target="target-time-append-min-ones"></div>
+                  <span class="numeric-caption">飲み始めの目安</span>
                 </div>
                 <input id="diary-target-time-append" type="hidden" />
               </div>
@@ -2885,7 +2981,7 @@ PNGとして保存し、後日「Append」や「View」で読み込めます。
               </div>
             </div>
 
-            <div class="diary-card-title" style="margin-top:14px;">QR</div>
+            <div class="diary-card-title" style="margin-top:10px;">QR</div>
             <div class="diary-card-desc">
 元のノート＋新しい1日＋目標設定をまとめて、新しいQRとして保存します。
             </div>
@@ -2935,15 +3031,18 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
           <div id="diary-view-status" style="margin-top:6px;font-size:11px;color:var(--text-soft);"></div>
         </div>
 
-        <!-- Graphボタン（JSでここに挿入） -->
+        <!-- Graphボタン（JSで挿入） -->
 
         <div class="diary-card" id="calendar-year-card" style="display:none;margin-top:14px;">
           <div class="diary-card-title">2. 年を選ぶ</div>
           <div class="diary-card-desc">
 記録がある年だけ表示しています。
           </div>
-
           <div class="calendar-year-grid" id="calendar-year-grid"></div>
+        </div>
+
+        <div style="margin-top:10px;">
+          <button class="calendar-back-btn" id="diary-view-back-home">← Diary Home</button>
         </div>
       </div>
     </div>
@@ -2960,6 +3059,7 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
 
         <div class="calendar-month-header">
           <div class="calendar-month-title" id="calendar-month-title"></div>
+          <div class="calendar-month-meta" id="calendar-month-meta"></div>
           <div class="calendar-month-nav">
             <button class="calendar-nav-btn" id="calendar-prev-month">←</button>
             <button class="calendar-nav-btn" id="calendar-next-month">→</button>
@@ -2968,6 +3068,7 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
 
         <div class="calendar-body-row">
           <div class="calendar-grid">
+            <div class="calendar-week-meta" id="calendar-week-meta"></div>
             <div class="calendar-weekdays">
               <div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div>
             </div>
@@ -2983,6 +3084,7 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
 
         <div class="calendar-footer-nav">
           <button class="calendar-back-btn" id="calendar-back-year-button">← 年を選び直す</button>
+          <button class="calendar-back-btn" id="calendar-back-view-button">← Diary View に戻る</button>
         </div>
       </div>
     </div>
@@ -2990,11 +3092,14 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
     <!-- Graph Screen -->
     <div class="screen graph-screen screen--hidden" id="graph-screen">
       <div class="content-frame">
-        <div class="diary-header">
-          <div class="diary-title">DIARY – GRAPH</div>
-          <div class="diary-subtitle">
+        <div class="graph-header-nav">
+          <div class="diary-header">
+            <div class="diary-title">DIARY – GRAPH</div>
+            <div class="diary-subtitle">
 読み込んだ日記データを、量・時間・気分・体調・目標とのズレでざっくり可視化します。
+            </div>
           </div>
+          <button class="graph-back-btn" id="graph-back-button-top">← Diary View に戻る</button>
         </div>
 
         <div class="graph-layout">
@@ -3008,7 +3113,7 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
               </div>
             </div>
 
-            <div class="graph-title" style="margin-top:6px;">METRIC</div>
+            <div class="graph-title" style="margin-top:4px;">METRIC</div>
             <div class="graph-controls">
               <div class="graph-chip-group" id="graph-metric-group">
                 <button class="graph-chip graph-chip--active" data-metric="amount">量 (②)</button>
@@ -3020,9 +3125,24 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
               </div>
             </div>
 
+            <div class="graph-legend" id="graph-legend">
+              <div class="graph-legend-item">
+                <div class="graph-legend-color" style="background:var(--line-amount);"></div>
+                <span>量</span>
+              </div>
+              <div class="graph-legend-item">
+                <div class="graph-legend-color" style="background:var(--line-condition);"></div>
+                <span>体調</span>
+              </div>
+              <div class="graph-legend-item">
+                <div class="graph-legend-color" style="background:var(--line-target);"></div>
+                <span id="graph-target-label">目標一日飲酒量 / 目標時間帯</span>
+              </div>
+            </div>
+
             <div class="graph-subtitle">
 ※ 量/時間帯/気分/酔い/体調は、入力欄の星や数字ボタンから記録された値を使って集計しています。
-　量＋体調では、量がオレンジ、体調が緑、目標値がピンクで表示されます。
+　量＋体調では、量がオレンジの棒、体調が緑の棒、目標値がピンクの線で表示されます。
             </div>
 
             <div class="graph-canvas-wrap">
@@ -3079,7 +3199,7 @@ Tap QR to preview / Save to download the image.
         min="0"
         max="1"
         step="0.01"
-        value="0.5"
+        value="0.2"
         class="audio-slider"
         id="bgm-volume"
       />
@@ -3276,6 +3396,7 @@ Tap QR to preview / Save to download the image.
     // Diary DOM (New)
     const diaryNewBackButton = document.getElementById("diary-new-back-button");
     const diaryAppendBackButton = document.getElementById("diary-append-back-button");
+    const diaryViewBackHome = document.getElementById("diary-view-back-home");
 
     const diaryDateInput = document.getElementById("diary-date");
     const diaryNameInput = document.getElementById("diary-name");
@@ -3345,12 +3466,15 @@ Tap QR to preview / Save to download the image.
     const calendarHeaderTitle = document.getElementById("calendar-header-title");
     const calendarHeaderSubtitle = document.getElementById("calendar-header-subtitle");
     const calendarMonthTitle = document.getElementById("calendar-month-title");
+    const calendarMonthMeta = document.getElementById("calendar-month-meta");
     const calendarDates = document.getElementById("calendar-dates");
+    const calendarWeekMeta = document.getElementById("calendar-week-meta");
     const calendarPrevMonthButton = document.getElementById("calendar-prev-month");
     const calendarNextMonthButton = document.getElementById("calendar-next-month");
     const calendarDetailsTitle = document.getElementById("calendar-details-title");
     const calendarDetailsBody = document.getElementById("calendar-details-body");
     const calendarBackYearButton = document.getElementById("calendar-back-year-button");
+    const calendarBackViewButton = document.getElementById("calendar-back-view-button");
 
     const diaryNewEntryButton = document.getElementById("diary-new-entry-button");
     const diaryAppendButton = document.getElementById("diary-append-button");
@@ -3360,12 +3484,14 @@ Tap QR to preview / Save to download the image.
     const graphCtx = graphCanvas.getContext("2d");
     const graphRangeGroup = document.getElementById("graph-range-group");
     const graphMetricGroup = document.getElementById("graph-metric-group");
+    const graphLegendTargetLabel = document.getElementById("graph-target-label");
     const graphList = document.getElementById("graph-list");
     const wineRankingList = document.getElementById("wine-ranking-list");
     const wineDetailButton = document.getElementById("wine-detail-button");
     const wineDetailList = document.getElementById("wine-detail-list");
     const wineRadarWrap = document.getElementById("wine-radar-wrap");
     const graphBackButton = document.getElementById("graph-back-button");
+    const graphBackButtonTop = document.getElementById("graph-back-button-top");
 
     const bgmVolume = document.getElementById("bgm-volume");
 
@@ -3405,7 +3531,7 @@ Tap QR to preview / Save to download the image.
       });
     }
 
-    /* ===== Home / Wine画面ロジック（前半） ===== */
+    /* ===== Home / Wine画面ロジック ===== */
 
     function renderHomeBottles() {
       bottleStrip.innerHTML = "";
@@ -3789,9 +3915,9 @@ Tap QR to preview / Save to download the image.
     }
 
     function setupBgm() {
-      bgmAudio.volume = parseFloat(bgmVolume.value || "0.5");
+      bgmAudio.volume = parseFloat(bgmVolume.value || "0.2");
       bgmVolume.addEventListener("input", () => {
-        bgmAudio.volume = parseFloat(bgmVolume.value || "0.5");
+        bgmAudio.volume = parseFloat(bgmVolume.value || "0.2");
       });
       const tryStart = () => {
         bgmAudio.play().catch(() => {});
@@ -3870,7 +3996,19 @@ Tap QR to preview / Save to download the image.
       diaryHomeScreen.classList.add("screen--active");
     });
 
+    diaryViewBackHome.addEventListener("click", () => {
+      hideAllScreensExcept(diaryHomeScreen);
+      diaryHomeScreen.classList.remove("screen--hidden");
+      diaryHomeScreen.classList.add("screen--active");
+    });
+
     calendarBackYearButton.addEventListener("click", () => {
+      hideAllScreensExcept(diaryViewScreen);
+      diaryViewScreen.classList.remove("screen--hidden");
+      diaryViewScreen.classList.add("screen--active");
+    });
+
+    calendarBackViewButton.addEventListener("click", () => {
       hideAllScreensExcept(diaryViewScreen);
       diaryViewScreen.classList.remove("screen--hidden");
       diaryViewScreen.classList.add("screen--active");
@@ -3956,7 +4094,7 @@ Tap QR to preview / Save to download the image.
       });
     }
 
-    function setupAmountPicker(prefix, displayId, hiddenId, hundredsTarget, tensTarget, onesTarget) {
+    function setupAmountPicker(displayId, hiddenId, hundredsTarget, tensTarget, onesTarget) {
       const hundredsEl = document.querySelector(`[data-target="${hundredsTarget}"]`);
       const tensEl = document.querySelector(`[data-target="${tensTarget}"]`);
       const onesEl = document.querySelector(`[data-target="${onesTarget}"]`);
@@ -4002,7 +4140,7 @@ Tap QR to preview / Save to download the image.
       };
     }
 
-    function setupAbvPicker(prefix, displayId, hiddenId, tTarget, oTarget, dTarget) {
+    function setupAbvPicker(displayId, hiddenId, tTarget, oTarget, dTarget) {
       const tEl = document.querySelector(`[data-target="${tTarget}"]`);
       const oEl = document.querySelector(`[data-target="${oTarget}"]`);
       const dEl = document.querySelector(`[data-target="${dTarget}"]`);
@@ -4038,7 +4176,7 @@ Tap QR to preview / Save to download the image.
         setValue(v) {
           const n = parseFloat(v);
           if (isNaN(n)) return;
-          const s = n.toFixed(1).padStart(4,"0"); // "xx.x"
+          const s = n.toFixed(1).padStart(4,"0");
           it = s[0]; io = s[1]; dec = s[3];
           Array.from(tEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b.dataset.value===it));
           Array.from(oEl.children).forEach(b => b.classList.toggle("numeric-digit-btn--active", b.dataset.value===io));
@@ -4048,7 +4186,7 @@ Tap QR to preview / Save to download the image.
       };
     }
 
-    function setupTimePicker(prefix, displayId, hiddenId, htTarget, hoTarget, mtTarget, moTarget) {
+    function setupTimePicker(displayId, hiddenId, htTarget, hoTarget, mtTarget, moTarget) {
       const htEl = document.querySelector(`[data-target="${htTarget}"]`);
       const hoEl = document.querySelector(`[data-target="${hoTarget}"]`);
       const mtEl = document.querySelector(`[data-target="${mtTarget}"]`);
@@ -4197,21 +4335,21 @@ Tap QR to preview / Save to download the image.
     let targetAmountAppendPicker, targetTimeAppendPicker, weekAmountAppendPicker, weekDaysAppendPicker;
 
     function setupNumericPickers() {
-      amountPicker = setupAmountPicker("", "amount-display", "diary-amount", "amount-hundreds", "amount-tens", "amount-ones");
-      abvPicker = setupAbvPicker("", "abv-display", "diary-abv", "abv-int-tens", "abv-int-ones", "abv-decimal");
-      timePicker = setupTimePicker("", "time-display", "diary-timezone", "time-hour-tens", "time-hour-ones", "time-min-tens", "time-min-ones");
+      amountPicker = setupAmountPicker("amount-display", "diary-amount", "amount-hundreds", "amount-tens", "amount-ones");
+      abvPicker = setupAbvPicker("abv-display", "diary-abv", "abv-int-tens", "abv-int-ones", "abv-decimal");
+      timePicker = setupTimePicker("time-display", "diary-timezone", "time-hour-tens", "time-hour-ones", "time-min-tens", "time-min-ones");
 
-      targetAmountPicker = setupAmountPicker("target", "target-amount-display", "diary-target-amount", "target-amount-hundreds", "target-amount-tens", "target-amount-ones");
-      targetTimePicker = setupTimePicker("target", "target-time-display", "diary-target-time", "target-time-hour-tens", "target-time-hour-ones", "target-time-min-tens", "target-time-min-ones");
+      targetAmountPicker = setupAmountPicker("target-amount-display", "diary-target-amount", "target-amount-hundreds", "target-amount-tens", "target-amount-ones");
+      targetTimePicker = setupTimePicker("target-time-display", "diary-target-time", "target-time-hour-tens", "target-time-hour-ones", "target-time-min-tens", "target-time-min-ones");
       weekAmountPicker = setupWeekAmountPicker("week-amount-display", "diary-week-amount", "week-amount-hundreds", "week-amount-tens", "week-amount-ones");
       weekDaysPicker = setupWeekDaysPicker("week-days-display", "diary-week-days", "week-days-buttons");
 
-      amountAppendPicker = setupAmountPicker("append", "amount-append-display", "diary-amount-append", "amount-append-hundreds", "amount-append-tens", "amount-append-ones");
-      abvAppendPicker = setupAbvPicker("append", "abv-append-display", "diary-abv-append", "abv-append-int-tens", "abv-append-int-ones", "abv-append-decimal");
-      timeAppendPicker = setupTimePicker("append", "time-append-display", "diary-timezone-append", "time-append-hour-tens", "time-append-hour-ones", "time-append-min-tens", "time-append-min-ones");
+      amountAppendPicker = setupAmountPicker("amount-append-display", "diary-amount-append", "amount-append-hundreds", "amount-append-tens", "amount-append-ones");
+      abvAppendPicker = setupAbvPicker("abv-append-display", "diary-abv-append", "abv-append-int-tens", "abv-append-int-ones", "abv-append-decimal");
+      timeAppendPicker = setupTimePicker("time-append-display", "diary-timezone-append", "time-append-hour-tens", "time-append-hour-ones", "time-append-min-tens", "time-append-min-ones");
 
-      targetAmountAppendPicker = setupAmountPicker("target-append", "target-amount-append-display", "diary-target-amount-append", "target-amount-append-hundreds", "target-amount-append-tens", "target-amount-append-ones");
-      targetTimeAppendPicker = setupTimePicker("target-append", "target-time-append-display", "diary-target-time-append", "target-time-append-hour-tens", "target-time-append-hour-ones", "target-time-append-min-tens", "target-time-append-min-ones");
+      targetAmountAppendPicker = setupAmountPicker("target-amount-append-display", "diary-target-amount-append", "target-amount-append-hundreds", "target-amount-append-tens", "target-amount-append-ones");
+      targetTimeAppendPicker = setupTimePicker("target-time-append-display", "diary-target-time-append", "target-time-append-hour-tens", "target-time-append-hour-ones", "target-time-append-min-tens", "target-time-append-min-ones");
       weekAmountAppendPicker = setupWeekAmountPicker("week-amount-append-display", "diary-week-amount-append", "week-amount-append-hundreds", "week-amount-append-tens", "week-amount-append-ones");
       weekDaysAppendPicker = setupWeekDaysPicker("week-days-append-display", "diary-week-days-append", "week-days-append-buttons");
     }
@@ -4401,7 +4539,6 @@ Tap QR to preview / Save to download the image.
           diaryAppendStatus.textContent = "ノートを読み込みました。新しい1日と目標を編集できます。";
           diaryAppendFormRow.style.display = "flex";
 
-          // 目標をAppend側UIに反映
           if (loadedDiaryMeta.targetAmount && targetAmountAppendPicker) {
             targetAmountAppendPicker.setValue(parseInt(loadedDiaryMeta.targetAmount,10) || 0);
           }
@@ -4455,7 +4592,7 @@ Tap QR to preview / Save to download the image.
       document.body.removeChild(a);
     });
 
-    /* ===== Diary View & Calendar ===== */
+    /* ===== Diary View & Calendar 読み込み ===== */
 
     diaryViewReadButton.addEventListener("click", () => {
       const file = diaryViewFile.files[0];
@@ -4545,141 +4682,6 @@ Tap QR to preview / Save to download the image.
       renderCalendarMonth();
     }
 
-    function renderCalendarMonth() {
-      if (calendarCurrentYear == null || calendarCurrentMonth == null) return;
-      const year = calendarCurrentYear;
-      const month = calendarCurrentMonth;
-      calendarMonthTitle.textContent = `${year} / ${month+1}`;
-      calendarDates.innerHTML = "";
-      calendarDetailsTitle.textContent = "記録のある日を選ぶと、ここに一覧が出ます。";
-      calendarDetailsBody.innerHTML = "";
-
-      const firstDay = new Date(year, month, 1);
-      const startWeekday = firstDay.getDay();
-      const daysInMonth = new Date(year, month+1, 0).getDate();
-
-      const entriesByDate = {};
-      loadedDiaryEntries.forEach(entry => {
-        if (!entry.date) return;
-        const d = new Date(entry.date);
-        if (d.getFullYear() === year && d.getMonth() === month) {
-          const day = d.getDate();
-          const key = `${year}-${month+1}-${day}`;
-          if (!entriesByDate[key]) entriesByDate[key] = [];
-          entriesByDate[key].push(entry);
-        }
-      });
-
-      const totalCells = 7 * 6;
-      let currentDay = 1;
-      for (let i = 0; i < totalCells; i++) {
-        const cell = document.createElement("div");
-        cell.className = "calendar-day";
-        if (i < startWeekday || currentDay > daysInMonth) {
-          cell.classList.add("calendar-day--inactive");
-          calendarDates.appendChild(cell);
-          continue;
-        }
-        const day = currentDay;
-        cell.textContent = day;
-        const key = `${year}-${month+1}-${day}`;
-        if (entriesByDate[key]) {
-          cell.classList.add("calendar-day--has-entry");
-          const entries = entriesByDate[key];
-          const dot = document.createElement("div");
-          dot.className = "calendar-dot";
-          const colors = entries.map(e => e.dotColor || "#f97316");
-          dot.style.background = colors[0];
-          cell.appendChild(dot);
-
-          const label = document.createElement("div");
-          label.className = "calendar-day-wine-label";
-          const firstBrand = (entries[0].brand || entries[0].name || "").trim();
-          label.textContent = firstBrand || "";
-          cell.appendChild(label);
-
-          cell.addEventListener("click", () => {
-            showCalendarDetails(year, month, day, entries);
-          });
-        } else {
-          cell.classList.add("calendar-day--inactive");
-        }
-        calendarDates.appendChild(cell);
-        currentDay++;
-      }
-    }
-
-    function showCalendarDetails(year, month, day, entries) {
-      calendarDetailsTitle.textContent = `${year}/${month+1}/${day} の記録`;
-      calendarDetailsBody.innerHTML = "";
-      entries.forEach(entry => {
-        const card = document.createElement("div");
-        card.className = "calendar-entry-card";
-
-        const nameTitle = document.createElement("div");
-        nameTitle.className = "calendar-entry-name";
-        nameTitle.textContent = entry.name || entry.brand || "(記録)";
-        card.appendChild(nameTitle);
-
-        const rows = [
-          ["お酒の名前", entry.name],
-          ["銘柄 / ブランド", entry.brand],
-          ["量", entry.amount],
-          ["ABV%", entry.abv],
-          ["味の評価", entry.taste],
-          ["香り", entry.aroma],
-          ["色・見た目", entry.colorNote],
-          ["総合コメント", entry.comment],
-          ["時間帯", entry.timezone],
-          ["気分", entry.mood],
-          ["ペアリング", entry.food],
-          ["場所", entry.place],
-          ["酔いの程度", entry.drunken],
-          ["翌日の体調", entry.nextday],
-          ["カレンダーの色", entry.dotColor]
-        ];
-
-        rows.forEach(([label, value]) => {
-          if (!value) return;
-          const row = document.createElement("div");
-          row.className = "calendar-entry-row";
-          const l = document.createElement("div");
-          l.className = "calendar-entry-label";
-          l.textContent = label + "：";
-          const v = document.createElement("div");
-          v.className = "calendar-entry-value";
-          v.textContent = value;
-          row.appendChild(l);
-          row.appendChild(v);
-          card.appendChild(row);
-        });
-
-        calendarDetailsBody.appendChild(card);
-      });
-    }
-
-    calendarPrevMonthButton.addEventListener("click", () => {
-      if (calendarCurrentMonth == null) return;
-      calendarCurrentMonth--;
-      if (calendarCurrentMonth < 0) {
-        calendarCurrentMonth = 11;
-        calendarCurrentYear--;
-      }
-      renderCalendarMonth();
-    });
-
-    calendarNextMonthButton.addEventListener("click", () => {
-      if (calendarCurrentMonth == null) return;
-      calendarCurrentMonth++;
-      if (calendarCurrentMonth > 11) {
-        calendarCurrentMonth = 0;
-        calendarCurrentYear++;
-      }
-      renderCalendarMonth();
-    });
-
-    /* ===== Graph ===== */
-
     function parseNumberOrNull(value) {
       if (!value) return null;
       const n = parseFloat(String(value).replace(/[^\d.\-]/g, ""));
@@ -4716,10 +4718,281 @@ Tap QR to preview / Save to download the image.
       return arr;
     }
 
+    function renderCalendarMonth() {
+      if (calendarCurrentYear == null || calendarCurrentMonth == null) return;
+      const year = calendarCurrentYear;
+      const month = calendarCurrentMonth;
+      calendarMonthTitle.textContent = `${year} / ${month+1}`;
+      calendarDates.innerHTML = "";
+      calendarDetailsTitle.textContent = "記録のある日を選ぶと、ここに一覧が出ます。";
+      calendarDetailsBody.innerHTML = "";
+
+      const firstDay = new Date(year, month, 1);
+      const startWeekday = firstDay.getDay();
+      const daysInMonth = new Date(year, month+1, 0).getDate();
+
+      const entriesByDate = {};
+      loadedDiaryEntries.forEach(entry => {
+        if (!entry.date) return;
+        const d = new Date(entry.date);
+        if (d.getFullYear() === year && d.getMonth() === month) {
+          const day = d.getDate();
+          const key = `${year}-${month+1}-${day}`;
+          if (!entriesByDate[key]) entriesByDate[key] = [];
+          entriesByDate[key].push(entry);
+        }
+      });
+
+      // 週別集計
+      const weekData = []; // {index, fromDay, toDay, amountTotal, alcoholG, daysDrank, avgNextWeek, labelText}
+      const weekTargetG = parseNumberOrNull(loadedDiaryMeta.weekAmount);
+      const weekDrinkDaysTarget = parseNumberOrNull(loadedDiaryMeta.weekDays);
+
+      const ascEntries = getEntriesSortedByDateAsc();
+      // 体調の週平均用
+      function getWeekIndexForDate(d) {
+        const firstWeekday = startWeekday;
+        const day = d.getDate();
+        const offset = (firstWeekday + day - 1);
+        return Math.floor(offset / 7);
+      }
+
+      const weekEntriesMap = {};
+      ascEntries.forEach(e => {
+        if (!e.date) return;
+        const d = new Date(e.date);
+        if (d.getFullYear() !== year || d.getMonth() !== month) return;
+        const widx = getWeekIndexForDate(d);
+        if (!weekEntriesMap[widx]) weekEntriesMap[widx] = [];
+        weekEntriesMap[widx].push(e);
+      });
+
+      const totalCells = 7 * 6;
+      let currentDay = 1;
+      calendarWeekMeta.innerHTML = "";
+      const weekMetaRows = [];
+
+      for (let w = 0; w < 6; w++) {
+        weekMetaRows.push({ amountG: 0, daysDrank: 0, hasEntry: false });
+      }
+
+      // 週ごとの飲酒量・体調集計
+      Object.keys(weekEntriesMap).forEach(k => {
+        const w = parseInt(k,10);
+        const entries = weekEntriesMap[w];
+        let alcoholG = 0;
+        let daysDrank = 0;
+        let sumNext = 0;
+        let countNext = 0;
+        const daySeen = new Set();
+        entries.forEach(e => {
+          const amt = parseNumberOrNull(e.amount) || 0;
+          const abv = parseNumberOrNull(e.abv) || 0;
+          const alcMl = amt * abv / 100;
+          const g = alcMl * 0.8;
+          alcoholG += g;
+          const dstr = e.date;
+          if (!daySeen.has(dstr)) {
+            daySeen.add(dstr);
+            daysDrank++;
+          }
+          const nx = parseRating1to5OrNull(e.nextday);
+          if (nx != null) {
+            sumNext += nx;
+            countNext++;
+          }
+        });
+        weekMetaRows[w].amountG = alcoholG;
+        weekMetaRows[w].daysDrank = daysDrank;
+        weekMetaRows[w].hasEntry = true;
+        weekMetaRows[w].avgNext = countNext ? sumNext / countNext : null;
+      });
+
+      // 週毎表示テキスト
+      calendarWeekMeta.innerHTML = "";
+      for (let w=0; w<6; w++) {
+        const rowDiv = document.createElement("div");
+        rowDiv.className = "calendar-week-meta-row";
+        if (weekMetaRows[w].hasEntry && weekTargetG != null) {
+          const diff = weekTargetG - weekMetaRows[w].amountG;
+          const span = document.createElement("span");
+          if (diff >= 0) {
+            span.textContent = `残り ${Math.round(diff)}g`;
+          } else {
+            span.textContent = `${Math.round(-diff)}g オーバー`;
+          }
+          rowDiv.appendChild(span);
+        }
+        calendarWeekMeta.appendChild(rowDiv);
+      }
+
+      // 最新週と前週の体調平均・残り飲める日数の表示
+      let latestWeekIndex = -1;
+      Object.keys(weekEntriesMap).forEach(k => {
+        const w = parseInt(k,10);
+        if (latestWeekIndex < w) latestWeekIndex = w;
+      });
+
+      let monthMetaText = "";
+      if (latestWeekIndex >= 0) {
+        const latest = weekMetaRows[latestWeekIndex];
+        const prev = weekMetaRows[latestWeekIndex - 1];
+        if (latest && latest.avgNext != null) {
+          monthMetaText += `今週の平均体調: ${latest.avgNext.toFixed(1)}`;
+          if (prev && prev.avgNext != null) {
+            const diff = latest.avgNext - prev.avgNext;
+            const sign = diff > 0 ? "＋" : "";
+            monthMetaText += `（前週${sign}${diff.toFixed(1)}）`;
+          }
+        }
+        if (weekDrinkDaysTarget != null) {
+          const used = latest.daysDrank || 0;
+          const left = Math.max(0, weekDrinkDaysTarget - used);
+          monthMetaText += ` / 残り飲める日数: ${left}日`;
+        }
+      }
+      calendarMonthMeta.textContent = monthMetaText;
+
+      // 日セル描画
+      for (let i = 0; i < totalCells; i++) {
+        const cell = document.createElement("div");
+        cell.className = "calendar-day";
+        if (i < startWeekday || currentDay > daysInMonth) {
+          cell.classList.add("calendar-day--inactive");
+          calendarDates.appendChild(cell);
+          continue;
+        }
+        const day = currentDay;
+        cell.textContent = day;
+        const key = `${year}-${month+1}-${day}`;
+        if (entriesByDate[key]) {
+          cell.classList.add("calendar-day--has-entry");
+          const entries = entriesByDate[key];
+          const dot = document.createElement("div");
+          dot.className = "calendar-dot";
+          const colors = entries.map(e => e.dotColor || "#f97316");
+          dot.style.background = colors[0];
+          cell.appendChild(dot);
+
+          const label = document.createElement("div");
+          label.className = "calendar-day-wine-label";
+          const firstBrand = (entries[0].name || entries[0].brand || "").trim();
+          label.textContent = firstBrand || "";
+          cell.appendChild(label);
+
+          cell.addEventListener("click", () => {
+            showCalendarDetails(year, month, day, entries);
+          });
+        } else {
+          cell.classList.add("calendar-day--inactive");
+        }
+        calendarDates.appendChild(cell);
+        currentDay++;
+      }
+    }
+
+    function showCalendarDetails(year, month, day, entries) {
+      calendarDetailsTitle.textContent = `${year}/${month+1}/${day} の記録`;
+      calendarDetailsBody.innerHTML = "";
+      entries.forEach(entry => {
+        const card = document.createElement("div");
+        card.className = "calendar-entry-card";
+
+        const nameTitle = document.createElement("div");
+        nameTitle.className = "calendar-entry-name";
+        nameTitle.textContent = entry.name || entry.brand || "(記録)";
+        card.appendChild(nameTitle);
+
+        const rows = [
+          ["お酒の名前", entry.name],
+          ["銘柄 / ブランド", entry.brand],
+          ["量", entry.amount],
+          ["ABV%", entry.abv],
+          ["味の評価", starsFromValue(entry.taste)],
+          ["香り", starsFromValue(entry.aroma)],
+          ["色・見た目", starsFromValue(entry.colorNote)],
+          ["総合コメント", entry.comment],
+          ["時間帯", entry.timezone],
+          ["気分", starsFromValue(entry.mood)],
+          ["ペアリング", entry.food],
+          ["場所", entry.place],
+          ["酔いの程度", starsFromValue(entry.drunken)],
+          ["翌日の体調", starsFromValue(entry.nextday)],
+          ["カレンダーの色", entry.dotColor]
+        ];
+
+        rows.forEach(([label, value]) => {
+          if (!value) return;
+          const row = document.createElement("div");
+          row.className = "calendar-entry-row";
+          const l = document.createElement("div");
+          l.className = "calendar-entry-label";
+          l.textContent = label + "：";
+          const v = document.createElement("div");
+          v.className = "calendar-entry-value";
+          if (label.indexOf("評価") !== -1 || label.indexOf("体調") !== -1 || label.indexOf("酔い") !== -1 || label.indexOf("気分") !== -1) {
+            v.innerHTML = value;
+          } else {
+            v.textContent = value;
+          }
+          row.appendChild(l);
+          row.appendChild(v);
+          card.appendChild(row);
+        });
+
+        calendarDetailsBody.appendChild(card);
+      });
+    }
+
+    function starsFromValue(v) {
+      const n = parseRating1to5OrNull(v);
+      if (n == null || n <= 0) return "";
+      let s = "";
+      for (let i=1;i<=5;i++) {
+        s += i<=n ? "★" : "☆";
+      }
+      return `<span style="color:#facc15;">${s}</span>`;
+    }
+
+    calendarPrevMonthButton.addEventListener("click", () => {
+      if (calendarCurrentMonth == null) return;
+      calendarCurrentMonth--;
+      if (calendarCurrentMonth < 0) {
+        calendarCurrentMonth = 11;
+        calendarCurrentYear--;
+      }
+      renderCalendarMonth();
+    });
+
+    calendarNextMonthButton.addEventListener("click", () => {
+      if (calendarCurrentMonth == null) return;
+      calendarCurrentMonth++;
+      if (calendarCurrentMonth > 11) {
+        calendarCurrentMonth = 0;
+        calendarCurrentYear++;
+      }
+      renderCalendarMonth();
+    });
+
+    /* ===== Graph ===== */
+
+    function parseTargetAmount() {
+      if (!loadedDiaryMeta || !loadedDiaryMeta.targetAmount) return null;
+      return parseNumberOrNull(loadedDiaryMeta.targetAmount);
+    }
+
+    function parseTargetTime() {
+      if (!loadedDiaryMeta || !loadedDiaryMeta.targetTime) return null;
+      return parseTime0to24OrNull(loadedDiaryMeta.targetTime);
+    }
+
+    function getEntriesSortedByDateAscForGraph() {
+      return getEntriesSortedByDateAsc();
+    }
+
     function applyRange(entries) {
       if (graphRange === "all") return entries;
       const limit = graphRange === "7" ? 7 : 30;
-      // 最新 limit 件を取りたいが、entriesは古い→新しいなので後ろから切り出す
       if (entries.length <= limit) return entries;
       return entries.slice(entries.length - limit);
     }
@@ -4753,20 +5026,15 @@ Tap QR to preview / Save to download the image.
       return null;
     }
 
-    function parseTargetAmount() {
-      if (!loadedDiaryMeta || !loadedDiaryMeta.targetAmount) return null;
-      return parseNumberOrNull(loadedDiaryMeta.targetAmount);
-    }
-
-    function parseTargetTime() {
-      if (!loadedDiaryMeta || !loadedDiaryMeta.targetTime) return null;
-      return parseTime0to24OrNull(loadedDiaryMeta.targetTime);
-    }
+    function varLineAmount() { return getComputedStyle(document.documentElement).getPropertyValue("--line-amount") || "#f97316"; }
+    function varLineCondition() { return getComputedStyle(document.documentElement).getPropertyValue("--line-condition") || "#22c55e"; }
+    function varLineTarget() { return getComputedStyle(document.documentElement).getPropertyValue("--line-target") || "#ec4899"; }
 
     function drawGraph() {
       graphCtx.clearRect(0, 0, graphCanvas.width, graphCanvas.height);
-      const allAsc = getEntriesSortedByDateAsc();
+      const allAsc = getEntriesSortedByDateAscForGraph();
       const entries = applyRange(allAsc);
+
       const points = [];
       entries.forEach((e, idx) => {
         const val = extractMetricValue(e, graphMetric === "amount+nextday" ? "amount" : graphMetric);
@@ -4800,8 +5068,14 @@ Tap QR to preview / Save to download the image.
       let minY, maxY;
       if (graphMetric === "time") {
         minY = 0; maxY = 24;
-      } else if (["mood","drunken","nextday"].includes(graphMetric) || graphMetric === "amount+nextday") {
+      } else if (["mood","drunken","nextday"].includes(graphMetric)) {
         minY = 1; maxY = 5;
+      } else if (graphMetric === "amount+nextday") {
+        // 量はml、体調は1～5。棒グラフだがスケールは別軸にせず、
+        // ここでは便宜的に量(ml)をそのまま、体調は1～5の軸で左側グリッドに描く
+        const vs = points.map(p => p.value);
+        minY = 0;
+        maxY = Math.max(...vs) || 1;
       } else {
         const vs = points.map(p => p.value);
         minY = 0;
@@ -4835,62 +5109,76 @@ Tap QR to preview / Save to download the image.
       graphCtx.lineTo(paddingLeft + w, paddingTop + h);
       graphCtx.stroke();
 
-      // 量・単独指標 or 量ライン
-      graphCtx.strokeStyle = graphMetric === "amount+nextday" ? varLineAmount() : varLineAmount();
-      graphCtx.lineWidth = 2;
-      graphCtx.beginPath();
-      points.forEach((p, idx) => {
-        const x = mapX(idx);
-        const y = mapY(p.value);
-        if (idx === 0) graphCtx.moveTo(x, y);
-        else graphCtx.lineTo(x, y);
-      });
-      graphCtx.stroke();
-
-      graphCtx.fillStyle = "#fed7aa";
-      points.forEach((p, idx) => {
-        const x = mapX(idx);
-        const y = mapY(p.value);
-        graphCtx.beginPath();
-        graphCtx.arc(x, y, 3, 0, Math.PI * 2);
-        graphCtx.fill();
-      });
-
-      // 体調 or 他指標ライン
       if (graphMetric === "amount+nextday") {
-        if (secPoints.length) {
-          graphCtx.strokeStyle = varLineCondition();
-          graphCtx.lineWidth = 2;
+        // 棒グラフ: 量(オレンジ) + 体調(緑)
+        const barWidth = points.length > 1 ? stepX * 0.3 : 8;
+        points.forEach((p, idx) => {
+          const xCenter = mapX(idx);
+          const baseY = paddingTop + h;
+          const yAmount = mapY(p.value);
+          graphCtx.fillStyle = varLineAmount();
+          graphCtx.fillRect(xCenter - barWidth, yAmount, barWidth, baseY - yAmount);
+        });
+        secPoints.forEach((p, idx) => {
+          const xCenter = mapX(idx);
+          const baseY = paddingTop + h;
+          // 体調は1〜5のスケール。minY/maxYは量のスケールだが、
+          // ここでは別軸的に高さを調整したい場合、本来は右軸を作る。
+          // シンプルに5をmaxYに合わせてスケーリング
+          const localMin = 1, localMax = 5;
+          const t = (p.value - localMin) / (localMax - localMin);
+          const yCondition = paddingTop + h * (1 - t);
+          graphCtx.fillStyle = varLineCondition();
+          graphCtx.fillRect(xCenter, yCondition, barWidth, baseY - yCondition);
+        });
+      } else {
+        // 通常線グラフ
+        graphCtx.strokeStyle = varLineAmount();
+        graphCtx.lineWidth = 2;
+        graphCtx.beginPath();
+        points.forEach((p, idx) => {
+          const x = mapX(idx);
+          const y = mapY(p.value);
+          if (idx === 0) graphCtx.moveTo(x, y);
+          else graphCtx.lineTo(x, y);
+        });
+        graphCtx.stroke();
+
+        graphCtx.fillStyle = "#fed7aa";
+        points.forEach((p, idx) => {
+          const x = mapX(idx);
+          const y = mapY(p.value);
           graphCtx.beginPath();
-          secPoints.forEach((p, idx) => {
-            const x = mapX(idx);
-            const y = mapY(p.value);
-            if (idx === 0) graphCtx.moveTo(x, y);
-            else graphCtx.lineTo(x, y);
-          });
-          graphCtx.stroke();
-          graphCtx.fillStyle = "#bbf7d0";
-          secPoints.forEach((p, idx) => {
-            const x = mapX(idx);
-            const y = mapY(p.value);
-            graphCtx.beginPath();
-            graphCtx.arc(x, y, 3, 0, Math.PI * 2);
-            graphCtx.fill();
-          });
-        }
+          graphCtx.arc(x, y, 3, 0, Math.PI * 2);
+          graphCtx.fill();
+        });
       }
 
-      // 目標ライン（ピンク）
-      if (targetValue != null) {
-        graphCtx.strokeStyle = varLineTarget();
-        graphCtx.setLineDash([4,4]);
-        graphCtx.lineWidth = 1.5;
-        graphCtx.beginPath();
-        const y = mapY(targetValue);
-        graphCtx.moveTo(paddingLeft, y);
-        graphCtx.lineTo(paddingLeft + w, y);
-        graphCtx.stroke();
-        graphCtx.setLineDash([]);
+      if (graphMetric === "amount+nextday") {
+        // 目標量ライン
+        if (targetValue != null) {
+          graphCtx.strokeStyle = varLineTarget();
+          graphCtx.setLineDash([4,4]);
+          graphCtx.lineWidth = 1.5;
+          graphCtx.beginPath();
+          const y = mapY(targetValue);
+          graphCtx.moveTo(paddingLeft, y);
+          graphCtx.lineTo(paddingLeft + w, y);
+          graphCtx.stroke();
+          graphCtx.setLineDash([]);
+        }
+      } else if (graphMetric === "amount" || graphMetric === "time") {
+        if (targetValue != null) {
+          graphCtx.strokeStyle = varLineTarget();
+          graphCtx.setLineDash([4,4]);
+          graphCtx.lineWidth = 1.5;
+          graphCtx.beginPath();
+          const y = mapY(targetValue);
+          graphCtx.moveTo(paddingLeft, y);
+          graphCtx.lineTo(paddingLeft + w, y);
+          graphCtx.stroke();
+          graphCtx.setLineDash([]);
+        }
       }
 
       graphCtx.fillStyle = "#9ca3af";
@@ -4932,11 +5220,16 @@ Tap QR to preview / Save to download the image.
         row.appendChild(right);
         graphList.appendChild(row);
       });
-    }
 
-    function varLineAmount() { return getComputedStyle(document.documentElement).getPropertyValue("--line-amount") || "#f97316"; }
-    function varLineCondition() { return getComputedStyle(document.documentElement).getPropertyValue("--line-condition") || "#22c55e"; }
-    function varLineTarget() { return getComputedStyle(document.documentElement).getPropertyValue("--line-target") || "#ec4899"; }
+      // 凡例ラベル
+      if (graphMetric === "amount" || graphMetric === "amount+nextday") {
+        graphLegendTargetLabel.textContent = "目標一日飲酒量";
+      } else if (graphMetric === "time") {
+        graphLegendTargetLabel.textContent = "目標時間帯";
+      } else {
+        graphLegendTargetLabel.textContent = "目標";
+      }
+    }
 
     function ratingFromText(text) {
       if (!text) return null;
@@ -5001,10 +5294,8 @@ Tap QR to preview / Save to download the image.
       wineRankingList.innerHTML = "";
 
       const section1Title = document.createElement("div");
+      section1Title.className = "wine-ranking-section-title";
       section1Title.textContent = "回数ランキング TOP5";
-      section1Title.style.marginBottom = "4px";
-      section1Title.style.color = "#e5e7eb";
-      section1Title.style.fontSize = "11px";
       wineRankingList.appendChild(section1Title);
 
       byCount.slice(0,5).forEach((w, i) => {
@@ -5027,10 +5318,8 @@ Tap QR to preview / Save to download the image.
       wineRankingList.appendChild(divider);
 
       const section2Title = document.createElement("div");
+      section2Title.className = "wine-ranking-section-title";
       section2Title.textContent = "味評価ランキング TOP5";
-      section2Title.style.marginBottom = "4px";
-      section2Title.style.color = "#e5e7eb";
-      section2Title.style.fontSize = "11px";
       wineRankingList.appendChild(section2Title);
 
       byTaste.slice(0,5).forEach((w, i) => {
@@ -5165,11 +5454,14 @@ Tap QR to preview / Save to download the image.
       buildWineRankingAndDetail();
     });
 
-    graphBackButton.addEventListener("click", () => {
+    function backToViewFromGraph() {
       hideAllScreensExcept(diaryViewScreen);
       diaryViewScreen.classList.remove("screen--hidden");
       diaryViewScreen.classList.add("screen--active");
-    });
+    }
+
+    graphBackButton.addEventListener("click", backToViewFromGraph);
+    graphBackButtonTop.addEventListener("click", backToViewFromGraph);
 
     graphRangeGroup.addEventListener("click", e => {
       const btn = e.target.closest(".graph-chip");
