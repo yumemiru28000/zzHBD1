@@ -2728,7 +2728,7 @@ PNGとして保存、他機能で読み込めます。
         <div class="diary-card-row" id="diary-append-form-row" style="display:none;margin-top:10px;">
           <!-- 左カラム：1日分 -->
           <div class="diary-card">
-            <div class="diary-card-title">1⃣1⃣ 新しい1日を追加</div>
+            <div class="diary-card-title">1⃣ 新しい1日を追加</div>
             <div class="diary-card-desc">
 ページを追加して新しいQRを作れます。
             </div>
@@ -2980,7 +2980,7 @@ PNGとして保存、他機能で読み込めます。
               </div>
             </div>
 
-            <div class="diary-card-title" style="margin-top:10px;">QR</div>
+            <div class="diary-card-title" style="margin-top:10px;">おわり</div>
             <div class="diary-card-desc">
 元の読み込んだQRノートの画像に上書き保存してください
             </div>
@@ -3001,7 +3001,7 @@ PNGとして保存、他機能で読み込めます。
         </div>
 
         <div style="margin-top:10px;">
-          <button class="calendar-back-btn" id="diary-append-back-button">← Diary Home</button>
+          <button class="calendar-back-btn" id="diary-append-back-button">← 戻る</button>
         </div>
       </div>
     </div>
@@ -3012,20 +3012,20 @@ PNGとして保存、他機能で読み込めます。
         <div class="diary-header">
           <div class="diary-title">DIARY – VIEW</div>
           <div class="diary-subtitle">
-QRから読み取った記録を、カレンダーに並べて眺めます。
+QRノートを、カレンダーとグラフで表示
           </div>
         </div>
 
         <div class="diary-card">
           <div class="diary-card-title">1. QRを読み込む</div>
           <div class="diary-card-desc">
-日記QR画像を選択し、「読み取る」を押してください。
+QRノート画像を選択し、「読み取る」を押してください。
           </div>
           <div class="diary-upload">
             <input type="file" id="diary-view-file" accept="image/*" />
           </div>
           <button class="diary-small-button" id="diary-view-read-button" style="margin-top:6px;">
-            <span>📷</span><span>READ</span>
+            <span></span><span>決定</span>
           </button>
           <div id="diary-view-status" style="margin-top:6px;font-size:11px;color:var(--text-soft);"></div>
         </div>
@@ -3033,7 +3033,7 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
         <!-- Graphボタン（JSで挿入） -->
 
         <div class="diary-card" id="calendar-year-card" style="display:none;margin-top:14px;">
-          <div class="diary-card-title">2. 年を選ぶ</div>
+          <div class="diary-card-title">3. カレンダー</div>
           <div class="diary-card-desc">
 記録がある年だけ表示しています。
           </div>
@@ -3041,7 +3041,7 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
         </div>
 
         <div style="margin-top:10px;">
-          <button class="calendar-back-btn" id="diary-view-back-home">← Diary Home</button>
+          <button class="calendar-back-btn" id="diary-view-back-home">← 戻る</button>
         </div>
       </div>
     </div>
@@ -3052,7 +3052,7 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
         <div class="diary-header">
           <div class="diary-title" id="calendar-header-title">DIARY – CALENDAR</div>
           <div class="diary-subtitle" id="calendar-header-subtitle">
-選んだ年の中で、夜ごとの足跡を見ていきます。
+自分の現在の飲酒を把握しよう
           </div>
         </div>
 
@@ -3075,7 +3075,7 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
           </div>
           <div class="calendar-details">
             <div class="calendar-details-title" id="calendar-details-title">
-記録のある日を選ぶと、ここに一覧が出ます。
+飲酒情報
             </div>
             <div class="calendar-details-body-scroll" id="calendar-details-body"></div>
           </div>
@@ -3083,7 +3083,7 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
 
         <div class="calendar-footer-nav">
           <button class="calendar-back-btn" id="calendar-back-year-button">← 年を選び直す</button>
-          <button class="calendar-back-btn" id="calendar-back-view-button">← Diary View に戻る</button>
+          <button class="calendar-back-btn" id="calendar-back-view-button">← 戻る</button>
         </div>
       </div>
     </div>
@@ -3098,7 +3098,7 @@ QRから読み取った記録を、カレンダーに並べて眺めます。
 読み込んだ日記データを、量・時間・気分・体調・目標とのズレでざっくり可視化します。
             </div>
           </div>
-          <button class="graph-back-btn" id="graph-back-button-top">← Diary View に戻る</button>
+          <button class="graph-back-btn" id="graph-back-button-top">← 戻る</button>
         </div>
 
         <div class="graph-layout">
