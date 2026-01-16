@@ -4911,6 +4911,7 @@ Tap QR to preview / Save to download the image.
 function showCalendarDetails(year, month, day, entries) {
   calendarDetailsTitle.textContent = `${year}/${month+1}/${day} の記録`;
   calendarDetailsBody.innerHTML = "";
+
   entries.forEach(entry => {
     const card = document.createElement("div");
     card.className = "calendar-entry-card";
@@ -4920,21 +4921,22 @@ function showCalendarDetails(year, month, day, entries) {
     nameTitle.textContent = entry.name || entry.brand || "(記録)";
     card.appendChild(nameTitle);
 
+    // ★ ここが重要：星系はすべて starsFromValue(...) を通す
     const rows = [
       ["お酒の名前", entry.name],
       ["銘柄 / ブランド", entry.brand],
       ["量", entry.amount],
       ["ABV%", entry.abv],
-      ["味の評価",    starsFromValue(entry.taste)],
-      ["香り",        starsFromValue(entry.aroma)],
-      ["色・見た目",  starsFromValue(entry.colorNote)],
-      ["総合コメント", entry.comment],
-      ["時間帯",      entry.timezone],
-      ["気分",        starsFromValue(entry.mood)],
-      ["ペアリング",  entry.food],
-      ["場所",        entry.place],
-      ["酔いの程度",  starsFromValue(entry.drunken)],
-      ["翌日の体調",  starsFromValue(entry.nextday)],
+      ["味の評価",        starsFromValue(entry.taste)],
+      ["香り",            starsFromValue(entry.aroma)],
+      ["色・見た目",      starsFromValue(entry.colorNote)],
+      ["総合コメント",     entry.comment],
+      ["時間帯",          entry.timezone],
+      ["気分",            starsFromValue(entry.mood)],
+      ["ペアリング",      entry.food],
+      ["場所",            entry.place],
+      ["酔いの程度",      starsFromValue(entry.drunken)],
+      ["翌日の体調",      starsFromValue(entry.nextday)],
       ["カレンダーの色", entry.dotColor]
     ];
 
@@ -4942,22 +4944,26 @@ function showCalendarDetails(year, month, day, entries) {
       if (!value) return;
       const row = document.createElement("div");
       row.className = "calendar-entry-row";
+
       const l = document.createElement("div");
       l.className = "calendar-entry-label";
       l.textContent = label + "：";
+
       const v = document.createElement("div");
       v.className = "calendar-entry-value";
 
+      // 「評価 / 体調 / 酔い / 気分」は HTML（黄色い星）として描画
       if (
         label.indexOf("評価") !== -1 ||
         label.indexOf("体調") !== -1 ||
         label.indexOf("酔い") !== -1 ||
         label.indexOf("気分") !== -1
       ) {
-        v.innerHTML = value;   // ★ 星はHTMLとし���描画
+        v.innerHTML = value;   // starsFromValue から返ってきた <span>★★★☆☆</span> をそのまま入れる
       } else {
-        v.textContent = value; // ★ それ以外はテキスト
+        v.textContent = value;
       }
+
       row.appendChild(l);
       row.appendChild(v);
       card.appendChild(row);
