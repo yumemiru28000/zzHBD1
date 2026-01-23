@@ -1514,7 +1514,7 @@
       text-shadow: 0 0 3px rgba(250,204,21,0.6);
     }
 
-    /* 数値選択用のボタングリッド（コンパクト） */
+    /* 数値選択用のボタングリッド */
 
     .numeric-picker-row {
       display: flex;
@@ -1644,16 +1644,16 @@
         0 0 0 1px rgba(15,23,42,1);
     }
 
- /* 既存の .diary-howto-title の上書き用（または追加） */
+ 
 .diary-howto-title {
-  font-size: 16px;          /* 元より大きめに */
-  letter-spacing: 0.28em;   /* 見出しらしく広めに */
+  font-size: 16px;         
+  letter-spacing: 0.28em;   
   text-transform: uppercase;
   color: #fed7aa;
   margin-bottom: 10px;
 }
 
-/* 日本語の「使い方」など、漢字タイトルも太く・少し大きく */
+
 .diary-howto-title-ja {
   font-size: 18px;
   font-weight: 600;
@@ -4921,7 +4921,7 @@ function showCalendarDetails(year, month, day, entries) {
     nameTitle.textContent = entry.name || entry.brand || "(記録)";
     card.appendChild(nameTitle);
 
-    // ★ ここが重要：星系はすべて starsFromValue(...) を通す
+   
     const rows = [
       ["お酒の名前", entry.name],
       ["銘柄 / ブランド", entry.brand],
@@ -4959,7 +4959,7 @@ function showCalendarDetails(year, month, day, entries) {
         label.indexOf("酔い") !== -1 ||
         label.indexOf("気分") !== -1
       ) {
-        v.innerHTML = value;   // starsFromValue から返ってきた <span>★★★☆☆</span> をそのまま入れる
+        v.innerHTML = value; 
       } else {
         v.textContent = value;
       }
@@ -4975,7 +4975,7 @@ function showCalendarDetails(year, month, day, entries) {
   
 function starsFromValue(v) {
   if (!v) return "";
-  // もし v に <span> が入っていても、中のテキストだけにする
+ 
   const textOnly = String(v).replace(/<[^>]+>/g, "");
   const n = parseRating1to5OrNull(textOnly);
   if (n == null || n <= 0) return "";
@@ -5102,8 +5102,7 @@ function starsFromValue(v) {
       } else if (["mood","drunken","nextday"].includes(graphMetric)) {
         minY = 1; maxY = 5;
       } else if (graphMetric === "amount+nextday") {
-        // 量はml、体調は1～5。棒グラフだがスケールは別軸にせず、
-        // ここでは便宜的に量(ml)をそのまま、体調は1～5の軸で左側グリッドに描く
+     
         const vs = points.map(p => p.value);
         minY = 0;
         maxY = Math.max(...vs) || 1;
@@ -5141,7 +5140,7 @@ function starsFromValue(v) {
       graphCtx.stroke();
 
       if (graphMetric === "amount+nextday") {
-        // 棒グラフ: 量(オレンジ) + 体調(緑)
+      
         const barWidth = points.length > 1 ? stepX * 0.3 : 8;
         points.forEach((p, idx) => {
           const xCenter = mapX(idx);
@@ -5153,9 +5152,7 @@ function starsFromValue(v) {
         secPoints.forEach((p, idx) => {
           const xCenter = mapX(idx);
           const baseY = paddingTop + h;
-          // 体調は1〜5のスケール。minY/maxYは量のスケールだが、
-          // ここでは別軸的に高さを調整したい場合、本来は右軸を作る。
-          // シンプルに5をmaxYに合わせてスケーリング
+       
           const localMin = 1, localMax = 5;
           const t = (p.value - localMin) / (localMax - localMin);
           const yCondition = paddingTop + h * (1 - t);
@@ -5163,7 +5160,6 @@ function starsFromValue(v) {
           graphCtx.fillRect(xCenter, yCondition, barWidth, baseY - yCondition);
         });
       } else {
-        // 通常線グラフ
         graphCtx.strokeStyle = varLineAmount();
         graphCtx.lineWidth = 2;
         graphCtx.beginPath();
